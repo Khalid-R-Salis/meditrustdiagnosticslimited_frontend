@@ -1,17 +1,48 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+// Key import
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import "./index.css";
+
+// FORMS Import
+import Login from "./pages/authforms/login";
+import Signup from "./pages/authforms/signup";
+import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
+import OTPInput from "./pages/authforms/otp";
+import Newpassword from "./pages/authforms/newpassword";
+import UpdatePWD from "./components/updatepwd";
+import LogOut from "./components/logout";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const location = useLocation();
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">DEVELOPMENT!</h1>
-      <h3 className=" text-center bg-green-800">MEDITRUST DIAGNOSTICS LTD</h3>
-    </>
+    <div className="App">
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/emailreset" element={<ResetPasswordEmail />} />
+          <Route path="/otp" element={<OTPInput />} />
+          <Route path="/newpassword" element={<Newpassword />} />
+          <Route path="/updatepassword" element={<UpdatePWD />} />
+          <Route path="/logout" element={<LogOut />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default AppWrapper;
