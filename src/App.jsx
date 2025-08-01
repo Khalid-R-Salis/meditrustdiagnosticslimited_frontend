@@ -9,7 +9,7 @@ import "./index.css";
 
 // FORMS Import
 import Login from "./pages/authforms/login";
-import Signup from "./pages/authforms/signup";
+import ContactAdmin from "./pages/authforms/contactadmin";
 import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
 import OTPInput from "./pages/authforms/otp";
 import Newpassword from "./pages/authforms/newpassword";
@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/contactadmin" element={<ContactAdmin />} />
           <Route path="/emailreset" element={<ResetPasswordEmail />} />
           <Route path="/otp" element={<OTPInput />} />
           <Route path="/newpassword" element={<Newpassword />} />
