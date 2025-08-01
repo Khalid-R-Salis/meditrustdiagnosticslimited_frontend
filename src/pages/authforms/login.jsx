@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import bg1 from "../../assets/bg1.png";
+import logo2 from "../../assets/logo2.png";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,8 +46,30 @@ const Login = () => {
     <form
       action=""
       onSubmit={handleSubmit}
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
       className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9]"
     >
+      <div
+        className="absolute top-0 left-0 w-full flex items-center"
+        style={{
+          borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+          height: "64px",
+        }}
+      >
+        <a href="/">
+          {" "}
+          <img
+            src={logo2}
+            alt="Logo"
+            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+          />
+        </a>
+      </div>
+
       {/* Login Box */}
       <div className="bg-[#FFF] p-[40px] rounded-[24px] shadow-md w-[440px]">
         <div className="mb-[32px]">

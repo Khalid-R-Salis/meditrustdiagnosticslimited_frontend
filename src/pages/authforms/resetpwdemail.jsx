@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bg1 from "../../assets/bg1.png";
+import logo2 from "../../assets/logo2.png";
 
 const Resetpassword = () => {
   const [email, setEmail] = useState("");
@@ -8,24 +10,42 @@ const Resetpassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Simulate an invalid email check
     if (email !== "test@gmail.com") {
       setError(true);
       return;
     }
-
     console.log("Reset link sent to:", email);
     setEmail("");
     setError(false);
-
     navigate("/otp");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9]">
+    <div
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9] relative"
+    >
+      <div
+        className="absolute top-0 left-0 w-full flex items-center"
+        style={{
+          borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+          height: "64px",
+        }}
+      >
+        <a href="/">
+          <img
+            src={logo2}
+            alt="Logo"
+            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+          />
+        </a>
+      </div>
       {/* Reset Password Box */}
-      <div className="bg-white p-[40px] rounded-2xl shadow-md w-[440px]">
+      <div className="bg-white p-[40px] rounded-2xl shadow-md w-[440px] mt-[80px]">
         <div className="mb-[32px]">
           <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
             <a href="/login">← BACK</a>

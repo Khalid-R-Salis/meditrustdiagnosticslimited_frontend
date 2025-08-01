@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import bg1 from "../../assets/bg1.png";
+import logo2 from "../../assets/logo2.png";
 
 const Newpassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -30,85 +32,109 @@ const Newpassword = () => {
     "bg-[#FFFBFA] shadow-[0_2px_5px_0_rgba(243,65,65,0.08),_0_0_0_2px_rgba(243,65,65,0.40),_0_1px_1px_0_rgba(0,0,0,0.12)]";
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9]"
+    <div
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9] relative"
     >
-      <div className="bg-white p-[40px] rounded-[24px] shadow-md w-[440px]">
-        <div className="mb-[32px]">
-          <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
-            You’re Almost There
-          </h1>
-          <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-inter mt-1">
-            Please enter a new password to complete your login reset process.
+      <div
+        className="absolute top-0 left-0 w-full flex items-center"
+        style={{
+          borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+          height: "64px",
+        }}
+      >
+        <a href="/">
+          <img
+            src={logo2}
+            alt="Logo"
+            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+          />
+        </a>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center justify-center gap-[8px] w-full"
+      >
+        <div className="bg-white p-[40px] rounded-[24px] shadow-md w-[440px] mt-[80px]">
+          <div className="mb-[32px]">
+            <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
+              You’re Almost There
+            </h1>
+            <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-inter mt-1">
+              Please enter a new password to complete your login reset process.
+            </p>
+          </div>
+
+          {/* New Password */}
+          <div className="mb-5">
+            <h2 className="text-[#454C52] text-[14px] font-inter font-normal leading-5 mb-2">
+              New Password
+            </h2>
+            <input
+              type="text"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+                if (confirmPassword && e.target.value === confirmPassword) {
+                  setPasswordError("");
+                }
+              }}
+              className={`${inputBaseClass} shadow-custom ${
+                passwordError ? errorInputClass : "shadow-custom"
+              }`}
+              required
+            />
+          </div>
+
+          {/* Confirm Password */}
+          <div className="mb-4">
+            <h2 className="text-[#454C52] text-[14px] font-inter font-normal leading-5 mb-2">
+              Confirm Password
+            </h2>
+            <input
+              type="text"
+              placeholder="Confirm new password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                if (newPassword && e.target.value === newPassword) {
+                  setPasswordError("");
+                }
+              }}
+              className={`${inputBaseClass} shadow-custom ${
+                passwordError ? errorInputClass : "shadow-custom"
+              }`}
+              required
+            />
+
+            {passwordError && (
+              <p className="text-[#F34141] text-[14px] font-inter font-normal leading-[20px] mt-2">
+                {passwordError}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium my-6 shadow-sm"
+          >
+            Reset password
+          </button>
+
+          <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
+            Need help?{" "}
+            <span className="text-[#829C15] cursor-pointer">
+              <a href="/contactadmin">Contact administrator</a>
+            </span>
           </p>
         </div>
-
-        {/* New Password */}
-        <div className="mb-5">
-          <h2 className="text-[#454C52] text-[14px] font-inter font-normal leading-5 mb-2">
-            New Password
-          </h2>
-          <input
-            type="text"
-            placeholder="Enter new password"
-            value={newPassword}
-            onChange={(e) => {
-              setNewPassword(e.target.value);
-              if (confirmPassword && e.target.value === confirmPassword) {
-                setPasswordError("");
-              }
-            }}
-            className={`${inputBaseClass} shadow-custom ${
-              passwordError ? errorInputClass : "shadow-custom"
-            }`}
-            required
-          />
-        </div>
-
-        {/* Confirm Password */}
-        <div className="mb-4">
-          <h2 className="text-[#454C52] text-[14px] font-inter font-normal leading-5 mb-2">
-            Confirm Password
-          </h2>
-          <input
-            type="text"
-            placeholder="Confirm new password"
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              if (newPassword && e.target.value === newPassword) {
-                setPasswordError("");
-              }
-            }}
-            className={`${inputBaseClass} shadow-custom ${
-              passwordError ? errorInputClass : "shadow-custom"
-            }`}
-            required
-          />
-
-          {passwordError && (
-            <p className="text-[#F34141] text-[14px] font-inter font-normal leading-[20px] mt-2">
-              {passwordError}
-            </p>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium my-6 shadow-sm"
-        >
-          Reset password
-        </button>
-
-        <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
-          Need help?{" "}
-          <span className="text-[#829C15] cursor-pointer">
-            <a href="/contactadmin">Contact administrator</a>
-          </span>
-        </p>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

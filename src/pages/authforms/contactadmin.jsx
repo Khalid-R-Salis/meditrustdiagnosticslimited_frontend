@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import bg1 from "../../assets/bg1.png";
+import logo2 from "../../assets/logo2.png";
 
 const ContactAdmin = () => {
   const [formData, setFormData] = useState({
@@ -37,15 +39,37 @@ const ContactAdmin = () => {
 
   const handleBack = (e) => {
     e.preventDefault();
-    window.history.back(); // Go to immediate previous page
+    window.history.back();
   };
 
   return (
     <form
+      action=""
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center min-h-screen bg-[#f9f9f9] px-4"
+      style={{
+        backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9]"
     >
-      <div className="bg-white p-[40px] rounded-[24px] shadow-md w-full max-w-[500px]">
+      <div
+        className="absolute top-0 left-0 w-full flex items-center"
+        style={{
+          borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
+          height: "64px",
+        }}
+      >
+        <a href="/">
+          {" "}
+          <img
+            src={logo2}
+            alt="Logo"
+            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+          />
+        </a>
+      </div>
+      <div className="bg-white p-[40px] rounded-[24px] shadow-md w-full max-w-[500px] z-10">
         <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
           <a href="#" onClick={handleBack}>
             ← BACK
