@@ -2,6 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import logo2 from "../assets/logo2.png";
+import paidStamp from "../assets/paid_stamp.png";
 
 const ReceiptTemplate = ({ data }) => {
   const handleDownload = () => {
@@ -117,12 +118,9 @@ const ReceiptTemplate = ({ data }) => {
         </div>
 
         {/* Paid Stamp */}
+
         <div className="mt-2 text-center">
-          <img
-            src="/src/assets/paid_stamp.png"
-            alt="Paid Stamp"
-            className="w-12 mx-auto"
-          />
+          <img src={paidStamp} alt="Paid Stamp" className="w-12 mx-auto" />
         </div>
       </div>
 
