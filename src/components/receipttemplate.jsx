@@ -3,7 +3,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import logo2 from "../assets/logo2.png";
 
-const ReceiptPage = ({ data }) => {
+const ReceiptTemplate = ({ data }) => {
   const handleDownload = () => {
     const input = document.getElementById("receipt");
     html2canvas(input, {
@@ -168,4 +168,4 @@ const ReceiptPage = ({ data }) => {
   );
 };
 
-export default ReceiptPage;
+export default ReceiptTemplate;
