@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo2 from "../assets/logo2.png";
 
 const OverviewIcon = () => (
   <svg
@@ -85,12 +86,9 @@ const Sidebar = ({ onLogout, onUpdatePassword }) => {
       <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] min-h-[calc(100vh-2rem)]">
         <div>
           <div className="ml-6 w-[166px] h-[40px] mb-5">
-            <img
-              src="/src/assets/logo2.png"
-              alt="logo"
-              className="w-36 mb-10"
-            />
+            <img src={logo2} alt="logo" className="w-36 mb-10" />
           </div>
+
           <nav className="flex flex-col justify-center items-start gap-2">
             <button
               className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
