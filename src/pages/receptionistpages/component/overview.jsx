@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../../../components/sidebar";
+import Sidebar from "./sidebar";
 import HeaderStats from "../../../components/headerstats";
 import ConsultationForm from "../../../components/consultationform";
 import ReceiptTemplate from "../../../components/receipttemplate";
@@ -19,16 +19,12 @@ const OverviewPage = () => {
 
   return (
     <div
-      className={`flex ${
+      className={`flex w-full ${
         showForm || showReceipt ? "overflow-hidden h-screen" : ""
       }`}
     >
-      <Sidebar
-        onLogout={handleLogout}
-        onUpdatePassword={handleUpdatePassword}
-      />
-
-      <div className="flex-1 bg-[#ffffff] py-8 px-[100px] relative">
+      {/* Main content */}
+      <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
             Overview
@@ -55,8 +51,7 @@ const OverviewPage = () => {
 
           <Link to="/authforms/contactadmin">
             <button
-              className="
-                flex flex-col justify-center items-start gap-2 
+              className="flex flex-col justify-center items-start gap-2 
                 px-3 py-1.5 
                 rounded-lg 
                 border border-[#E5E7EA] 
@@ -64,15 +59,14 @@ const OverviewPage = () => {
                 text-[#000] 
                 text-sm font-medium leading-5 
                 text-center 
-                font-inter
-              "
+                font-inter"
             >
               View all
             </button>
           </Link>
         </div>
 
-        <section className="bg-white p-4">
+        <section className="bg-white p-4 overflow-auto">
           <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
@@ -91,27 +85,25 @@ const OverviewPage = () => {
             <tbody>
               {[...Array(7)].map((_, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
-                  <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate overflow-hidden whitespace-nowrap">
+                  <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
                     #3266
                   </td>
 
-                  <td className="flex-col items-start justify-center py-4 max-w-[140px] truncate overflow-hidden whitespace-nowrap">
+                  <td className="flex-col items-start justify-center py-4 max-w-[140px] truncate">
                     Khalid Rabiu – 09099999999
                   </td>
 
-                  <td className="px-5 py-4 max-w-[60px] truncate overflow-hidden whitespace-nowrap">
-                    Male
-                  </td>
+                  <td className="px-5 py-4 max-w-[60px] truncate">Male</td>
 
-                  <td className="px-5 py-4 max-w-[140px] truncate overflow-hidden whitespace-nowrap">
+                  <td className="px-5 py-4 max-w-[140px] truncate">
                     FOLLICLE STIMULATING HORMONE
                   </td>
 
-                  <td className="px-5 py-4 max-w-[160px] truncate overflow-hidden whitespace-nowrap">
+                  <td className="px-5 py-4 max-w-[160px] truncate">
                     16, Jun 2025 - 11:00 AM
                   </td>
 
-                  <td className="px-5 py-4 max-w-[120px] truncate overflow-hidden whitespace-nowrap">
+                  <td className="px-5 py-4 max-w-[120px] truncate">
                     ₦50,0000 (transfer)
                   </td>
 

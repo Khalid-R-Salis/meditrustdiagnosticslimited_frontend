@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo2 from "../assets/logo2.png";
+import logo2 from "../../../assets/logo2.png";
 
 const OverviewIcon = () => (
   <svg
@@ -74,8 +74,8 @@ const DotsIcon = () => (
   </svg>
 );
 
-const Sidebar = ({ onLogout, onUpdatePassword }) => {
-  const [activeNav, setActiveNav] = useState("overview");
+const Sidebar = ({ activeNav, setActiveNav }) => {
+  // const [activeNav, setActiveNav] = useState("overview");
 
   const handleSettingsClick = () => {
     window.location.href = "/settings";
@@ -83,7 +83,7 @@ const Sidebar = ({ onLogout, onUpdatePassword }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] min-h-[calc(100vh-2rem)]">
+      <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)]">
         <div>
           <div className="ml-6 w-[166px] h-[40px] mb-5">
             <img src={logo2} alt="logo" className="w-36 mb-10" />

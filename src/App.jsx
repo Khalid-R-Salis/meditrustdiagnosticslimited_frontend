@@ -14,10 +14,11 @@ import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
 import OTPInput from "./pages/authforms/otp";
 import Newpassword from "./pages/authforms/newpassword";
 import UpdatePWD from "./components/updatepwd";
-import LogOut from "./components/logout";
+// import LogOut from "./components/logout";
 
 // Receptionist Pages
-import OverviewPage from "./pages/receptionistpages/overview/index.jsx";
+import OverviewPage from "./pages/receptionistpages/component/overview";
+import ReceptionistDashboard from "./pages/receptionistpages/receptionistdashboard";
 
 function App() {
   const location = useLocation();
@@ -38,6 +39,10 @@ function App() {
 
           {/*  */}
           <Route path="/receptionist/overview" element={<OverviewPage />} />
+          <Route
+            path="/receptionistdashboard"
+            element={<ReceptionistDashboard />}
+          />
         </Routes>
       </div>
     </div>
