@@ -33,9 +33,8 @@ function App() {
           <Route path="/otp" element={<OTPInput />} />
           <Route path="/newpassword" element={<Newpassword />} />
           <Route path="/updatepassword" element={<UpdatePWD />} />
-          <Route path="/authforms/contactadmin" element={<ContactAdmin />} />
+          {/* <Route path="/authforms/contactadmin" element={<ContactAdmin />} /> */}
           {/* the above route if for the main time before i have the consultations page */}
-          <Route path="/logout" element={<LogOut />} />
 
           {/*  */}
           <Route path="/receptionist/overview" element={<OverviewPage />} />
