@@ -3,3 +3,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  button,
+  .print\:hidden {
+    display: none !important;
+  }
+}

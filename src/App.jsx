@@ -16,6 +16,9 @@ import Newpassword from "./pages/authforms/newpassword";
 import UpdatePWD from "./components/updatepwd";
 import LogOut from "./components/logout";
 
+// Receptionist Pages
+import OverviewPage from "./pages/receptionistpages/overview/index.jsx";
+
 function App() {
   const location = useLocation();
 
@@ -30,7 +33,12 @@ function App() {
           <Route path="/otp" element={<OTPInput />} />
           <Route path="/newpassword" element={<Newpassword />} />
           <Route path="/updatepassword" element={<UpdatePWD />} />
+          <Route path="/authforms/contactadmin" element={<ContactAdmin />} />
+          {/* the above route if for the main time before i have the consultations page */}
           <Route path="/logout" element={<LogOut />} />
+
+          {/*  */}
+          <Route path="/receptionist/overview" element={<OverviewPage />} />
         </Routes>
       </div>
     </div>
