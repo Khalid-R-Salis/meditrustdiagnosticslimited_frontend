@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../../../components/sidebar";
-import HeaderStats from "../../../components/headerstats";
+import HeaderStats from "../../../components/HeaderStats";
+
 import ConsultationForm from "../../../components/consultationform";
 import ReceiptTemplate from "../../../components/receipttemplate";
 
