@@ -32,29 +32,44 @@ const ReceiptTemplate = ({ data }) => {
 
   const handlePrint = () => {
     const content = document.getElementById("receipt").innerHTML;
-    const win = window.open("", "", "width=300,height=600");
+    const win = window.open("", "_blank", "width=300,height=600");
+
+    if (!win) {
+      alert("Popup blocked! Please allow popups for this site.");
+      return;
+    }
+
+    win.document.open();
     win.document.write(`
-      <html>
-        <head>
-          <title>Print Receipt</title>
-          <style>
-            body {
-              font-family: sans-serif;
-              font-size: 8px;
-              margin: 0;
-              padding: 10px;
-              width: 230px;
-              background-color: #F8F9F4;
-            }
-            .text-center { text-align: center; }
-            img { max-width: 80px; margin: auto; display: block; }
-          </style>
-        </head>
-        <body onload="window.print(); window.close();">
-          ${content}
-        </body>
-      </html>
-    `);
+    <html>
+      <head>
+        <title>Print Receipt</title>
+        <style>
+          body {
+            font-family: sans-serif;
+            font-size: 8px;
+            margin: 0;
+            padding: 10px;
+            width: 230px;
+            background-color: #F8F9F4;
+          }
+          .text-center { text-align: center; }
+          img { max-width: 80px; margin: auto; display: block; }
+        </style>
+      </head>
+      <body>
+        ${content}
+        <script>
+          window.onload = function() {
+            setTimeout(function() {
+              window.print();
+              window.close();
+            }, 100);
+          };
+        </script>
+      </body>
+    </html>
+  `);
     win.document.close();
   };
 
