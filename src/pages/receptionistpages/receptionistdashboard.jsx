@@ -1,6 +1,6 @@
 import Sidebar from "./component/sidebar";
 import OverviewPage from "./component/overview";
-import Consultations from "./component/consultations"; // Ensure this component exists
+import Consultations from "./component/consultations";
 import { useState } from "react";
 
 const DashboardLayout = () => {
@@ -9,11 +9,11 @@ const DashboardLayout = () => {
   const renderContent = () => {
     switch (activeNav) {
       case "overview":
-        return <OverviewPage />;
+        return <OverviewPage setActiveNav={setActiveNav} />;
       case "consultations":
         return <Consultations />;
       default:
-        return <OverviewPage />;
+        return <OverviewPage setActiveNav={setActiveNav} />;
     }
   };
 

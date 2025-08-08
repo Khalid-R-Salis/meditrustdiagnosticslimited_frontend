@@ -5,7 +5,7 @@ import HeaderStats from "../../../components/headerstats";
 import ConsultationForm from "../../../components/consultationform";
 import ReceiptTemplate from "../../../components/receipttemplate";
 
-const OverviewPage = () => {
+const OverviewPage = ({ setActiveNav }) => {
   const [showForm, setShowForm] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
 
@@ -49,9 +49,8 @@ const OverviewPage = () => {
             Recent Patient Entries
           </h2>
 
-          <Link to="/authforms/contactadmin">
-            <button
-              className="flex flex-col justify-center items-start gap-2 
+          <button
+            className="flex flex-col justify-center items-start gap-2 
                 px-3 py-1.5 
                 rounded-lg 
                 border border-[#E5E7EA] 
@@ -60,10 +59,10 @@ const OverviewPage = () => {
                 text-sm font-medium leading-5 
                 text-center 
                 font-inter"
-            >
-              View all
-            </button>
-          </Link>
+            onClick={() => setActiveNav("consultations")}
+          >
+            View all
+          </button>
         </div>
 
         <section className="bg-white p-4 overflow-auto">
