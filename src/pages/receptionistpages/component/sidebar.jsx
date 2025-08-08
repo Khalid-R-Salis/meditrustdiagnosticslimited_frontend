@@ -75,15 +75,49 @@ const DotsIcon = () => (
 );
 
 const Sidebar = ({ activeNav, setActiveNav }) => {
-  // const [activeNav, setActiveNav] = useState("overview");
+  const [showDotsMenu, setShowDotsMenu] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
-  const handleSettingsClick = () => {
-    window.location.href = "/settings";
+  // To toggle dots menu popup
+  const toggleDotsMenu = () => {
+    setShowDotsMenu(!showDotsMenu);
+  };
+
+  // Handlers
+  const handleLogoutClick = () => {
+    setShowDotsMenu(false);
+    setShowLogoutModal(true);
+  };
+
+  const handleChangePasswordClick = () => {
+    setShowDotsMenu(false);
+    setShowChangePasswordModal(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    setShowLogoutModal(false);
+    alert("Logged out!"); // replace with real logout logic
+  };
+
+  const handleLogoutCancel = () => {
+    setShowLogoutModal(false);
+  };
+
+  const handleChangePasswordSubmit = (e) => {
+    e.preventDefault();
+    // Your password change logic here
+    alert("Password changed!");
+    setShowChangePasswordModal(false);
+  };
+
+  const handleChangePasswordCancel = () => {
+    setShowChangePasswordModal(false);
   };
 
   return (
     <>
-      <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)]">
+      <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)] relative">
         <div>
           <div className="ml-6 w-[166px] h-[40px] mb-5">
             <img src={logo2} alt="logo" className="w-36 mb-10" />
@@ -118,20 +152,19 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
           </nav>
         </div>
 
-        <div className="flex flex-col justify-center items-start self-stretch p-[12px] rounded-[8px] border border-[#CED2D6] bg-white mb-6">
+        <div className="flex flex-col justify-center items-start self-stretch p-[12px] rounded-[8px] border border-[#CED2D6] bg-white mb-6 relative">
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-5 min-w-0 w-full">
               <span
                 className="flex-1 min-w-0 truncate text-[#596066] text-[16px] sm:text-[15px] font-inter font-[400] leading-[24px] text-left cursor-default"
                 title="Nwankwo paschal"
-                // the advantage of the title attribute is that it shows the full name on hover
               >
                 Nwankwo paschal
               </span>
               <button
                 type="button"
-                className="p-1 rounded hover:bg-gray-100 transition"
-                onClick={handleSettingsClick}
+                className="p-1 rounded hover:bg-gray-100 transition relative z-10"
+                onClick={toggleDotsMenu}
               >
                 <span title="Click to open settings" role="button" tabIndex={0}>
                   <DotsIcon />
@@ -142,12 +175,121 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
           <span
             className="text-[#9EA5AD] text-[14px] font-inter font-[400] leading-[20px] truncate w-full text-left cursor-default"
             title="nwakwopaschal017@gmail.com"
-            // the advantage of the title attribute is that it shows the full email on hover
           >
             nwakwopaschalkwak017@gmail.com
           </span>
+
+          {/* Dots menu popup */}
+          {showDotsMenu && (
+            <div
+              className="absolute left-[190px] top-[40px] bg-white rounded-md border border-[#E5E7EA] shadow-lg z-20 w-[160px] font-inter text-sm"
+              onClick={(e) => e.stopPropagation()} // prevent closing if inside popup clicked
+            >
+              <button
+                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                onClick={handleLogoutClick}
+              >
+                Log Out
+              </button>
+              <button
+                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                onClick={handleChangePasswordClick}
+              >
+                Change Password
+              </button>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Logout confirmation modal */}
+      {showLogoutModal && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={handleLogoutCancel} // close modal if click outside
+        >
+          <div
+            className="bg-white rounded-lg p-6 w-[320px] shadow-lg relative"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+          >
+            <h2 className="text-lg font-semibold mb-4">Confirm Logout</h2>
+            <p className="mb-6">Are you sure you want to logout?</p>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                onClick={handleLogoutCancel}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                onClick={handleLogoutConfirm}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Change Password modal */}
+      {showChangePasswordModal && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={handleChangePasswordCancel}
+        >
+          <form
+            className="bg-white rounded-lg p-6 w-[360px] shadow-lg relative flex flex-col gap-4"
+            onClick={(e) => e.stopPropagation()}
+            onSubmit={handleChangePasswordSubmit}
+          >
+            <h2 className="text-lg font-semibold mb-2">Change Password</h2>
+
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              Current Password
+              <input
+                type="password"
+                required
+                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </label>
+
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              New Password
+              <input
+                type="password"
+                required
+                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </label>
+
+            <label className="flex flex-col text-sm font-medium text-gray-700">
+              Confirm New Password
+              <input
+                type="password"
+                required
+                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </label>
+
+            <div className="flex justify-end gap-4 mt-2">
+              <button
+                type="button"
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                onClick={handleChangePasswordCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 };
