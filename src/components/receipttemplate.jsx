@@ -4,7 +4,23 @@ import html2canvas from "html2canvas";
 import logo2 from "../assets/logo2.png";
 import paidStamp from "../assets/paid_stamp.png";
 
-const ReceiptTemplate = ({ data }) => {
+const ReceiptTemplate = () => {
+  // Hardcoded receipt details, Fahad will replace with actual data later
+  const receiptDetails = [
+    { label: "Patient ID:", value: "#5787" },
+    { label: "Patient's Name:", value: "John Doe" },
+    { label: "Sex:", value: "Male" },
+    { label: "Phone:", value: "08012345678" },
+    { label: "Sample:", value: "Blood" },
+    { label: "Referral Hospital:", value: "General Hospital Kano" },
+    { label: "Operator:", value: "Jane Smith" },
+    { label: "Test Type:", value: "Full Blood Count" },
+    { label: "Test Price:", value: "NGN 50,000" },
+    { label: "Total:", value: "NGN 50,000" },
+    { label: "Payment Method:", value: "Cash" },
+    { label: "Processed by:", value: "Nwankwo Paschal" },
+  ];
+
   const handleDownload = () => {
     const input = document.getElementById("receipt");
     html2canvas(input, {
@@ -30,52 +46,79 @@ const ReceiptTemplate = ({ data }) => {
     });
   };
 
-  const handlePrint = () => {
-    const content = document.getElementById("receipt").innerHTML;
-    const win = window.open("", "_blank", "width=300,height=600");
+  const handleBluetoothPrint = async () => {
+    try {
+      const device = await navigator.bluetooth.requestDevice({
+        filters: [{ name: "MTP-II" }],
+        optionalServices: ["000018f0-0000-1000-8000-00805f9b34fb"],
+      });
 
-    if (!win) {
-      alert("Popup blocked! Please allow popups for this site.");
-      return;
+      const server = await device.gatt.connect();
+      const service = await server.getPrimaryService(
+        "000018f0-0000-1000-8000-00805f9b34fb"
+      );
+
+      const characteristics = await service.getCharacteristics();
+      const writeCharacteristic = characteristics.find(
+        (c) => c.properties.write || c.properties.writeWithoutResponse
+      );
+
+      if (!writeCharacteristic) {
+        throw new Error("No writable characteristic found!");
+      }
+
+      const esc = "\x1B";
+      const newLine = "\x0A";
+
+      let textToPrint = "";
+      textToPrint += esc + "@"; // Initialize
+      textToPrint += esc + "a" + "\x01"; // Center align
+
+      // Recipt header
+      textToPrint += esc + "a" + "\x01"; // Center
+      textToPrint += esc + "!" + "\x10"; // Double height
+      textToPrint += esc + "E" + "\x01"; // Bold
+      textToPrint += "MEDITRUST DIAGNOSTICS LIMITED" + newLine;
+      textToPrint += esc + "!" + "\x00"; // Reset size
+      textToPrint += esc + "E" + "\x00"; // Bold off
+
+      textToPrint += "Address: Mandawari, Kano" + newLine;
+      textToPrint += newLine; // just a space
+
+      // Receipt title
+      textToPrint += esc + "E" + "\x01"; //take back Bold
+      textToPrint += "PATIENT RECEIPT" + newLine;
+      textToPrint += esc + "E" + "\x00"; // Bold off
+      textToPrint += new Date().toLocaleString() + newLine + newLine;
+
+      // Details
+      textToPrint += esc + "a" + "\x00"; // Left align
+      receiptDetails.forEach((item) => {
+        textToPrint += `${item.label.padEnd(13)} ${item.value}${newLine}`;
+      });
+
+      // Paid stamp text
+      textToPrint += newLine + esc + "a" + "\x01" + "*** PAID ***" + newLine;
+
+      // Footer
+      textToPrint += esc + "a" + "\x01";
+      textToPrint += "Thanks for your patronage";
+
+      // Feed paper
+      textToPrint += newLine.repeat(4);
+
+      const encoder = new TextEncoder();
+      const dataBytes = encoder.encode(textToPrint);
+      await writeCharacteristic.writeValue(dataBytes);
+
+      alert("Bluetooth printing completed!");
+    } catch (err) {
+      alert("Failed to print via Bluetooth: " + err.message);
     }
-
-    win.document.open();
-    win.document.write(`
-    <html>
-      <head>
-        <title>Print Receipt</title>
-        <style>
-          body {
-            font-family: sans-serif;
-            font-size: 8px;
-            margin: 0;
-            padding: 10px;
-            width: 230px;
-            background-color: #F8F9F4;
-          }
-          .text-center { text-align: center; }
-          img { max-width: 80px; margin: auto; display: block; }
-        </style>
-      </head>
-      <body>
-        ${content}
-        <script>
-          window.onload = function() {
-            setTimeout(function() {
-              window.print();
-              window.close();
-            }, 100);
-          };
-        </script>
-      </body>
-    </html>
-  `);
-    win.document.close();
   };
 
   return (
     <div className="flex flex-col items-center py-4">
-      {/* Receipt */}
       <div
         id="receipt"
         className="w-full max-w-[230px] font-inter text-black text-[7px] print:bg-[#F8F9F4] print:shadow-none print:text-black print:p-0 p-4 border"
@@ -90,20 +133,7 @@ const ReceiptTemplate = ({ data }) => {
 
         {/* Details */}
         <div className="space-y-1 leading-[10px]">
-          {[
-            { label: "Ticket ID:", value: `#${data?.ticket || "5787"}` },
-            { label: "Patient's Name:", value: data?.name || "John Doe" },
-            { label: "Sex:", value: data?.sex },
-            { label: "Phone:", value: data?.phone },
-            { label: "Sample:", value: data?.sample },
-            { label: "Referral Hospital:", value: data?.hospital },
-            { label: "Operator:", value: data?.operator },
-            { label: "Test Type:", value: data?.test },
-            { label: "Test Price:", value: "₦50,000" },
-            { label: "Total:", value: data?.total },
-            { label: "Payment Method:", value: data?.payment },
-            { label: "Processed by:", value: "Nwankwo Paschal" },
-          ].map((item, idx) => (
+          {receiptDetails.map((item, idx) => (
             <div
               key={idx}
               className="flex flex-col border-b border-dashed border-gray-300 pb-1"
@@ -133,7 +163,6 @@ const ReceiptTemplate = ({ data }) => {
         </div>
 
         {/* Paid Stamp */}
-
         <div className="mt-2 text-center">
           <img src={paidStamp} alt="Paid Stamp" className="w-12 mx-auto" />
         </div>
@@ -144,7 +173,7 @@ const ReceiptTemplate = ({ data }) => {
         <button
           onClick={handleDownload}
           style={{
-            borderRadius: "8px",
+            borderRadius: "5px",
             border: "1px solid var(--Grey-200, #E5E7EA)",
             background: "var(--Grey-50, #FAFAFA)",
             color: "var(--Primary-Black, #000)",
@@ -153,14 +182,17 @@ const ReceiptTemplate = ({ data }) => {
             fontWeight: 400,
             lineHeight: "16px",
             padding: "2px 8px",
+            width: "40%",
+            textAlign: "center",
           }}
         >
           Download
         </button>
+
         <button
-          onClick={handlePrint}
+          onClick={handleBluetoothPrint}
           style={{
-            borderRadius: "8px",
+            borderRadius: "5px",
             background: "var(--Brand-dark, #829C15)",
             boxShadow:
               "1px 1px 2px 1px rgba(255,255,255,0.18) inset, -1px -1px 2px 1px rgba(255,255,255,0.18) inset",
@@ -170,7 +202,7 @@ const ReceiptTemplate = ({ data }) => {
             fontWeight: 400,
             lineHeight: "16px",
             padding: "2px 8px",
-            width: "45%",
+            width: "40%",
             textAlign: "center",
           }}
         >
