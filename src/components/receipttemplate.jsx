@@ -46,6 +46,14 @@ const ReceiptTemplate = () => {
     });
   };
 
+  const sendInChunks = async (characteristic, data, chunkSize = 20) => {
+    for (let i = 0; i < data.length; i += chunkSize) {
+      const chunk = data.slice(i, i + chunkSize);
+      await characteristic.writeValue(chunk);
+      await new Promise((res) => setTimeout(res, 50)); // small delay for buffer flush
+    }
+  };
+
   const handleBluetoothPrint = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
@@ -69,26 +77,21 @@ const ReceiptTemplate = () => {
 
       const esc = "\x1B";
       const newLine = "\x0A";
-
       let textToPrint = "";
-      textToPrint += esc + "@"; // Initialize
-      textToPrint += esc + "a" + "\x01"; // Center align
 
-      // Recipt header
+      textToPrint += esc + "@"; // Initialize
       textToPrint += esc + "a" + "\x01"; // Center
       textToPrint += esc + "!" + "\x10"; // Double height
       textToPrint += esc + "E" + "\x01"; // Bold
       textToPrint += "MEDITRUST DIAGNOSTICS LIMITED" + newLine;
-      textToPrint += esc + "!" + "\x00"; // Reset size
+      textToPrint += esc + "!" + "\x00"; // Reset
       textToPrint += esc + "E" + "\x00"; // Bold off
 
-      textToPrint += "Address: Mandawari, Kano" + newLine;
-      textToPrint += newLine; // just a space
+      textToPrint += "Address: Mandawari, Kano" + newLine + newLine;
 
-      // Receipt title
-      textToPrint += esc + "E" + "\x01"; //take back Bold
+      textToPrint += esc + "E" + "\x01";
       textToPrint += "PATIENT RECEIPT" + newLine;
-      textToPrint += esc + "E" + "\x00"; // Bold off
+      textToPrint += esc + "E" + "\x00";
       textToPrint += new Date().toLocaleString() + newLine + newLine;
 
       // Details
@@ -97,19 +100,16 @@ const ReceiptTemplate = () => {
         textToPrint += `${item.label.padEnd(13)} ${item.value}${newLine}`;
       });
 
-      // Paid stamp text
       textToPrint += newLine + esc + "a" + "\x01" + "*** PAID ***" + newLine;
-
-      // Footer
       textToPrint += esc + "a" + "\x01";
       textToPrint += "Thanks for your patronage";
-
-      // Feed paper
       textToPrint += newLine.repeat(4);
 
       const encoder = new TextEncoder();
       const dataBytes = encoder.encode(textToPrint);
-      await writeCharacteristic.writeValue(dataBytes);
+
+      // 🚀 Send in chunks
+      await sendInChunks(writeCharacteristic, dataBytes, 20);
 
       alert("Bluetooth printing completed!");
     } catch (err) {
