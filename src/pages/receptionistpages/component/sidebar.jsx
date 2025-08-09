@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import logo2 from "../../../assets/logo2.png";
 
@@ -78,6 +79,7 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
   const [showDotsMenu, setShowDotsMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const navigate = useNavigate();
 
   // To toggle dots menu popup
   const toggleDotsMenu = () => {
@@ -97,7 +99,10 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
 
   const handleLogoutConfirm = () => {
     setShowLogoutModal(false);
-    alert("Logged out!"); // replace with real logout logic
+    // Clear any stored session data if necessary
+    localStorage.removeItem("authToken"); // example if using tokens
+    // Navigate to login page
+    navigate("/login");
   };
 
   const handleLogoutCancel = () => {
@@ -179,20 +184,19 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
             nwakwopaschalkwak017@gmail.com
           </span>
 
-          {/* Dots menu popup */}
           {showDotsMenu && (
             <div
-              className="absolute left-[190px] top-[40px] bg-white rounded-md border border-[#E5E7EA] shadow-lg z-20 w-[160px] font-inter text-sm"
-              onClick={(e) => e.stopPropagation()} // prevent closing if inside popup clicked
+              className="absolute left-[35px] bottom-[60px] w-[160px] font-inter text-sm rounded-lg border border-[#E5E7EA] bg-white shadow-[0_1px_16px_0_rgba(0,0,0,0.12)] z-20"
+              onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                className="w-full px-4 py-2 text-left mb-2 hover:bg-gray-100 text-[#596066] font-inter text-[14px] font-normal leading-[20px]"
                 onClick={handleLogoutClick}
               >
                 Log Out
               </button>
               <button
-                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                className="w-full px-4 py-2 text-left hover:bg-gray-100 text-[#596066] font-inter text-[14px] font-normal leading-[20px]"
                 onClick={handleChangePasswordClick}
               >
                 Change Password
@@ -202,27 +206,34 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
         </div>
       </div>
 
-      {/* Logout confirmation modal */}
+      {/* Logout modal */}
       {showLogoutModal && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={handleLogoutCancel} // close modal if click outside
+          onClick={handleLogoutCancel}
         >
           <div
-            className="bg-white rounded-lg p-6 w-[320px] shadow-lg relative"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+            className="bg-white rounded-lg p-8 w-[320px] shadow-lg relative"
+            onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-lg font-semibold mb-4">Confirm Logout</h2>
-            <p className="mb-6">Are you sure you want to logout?</p>
+            <h2 className="text-[#596066] font-inter text-[16px] font-semibold leading-[24px] mb-4 ">
+              Confirm Logout
+            </h2>
+
+            <p className="text-[#676E76] font-inter text-[14px] font-normal leading-[20px] mb-6">
+              Your session wouldn’t be saved. be sure to complete whatever you
+              are doing
+            </p>
+
             <div className="flex justify-end gap-4">
               <button
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-4 py-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] hover:bg-gray-300"
                 onClick={handleLogoutCancel}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                className="px-4 py-2 rounded-lg bg-[#CD3636] text-white shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset] hover:bg-red-700"
                 onClick={handleLogoutConfirm}
               >
                 Logout
