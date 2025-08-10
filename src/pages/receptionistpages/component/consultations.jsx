@@ -46,13 +46,13 @@ const ConsultationPage = () => {
   const [showReceipt, setShowReceipt] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [filterRange, setFilterRange] = useState("today");
 
   const filteredData = mockConsultations.filter(
     (item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.receiptNumber.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const [filterRange, setFilterRange] = useState("today");
 
   const paginatedData = filteredData.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -70,7 +70,7 @@ const ConsultationPage = () => {
   };
 
   return (
-    <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
+    <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative h-screen overflow-y-auto">
       <div className="flex justify-between items-center mb-10">
         <h1
           className="text-[24px] font-semibold leading-[32px] text-black font-inter"
