@@ -52,6 +52,7 @@ const ConsultationPage = () => {
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.receiptNumber.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const [filterRange, setFilterRange] = useState("today");
 
   const paginatedData = filteredData.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -83,35 +84,68 @@ const ConsultationPage = () => {
         </h1>
       </div>
 
-      {/* Search bar */}
-      <div className="mb-6 flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-          className="shrink-0"
-        >
-          <path
-            d="M15.75 15.75L11.8525 11.8525M11.8525 11.8525C12.8704 10.8346 13.5 9.4283 13.5 7.875C13.5 4.7684 10.9816 2.25 7.875 2.25C4.7684 2.25 2.25 4.7684 2.25 7.875C2.25 10.9816 4.7684 13.5 7.875 13.5C9.4283 13.5 10.8346 12.8704 11.8525 11.8525Z"
-            stroke="#9EA5AD"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      <div className="mb-6 flex items-center gap-3">
+        {/* Search bar */}
+        <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            className="shrink-0"
+          >
+            <path
+              d="M15.75 15.75L11.8525 11.8525M11.8525 11.8525C12.8704 10.8346 13.5 9.4283 13.5 7.875C13.5 4.7684 10.9816 2.25 7.875 2.25C4.7684 2.25 2.25 4.7684 2.25 7.875C2.25 10.9816 4.7684 13.5 7.875 13.5C9.4283 13.5 10.8346 12.8704 11.8525 11.8525Z"
+              stroke="#9EA5AD"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
 
-        <input
-          type="text"
-          placeholder="Search by  name or recipt number"
-          className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1); // Reset to first page on search
-          }}
-        />
+          <input
+            type="text"
+            placeholder="Search by name or receipt number"
+            className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+          />
+        </div>
+
+        {/* Dropdown */}
+        <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            className="mr-2 shrink-0"
+          >
+            <path
+              d="M5.0625 2.25V3.9375M12.9375 2.25V3.9375M2.25 14.0625V5.625C2.25 4.69302 3.00552 3.9375 3.9375 3.9375H14.0625C14.9945 3.9375 15.75 4.69302 15.75 5.625V14.0625M2.25 14.0625C2.25 14.9945 3.00552 15.75 3.9375 15.75H14.0625C14.9945 15.75 15.75 14.9945 15.75 14.0625M2.25 14.0625V8.4375C2.25 7.50552 3.00552 6.75 3.9375 6.75H14.0625C14.9945 6.75 15.75 7.50552 15.75 8.4375"
+              stroke="#9EA5AD"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+
+          <select
+            className="bg-transparent outline-none text-sm"
+            value={filterRange}
+            onChange={(e) => setFilterRange(e.target.value)}
+          >
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+            <option value="always">Always</option>
+          </select>
+        </div>
       </div>
 
       <section className="bg-white p-4 overflow-auto">
