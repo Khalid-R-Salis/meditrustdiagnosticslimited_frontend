@@ -1,3 +1,4 @@
+// This is the header component in overview page for the receptionist dashboard
 import { useState } from "react";
 
 const HeaderStats = () => {

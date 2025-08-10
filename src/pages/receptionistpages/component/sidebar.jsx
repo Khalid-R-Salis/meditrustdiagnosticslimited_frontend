@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import logo2 from "../../../assets/logo2.png";
+import Settings from "../../../components/settings";
 
 const OverviewIcon = () => (
   <svg
@@ -24,7 +25,6 @@ const OverviewIcon = () => (
     />
   </svg>
 );
-
 const ConsultationIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -43,82 +43,8 @@ const ConsultationIcon = () => (
   </svg>
 );
 
-const DotsIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-  >
-    <path
-      d="M6.75 12C6.75 12.4142 6.41421 12.75 6 12.75C5.58579 12.75 5.25 12.4142 5.25 12C5.25 11.5858 5.58579 11.25 6 11.25C6.41421 11.25 6.75 11.5858 6.75 12Z"
-      stroke="#596066"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12.75 12C12.75 12.4142 12.4142 12.75 12 12.75C11.5858 12.75 11.25 12.4142 11.25 12C11.25 11.5858 11.5858 11.25 12 11.25C12.4142 11.25 12.75 11.5858 12.75 12Z"
-      stroke="#596066"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M18.75 12C18.75 12.4142 18.4142 12.75 18 12.75C17.5858 12.75 17.25 12.4142 17.25 12C17.25 11.5858 17.5858 11.25 18 11.25C18.4142 11.25 18.75 11.5858 18.75 12Z"
-      stroke="#596066"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 const Sidebar = ({ activeNav, setActiveNav }) => {
-  const [showDotsMenu, setShowDotsMenu] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const navigate = useNavigate();
-
-  // To toggle dots menu popup
-  const toggleDotsMenu = () => {
-    setShowDotsMenu(!showDotsMenu);
-  };
-
-  // Handlers
-  const handleLogoutClick = () => {
-    setShowDotsMenu(false);
-    setShowLogoutModal(true);
-  };
-
-  const handleChangePasswordClick = () => {
-    setShowDotsMenu(false);
-    setShowChangePasswordModal(true);
-  };
-
-  const handleLogoutConfirm = () => {
-    setShowLogoutModal(false);
-    // Clear any stored session data if necessary
-    localStorage.removeItem("authToken"); // example if using tokens
-    // Navigate to login page
-    navigate("/login");
-  };
-
-  const handleLogoutCancel = () => {
-    setShowLogoutModal(false);
-  };
-
-  const handleChangePasswordSubmit = (e) => {
-    e.preventDefault();
-    // Your password change logic here
-    alert("Password changed!");
-    setShowChangePasswordModal(false);
-  };
-
-  const handleChangePasswordCancel = () => {
-    setShowChangePasswordModal(false);
-  };
 
   return (
     <>
@@ -156,151 +82,8 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
             </button>
           </nav>
         </div>
-
-        <div className="flex flex-col justify-center items-start self-stretch p-[12px] rounded-[8px] border border-[#CED2D6] bg-white mb-6 relative">
-          <div className="w-full flex items-center justify-between">
-            <div className="flex items-center gap-5 min-w-0 w-full">
-              <span
-                className="flex-1 min-w-0 truncate text-[#596066] text-[16px] sm:text-[15px] font-inter font-[400] leading-[24px] text-left cursor-default"
-                title="Nwankwo paschal"
-              >
-                Nwankwo paschal
-              </span>
-              <button
-                type="button"
-                className="p-1 rounded hover:bg-gray-100 transition relative z-10"
-                onClick={toggleDotsMenu}
-              >
-                <span title="Click to open settings" role="button" tabIndex={0}>
-                  <DotsIcon />
-                </span>
-              </button>
-            </div>
-          </div>
-          <span
-            className="text-[#9EA5AD] text-[14px] font-inter font-[400] leading-[20px] truncate w-full text-left cursor-default"
-            title="nwakwopaschal017@gmail.com"
-          >
-            nwakwopaschalkwak017@gmail.com
-          </span>
-
-          {showDotsMenu && (
-            <div
-              className="absolute left-[35px] bottom-[60px] w-[160px] font-inter text-sm rounded-lg border border-[#E5E7EA] bg-white shadow-[0_1px_16px_0_rgba(0,0,0,0.12)] z-20"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className="w-full px-4 py-2 text-left mb-2 hover:bg-gray-100 text-[#596066] font-inter text-[14px] font-normal leading-[20px]"
-                onClick={handleLogoutClick}
-              >
-                Log Out
-              </button>
-              <button
-                className="w-full px-4 py-2 text-left hover:bg-gray-100 text-[#596066] font-inter text-[14px] font-normal leading-[20px]"
-                onClick={handleChangePasswordClick}
-              >
-                Change Password
-              </button>
-            </div>
-          )}
-        </div>
+        <Settings />
       </div>
-
-      {/* Logout modal */}
-      {showLogoutModal && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={handleLogoutCancel}
-        >
-          <div
-            className="bg-white rounded-lg p-8 w-[320px] shadow-lg relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-[#596066] font-inter text-[16px] font-semibold leading-[24px] mb-4 ">
-              Confirm Logout
-            </h2>
-
-            <p className="text-[#676E76] font-inter text-[14px] font-normal leading-[20px] mb-6">
-              Your session wouldn’t be saved. be sure to complete whatever you
-              are doing
-            </p>
-
-            <div className="flex justify-end gap-4">
-              <button
-                className="px-4 py-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] hover:bg-gray-300"
-                onClick={handleLogoutCancel}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 rounded-lg bg-[#CD3636] text-white shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset] hover:bg-red-700"
-                onClick={handleLogoutConfirm}
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Change Password modal */}
-      {showChangePasswordModal && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={handleChangePasswordCancel}
-        >
-          <form
-            className="bg-white rounded-lg p-6 w-[360px] shadow-lg relative flex flex-col gap-4"
-            onClick={(e) => e.stopPropagation()}
-            onSubmit={handleChangePasswordSubmit}
-          >
-            <h2 className="text-lg font-semibold mb-2">Change Password</h2>
-
-            <label className="flex flex-col text-sm font-medium text-gray-700">
-              Current Password
-              <input
-                type="password"
-                required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </label>
-
-            <label className="flex flex-col text-sm font-medium text-gray-700">
-              New Password
-              <input
-                type="password"
-                required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </label>
-
-            <label className="flex flex-col text-sm font-medium text-gray-700">
-              Confirm New Password
-              <input
-                type="password"
-                required
-                className="mt-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              />
-            </label>
-
-            <div className="flex justify-end gap-4 mt-2">
-              <button
-                type="button"
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-                onClick={handleChangePasswordCancel}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-              >
-                Change Password
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
     </>
   );
 };

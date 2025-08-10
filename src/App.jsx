@@ -13,7 +13,7 @@ import ContactAdmin from "./pages/authforms/contactadmin";
 import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
 import OTPInput from "./pages/authforms/otp";
 import Newpassword from "./pages/authforms/newpassword";
-import UpdatePWD from "./components/updatepwd";
+// import UpdatePWD from "./components/updatepwd";
 // import LogOut from "./components/logout";
 
 // Receptionist Pages
@@ -33,9 +33,6 @@ function App() {
           <Route path="/emailreset" element={<ResetPasswordEmail />} />
           <Route path="/otp" element={<OTPInput />} />
           <Route path="/newpassword" element={<Newpassword />} />
-          <Route path="/updatepassword" element={<UpdatePWD />} />
-          {/* <Route path="/authforms/contactadmin" element={<ContactAdmin />} /> */}
-          {/* the above route if for the main time before i have the consultations page */}
 
           {/*  */}
           <Route path="/receptionist/overview" element={<OverviewPage />} />
