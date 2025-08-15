@@ -13,12 +13,12 @@ import ContactAdmin from "./pages/authforms/contactadmin";
 import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
 import OTPInput from "./pages/authforms/otp";
 import Newpassword from "./pages/authforms/newpassword";
-// import UpdatePWD from "./components/updatepwd";
-// import LogOut from "./components/logout";
 
 // Receptionist Pages
-import OverviewPage from "./pages/receptionistpages/component/overview";
 import ReceptionistDashboard from "./pages/receptionistpages/receptionistdashboard";
+
+// Labtechnician Pages
+import LabtechnicialDashboard from "./pages/labtechnichains/technicians";
 
 function App() {
   const location = useLocation();
@@ -35,11 +35,10 @@ function App() {
           <Route path="/newpassword" element={<Newpassword />} />
 
           {/*  */}
-          <Route path="/receptionist/overview" element={<OverviewPage />} />
-          <Route
-            path="/receptionistdashboard"
-            element={<ReceptionistDashboard />}
-          />
+          <Route path="/receptionist" element={<ReceptionistDashboard />} />
+
+          {/*  */}
+          <Route path="/labtechnician" element={<LabtechnicialDashboard />} />
         </Routes>
       </div>
     </div>
