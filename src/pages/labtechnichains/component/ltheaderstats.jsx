@@ -4,19 +4,15 @@ const HeaderStats = () => {
   const filters = ["Today", "This Week", "This Month"];
   const data = [
     {
-      label: "Patients consulted",
-      value: "100",
-      tooltip: "Total number of patients you have consulted",
+      label: "Outstanding reports",
+      value: "3",
+      tooltip: "Total number of reports you haven't attended to",
     },
+
     {
-      label: "Cash received",
-      value: "₦200,000",
-      tooltip: "Total amount of cash you have received",
-    },
-    {
-      label: "Funds via bank transfer",
-      value: "₦150,000",
-      tooltip: "Total amount patients have transferred",
+      label: "Tests uploaded",
+      value: "20",
+      tooltip: "Total number of tests you have uploaded",
     },
   ];
 
@@ -32,19 +28,22 @@ const HeaderStats = () => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between gap-4">
               <div className="text-2xl font-bold">{item.value}</div>
-              <select
-                className="px-[8px] py-[8px] text-[14px] font-normal leading-[20px] text-[#596066] bg-white border border-[#E5E7EA] rounded-[8px] shadow-sm focus:outline-none"
-                onChange={() => {}}
-              >
-                {filters.map((f) => (
-                  <option
-                    key={f}
-                    className="bg-white hover:bg-[#F8FCE9] text-[#596066] px-2 py-1"
-                  >
-                    {f}
-                  </option>
-                ))}
-              </select>
+
+              {item.label !== "Outstanding reports" && (
+                <select
+                  className="px-[8px] py-[8px] text-[14px] font-normal leading-[20px] text-[#596066] bg-white border border-[#E5E7EA] rounded-[8px] shadow-sm focus:outline-none"
+                  onChange={() => {}}
+                >
+                  {filters.map((f) => (
+                    <option
+                      key={f}
+                      className="bg-white hover:bg-[#F8FCE9] text-[#596066] px-2 py-1"
+                    >
+                      {f}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
 
             <div className="flex items-center gap-1 text-sm text-[#596066]">
