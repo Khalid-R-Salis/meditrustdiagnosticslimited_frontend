@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import HeaderStats from "./ltheaderstats";
 import ReceiptTemplate from "../../../components/receipttemplate";
-import ResultTemplate from "../../../components/patientreports";
+import ResultTemplate from "../../../components/testresult";
 
 const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
   const [showReceipt, setShowReceipt] = useState(false);
@@ -10,7 +10,7 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
   const menuRef = useRef(null);
 
   const handleViewAll = () => {
-    setActiveNav("reportform");
+    setActiveNav("patientreport");
   };
 
   const [patients] = useState(() =>

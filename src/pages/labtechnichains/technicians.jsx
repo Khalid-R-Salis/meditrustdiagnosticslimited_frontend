@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Sidebar from "./component/ltsidebar";
 import OverviewPage from "./component/ltoverview";
-import ReportForm from "../../components/patientreports";
+import TestResult from "../../components/testresult";
 import ResultForm from "./component/resultform";
+import PatientReport from "./component/patientreport";
 
 const DashboardLayout = () => {
   const [activeNav, setActiveNav] = useState("overview");
@@ -17,8 +18,16 @@ const DashboardLayout = () => {
             setShowResultTemplate={setShowResultTemplate}
           />
         );
-      case "reportform":
-        return <ReportForm />;
+      // case "reportform":
+      //   return <PatientReport />;
+      // case "resultform":
+      //   return <PatientReport />;
+      // default:
+      //   return <OverviewPage setActiveNav={setActiveNav} />;
+      case "patientreport":
+        return <PatientReport />;
+      case "testresult":
+        return <TestResult />;
       case "resultform":
         return <ResultForm />;
       default:
@@ -42,7 +51,7 @@ const DashboardLayout = () => {
             >
               ✕
             </button>
-            <ResultTemplate />
+            <ReportForm />
           </div>
         </div>
       )}

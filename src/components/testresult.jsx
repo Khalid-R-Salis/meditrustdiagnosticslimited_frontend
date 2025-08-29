@@ -1,7 +1,7 @@
 import React from "react";
 import meditrustbg from "../../src/assets/meditrustbg.jpg";
 
-const PatientReport = ({ onClose }) => {
+const TestResult = ({ onClose }) => {
   return (
     <div className="flex flex-col items-center justify-center ">
       <div
@@ -110,4 +110,4 @@ const PatientReport = ({ onClose }) => {
   );
 };
 
-export default PatientReport;
+export default TestResult;

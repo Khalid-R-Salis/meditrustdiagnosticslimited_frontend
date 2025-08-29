@@ -46,12 +46,11 @@ const ReceiptTemplate = () => {
     });
   };
 
-  // This function sends data in chunks to avoid buffer overflow issues, it enables small devices like the tablet to print large receipts without crashing.
   const sendInChunks = async (characteristic, data, chunkSize = 20) => {
     for (let i = 0; i < data.length; i += chunkSize) {
       const chunk = data.slice(i, i + chunkSize);
       await characteristic.writeValue(chunk);
-      await new Promise((res) => setTimeout(res, 50)); // v. small delay for buffer flush
+      await new Promise((res) => setTimeout(res, 50));
     }
   };
 
@@ -109,7 +108,7 @@ const ReceiptTemplate = () => {
       const encoder = new TextEncoder();
       const dataBytes = encoder.encode(textToPrint);
 
-      // 🚀 Send in chunks
+      //  Send in chunks
       await sendInChunks(writeCharacteristic, dataBytes, 20);
 
       alert("Bluetooth printing completed!");

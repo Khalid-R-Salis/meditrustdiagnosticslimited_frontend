@@ -55,6 +55,7 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
         </div>
 
         <nav className="flex flex-col justify-center items-start gap-2">
+          {/* Overview */}
           <button
             className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
               ${
@@ -68,14 +69,15 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
             <h2>Overview</h2>
           </button>
 
+          {/* Patient Reports */}
           <button
             className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
               ${
-                activeNav === "reportform"
+                activeNav === "patientreport"
                   ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
                   : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
               }`}
-            onClick={() => setActiveNav("reportform")}
+            onClick={() => setActiveNav("patientreport")}
           >
             <ReportIcon />
             <h2>Patient Reports</h2>
