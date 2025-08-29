@@ -3,9 +3,9 @@ import meditrustbg from "../../src/assets/meditrustbg.jpg";
 
 const TestResult = ({ onClose }) => {
   const handleSubmit = (e) => {
-    e.preventDefault(); // prevent actual form reload
+    e.preventDefault();
     console.log("Uploading test result...");
-    onClose(); // close after upload
+    onClose();
   };
 
   return (
@@ -94,7 +94,7 @@ const TestResult = ({ onClose }) => {
               border: "1px solid #E5E7EA",
               background: "#FAFAFA",
             }}
-            onClick={onClose} // Cancel closes
+            onClick={onClose}
           >
             Cancel
           </button>

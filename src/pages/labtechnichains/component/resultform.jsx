@@ -645,7 +645,7 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
           value={form.testResult}
           onChange={(content) => {
             setForm({ ...form, testResult: content });
-            // Remove error once user starts typing
+
             if (content.trim()) {
               setErrors((prev) => ({ ...prev, testResult: "" }));
             }
@@ -694,7 +694,6 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
           )}
         </div>
 
-        {/* Dynamic Name Filed */}
         <div>
           <label className="block mb-1 text-[#676E76] font-inter text-sm">
             {nameLabel}

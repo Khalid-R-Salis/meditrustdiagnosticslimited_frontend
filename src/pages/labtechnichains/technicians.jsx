@@ -25,7 +25,8 @@ const DashboardLayout = () => {
           />
         );
       case "patientreport":
-        return <PatientReport />;
+        return <PatientReport setActiveNav={setActiveNav} />;
+
       case "testresult":
         // return <TestResult />;
         return <TestResult onClose={() => setShowResultTemplate(false)} />;
