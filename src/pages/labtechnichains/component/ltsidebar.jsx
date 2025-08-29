@@ -44,7 +44,7 @@ const ReportIcon = () => (
   </svg>
 );
 
-const Sidebar = ({ activeNav, setActiveNav }) => {
+const Sidebar = ({ activeNav, setActiveNav, disableNav = false }) => {
   const navigate = useNavigate();
 
   return (
@@ -55,8 +55,36 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
         </div>
 
         <nav className="flex flex-col justify-center items-start gap-2">
-          {/* Overview */}
           <button
+            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
+    ${
+      activeNav === "overview"
+        ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
+        : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
+    }`}
+            onClick={() => !disableNav && setActiveNav("overview")}
+            disabled={disableNav}
+          >
+            <OverviewIcon />
+            <h2>Overview</h2>
+          </button>
+
+          <button
+            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
+    ${
+      activeNav === "patientreport"
+        ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
+        : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
+    }`}
+            onClick={() => !disableNav && setActiveNav("patientreport")}
+            disabled={disableNav}
+          >
+            <ReportIcon />
+            <h2>Patient Reports</h2>
+          </button>
+
+          {/* Overview */}
+          {/* <button
             className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
               ${
                 activeNav === "overview"
@@ -67,10 +95,10 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
           >
             <OverviewIcon />
             <h2>Overview</h2>
-          </button>
+          </button> */}
 
           {/* Patient Reports */}
-          <button
+          {/* <button
             className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
               ${
                 activeNav === "patientreport"
@@ -81,10 +109,16 @@ const Sidebar = ({ activeNav, setActiveNav }) => {
           >
             <ReportIcon />
             <h2>Patient Reports</h2>
-          </button>
+          </button> */}
         </nav>
       </div>
-      <Settings />
+      {/* Settings */}
+      <div className="relative">
+        <Settings />
+        {disableNav && (
+          <div className="absolute inset-0 z-10 bg-transparent cursor-not-allowed"></div>
+        )}
+      </div>
     </div>
   );
 };

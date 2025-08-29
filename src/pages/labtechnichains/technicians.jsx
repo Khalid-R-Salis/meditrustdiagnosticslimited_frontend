@@ -9,6 +9,12 @@ const DashboardLayout = () => {
   const [activeNav, setActiveNav] = useState("overview");
   const [showResultTemplate, setShowResultTemplate] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Uploading test result...");
+    onClose();
+  };
+
   const renderContent = () => {
     switch (activeNav) {
       case "overview":
@@ -18,18 +24,14 @@ const DashboardLayout = () => {
             setShowResultTemplate={setShowResultTemplate}
           />
         );
-      // case "reportform":
-      //   return <PatientReport />;
-      // case "resultform":
-      //   return <PatientReport />;
-      // default:
-      //   return <OverviewPage setActiveNav={setActiveNav} />;
       case "patientreport":
         return <PatientReport />;
       case "testresult":
-        return <TestResult />;
+        // return <TestResult />;
+        return <TestResult onClose={() => setShowResultTemplate(false)} />;
+
       case "resultform":
-        return <ResultForm />;
+        return <ResultForm setActiveNav={setActiveNav} />;
       default:
         return <OverviewPage setActiveNav={setActiveNav} />;
     }
@@ -37,7 +39,11 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex justify-between items-start bg-white overflow-hidden">
-      <Sidebar activeNav={activeNav} setActiveNav={setActiveNav} />
+      <Sidebar
+        activeNav={activeNav}
+        setActiveNav={setActiveNav}
+        disableNav={activeNav === "resultform"}
+      />
 
       <div className="flex-1 px-4 py-6 relative">{renderContent()}</div>
 

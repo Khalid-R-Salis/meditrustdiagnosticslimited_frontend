@@ -514,13 +514,57 @@ line-height:107%'><b><u><span lang=EN-GB style='font-size:14.0pt;line-height:
 </div>
 `;
 
-const ResultForm = ({ onClose, onConfirm }) => {
+const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
   const [form, setForm] = useState({
     testResult: "",
     inputTable: false,
     operator: "",
     radiologistName: "",
   });
+
+  const [reportContent, setReportContent] = useState("");
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+
+  const handleCancel = () => {
+    setShowCancelConfirm(true);
+  };
+
+  const confirmCancel = () => {
+    setShowCancelConfirm(false);
+    setActiveNav("overview");
+  };
+
+  const handleSave = () => {
+    const requiredFields = ["testResult", "operator", "radiologistName"];
+    const newErrors = {};
+
+    // Validate required fields
+    requiredFields.forEach((field) => {
+      if (!form[field] || !form[field].trim()) {
+        newErrors[field] = "This field is required.";
+      }
+    });
+
+    // Set errors if any
+    setErrors(newErrors);
+
+    // Stop if there are validation errors
+    if (Object.keys(newErrors).length > 0) return;
+
+    // ✅ Simulate form submission
+    console.log("Submitting report:", form);
+
+    // ✅ Reset form after successful submission
+    setForm({
+      testResult: "",
+      inputTable: false,
+      operator: "",
+      radiologistName: "",
+    });
+    setErrors({});
+
+    setReportContent("");
+  };
 
   const [errors, setErrors] = useState({});
   const formRef = useRef(null);
@@ -571,20 +615,21 @@ const ResultForm = ({ onClose, onConfirm }) => {
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           New Report
         </h2>
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-between mb-6 gap-3">
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleCancel}
             className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
           >
             Cancel
           </button>
+
           <button
             type="button"
-            onClick={handleExternalSubmit}
+            onClick={handleSave}
             className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
           >
-            Save Report
+            Upload Result
           </button>
         </div>
       </div>
@@ -598,8 +643,18 @@ const ResultForm = ({ onClose, onConfirm }) => {
         {/* Test Result */}
         <RichTextEditor
           value={form.testResult}
-          onChange={(content) => setForm({ ...form, testResult: content })}
+          onChange={(content) => {
+            setForm({ ...form, testResult: content });
+            // Remove error once user starts typing
+            if (content.trim()) {
+              setErrors((prev) => ({ ...prev, testResult: "" }));
+            }
+          }}
         />
+        {/* Show error if empty */}
+        {errors.testResult && (
+          <p className="text-red-500 text-sm mt-1">{errors.testResult}</p>
+        )}
 
         <div className="flex items-center gap-3">
           <label className="text-[#676E76] text-sm">echo test?</label>
@@ -626,7 +681,9 @@ const ResultForm = ({ onClose, onConfirm }) => {
             name="operator"
             value={form.operator}
             onChange={handleChange}
-            className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+            className={`w-full rounded-lg border ${
+              errors.operator ? "border-red-500" : "border-[#E5E7EA]"
+            } bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]`}
           >
             <option value="">Select</option>
             <option>Radiologist</option>
@@ -647,7 +704,9 @@ const ResultForm = ({ onClose, onConfirm }) => {
             value={form.radiologistName}
             onChange={handleChange}
             placeholder="John Doe"
-            className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+            className={`w-full rounded-lg border ${
+              errors.radiologistName ? "border-red-500" : "border-[#E5E7EA]"
+            } bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]`}
           />
           {errors.radiologistName && (
             <p className="text-red-500 text-sm mt-1">
@@ -655,6 +714,33 @@ const ResultForm = ({ onClose, onConfirm }) => {
             </p>
           )}
         </div>
+        {showCancelConfirm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+              <p className="text-gray-800 text-base mb-6">
+                Are you sure you want to close this page? <br />
+                <b className="uppercase text-red-600">Changes are Unsaved!</b>
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowCancelConfirm(false)}
+                  className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
+                >
+                  NO
+                </button>
+
+                <button
+                  type="button"
+                  onClick={confirmCancel}
+                  className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
+                >
+                  YES, Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
