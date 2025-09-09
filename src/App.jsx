@@ -14,11 +14,14 @@ import ResetPasswordEmail from "./pages/authforms/resetpwdemail";
 import OTPInput from "./pages/authforms/otp";
 import Newpassword from "./pages/authforms/newpassword";
 
-// Receptionist Pages
+// Receptionist Dashboard
 import ReceptionistDashboard from "./pages/receptionistpages/receptionistdashboard";
 
-// Labtechnician Pages
+// Labtechnician Dashboard
 import LabtechnicialDashboard from "./pages/labtechnichains/technicians";
+
+// Admin Dashboard
+import AdminDashboard from "./pages/admin/admindashboard";
 
 function App() {
   const location = useLocation();
@@ -39,6 +42,9 @@ function App() {
 
           {/*  */}
           <Route path="/labtechnician" element={<LabtechnicialDashboard />} />
+
+          {/*  */}
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </div>
     </div>
