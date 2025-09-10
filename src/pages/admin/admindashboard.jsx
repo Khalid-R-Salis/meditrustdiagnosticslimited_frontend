@@ -12,7 +12,9 @@ const AdminDashboard = () => {
     <div className="flex">
       <AdminSidebar activeNav={activeNav} setActiveNav={setActiveNav} />
       <div className="flex-1 p-6">
-        {activeNav === "AdminOverview" && <AdminOverview />}
+        {activeNav === "AdminOverview" && (
+          <AdminOverview setActiveNav={setActiveNav} />
+        )}
         {activeNav === "PatientReports" && <PatientReports />}
         {activeNav === "Pricing" && <Pricing />}
         {activeNav === "UserManagement" && <UserManagement />}
