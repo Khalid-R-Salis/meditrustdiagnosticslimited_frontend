@@ -11,8 +11,8 @@ const AdminHeaderStats = () => {
       label: "Total Revenue",
       tooltip: "Total money received from cash and transfer",
       breakdown: [
-        { name: "Cash received", value: 80, color: "#3C480A" },
-        { name: "Transfer received", value: 20, color: "#829C15" },
+        { name: "Cash received", value: 5, color: "#3C480A" },
+        { name: "Transfer received", value: 1, color: "#829C15" },
       ],
     },
     {
@@ -36,20 +36,22 @@ const AdminHeaderStats = () => {
             key={index}
             className="bg-[#FAFAFA] border border-[#E5E7EA] rounded-xl p-6 shadow-sm flex flex-col gap-3 relative"
           >
-            {/* Top row: value + filter */}
             <div className="flex justify-between items-center">
-              <div className="text-2xl font-bold">{item.value}</div>
+              <div className="text-[24px] font-medium leading-[32px] text-[#000] font-inter">
+                {item.label === "Total Revenue" ? `₦${item.value}` : item.value}
+              </div>
 
-              <select className="px-2 py-1 text-sm border border-[#E5E7EA] rounded-md focus:outline-none">
+              <select className="px-2 py-1 text-sm border border-[#E5E7EA] rounded-[8px] focus:outline-none">
                 {filters.map((f) => (
                   <option key={f}>{f}</option>
                 ))}
               </select>
             </div>
 
-            {/* Label + info + tooltip button */}
-            <div className="flex items-center gap-2 text-sm text-gray-700 relative">
-              <span>{item.label}</span>
+            <div className="flex items-center gap-2 relative">
+              <span className="text-[14px] font-normal leading-[20px] text-[#596066] font-inter">
+                {item.label}
+              </span>
               <button
                 onClick={() =>
                   setVisibleTooltip(visibleTooltip === index ? null : index)
@@ -86,10 +88,14 @@ const AdminHeaderStats = () => {
               )}
             </div>
 
-            {/* Dynamic stacked progress bar */}
             <div className="w-full h-[3px] bg-gray-100 rounded flex overflow-hidden">
               {item.breakdown.map((b, i) => {
-                const percentage = total ? (b.value / total) * 100 : 0;
+                let percentage = total ? (b.value / total) * 100 : 0;
+
+                if (total > 0 && b.value === total) {
+                  percentage = 100;
+                }
+
                 return (
                   <div
                     key={i}
@@ -103,16 +109,18 @@ const AdminHeaderStats = () => {
               })}
             </div>
 
-            {/* Breakdown legend */}
-            <div className="flex flex-col gap-1 text-sm text-gray-700 mt-2">
+            <div className="flex flex-col gap-1 mt-2">
               {item.breakdown.map((b, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span
                     className="w-2 h-2 rounded-full"
                     style={{ backgroundColor: b.color }}
                   ></span>
-                  <span>
-                    {b.name} ({b.value})
+                  <span className="text-[12px] font-normal leading-[18px] text-[#596066] font-inter">
+                    {b.name}{" "}
+                    {item.label === "Total Revenue"
+                      ? `(₦${b.value})`
+                      : `(${b.value})`}
                   </span>
                 </div>
               ))}
