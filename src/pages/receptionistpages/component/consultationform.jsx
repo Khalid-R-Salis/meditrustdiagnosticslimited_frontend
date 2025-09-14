@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+
 const testOptions = [
   { label: "2 Hours Post Prandial (2PP)", price: 3500 },
   { label: "Albumin Serum", price: 3000 },
@@ -224,7 +225,14 @@ const testOptions = [
 
 const MAX_TESTS = 5;
 
-const ConsultationForm = ({ onClose, onConfirm }) => {
+const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
+  useEffect(() => {
+    if (setSidebarDisabled) setSidebarDisabled(true);
+    return () => {
+      if (setSidebarDisabled) setSidebarDisabled(false);
+    };
+  }, [setSidebarDisabled]);
+
   const [form, setForm] = useState({
     name: "",
     sex: "Male",
@@ -235,6 +243,8 @@ const ConsultationForm = ({ onClose, onConfirm }) => {
     tests: [],
     payment: "Cash",
   });
+
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
   const [errors, setErrors] = useState({});
   const [testSearch, setTestSearch] = useState("");
@@ -339,7 +349,7 @@ const ConsultationForm = ({ onClose, onConfirm }) => {
         <div className="flex justify-center items-center gap-2">
           <button
             type="button"
-            onClick={onClose}
+            onClick={() => setShowCancelConfirm(true)} // ✅ show modal first
             className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
           >
             Cancel
@@ -354,6 +364,37 @@ const ConsultationForm = ({ onClose, onConfirm }) => {
           </button>
         </div>
       </div>
+
+      {showCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+            <p className="text-gray-800 text-base mb-6">
+              Are you sure you want to close this page? <br />
+              <b className="uppercase text-red-600">Changes are Unsaved!</b>
+            </p>
+            <div className="flex justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => setShowCancelConfirm(false)}
+                className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
+              >
+                NO
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCancelConfirm(false);
+                  onClose(); // actually close
+                }}
+                className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
+              >
+                YES, Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <form
         ref={formRef}

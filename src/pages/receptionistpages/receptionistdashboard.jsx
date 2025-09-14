@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const DashboardLayout = () => {
   const [activeNav, setActiveNav] = useState("overview");
+  const [sidebarDisabled, setSidebarDisabled] = useState(false);
 
   const renderContent = () => {
     switch (activeNav) {
@@ -21,6 +22,7 @@ const DashboardLayout = () => {
               console.log("Confirmed consultation:", formData);
               setActiveNav("overview");
             }}
+            setSidebarDisabled={setSidebarDisabled}
           />
         );
       default:
@@ -30,7 +32,11 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex justify-between items-start bg-white overflow-hidden">
-      <Sidebar activeNav={activeNav} setActiveNav={setActiveNav} />
+      <Sidebar
+        activeNav={activeNav}
+        setActiveNav={setActiveNav}
+        sidebarDisabled={sidebarDisabled}
+      />
       <div className="flex-1 px-4 py-6">{renderContent()}</div>
     </div>
   );

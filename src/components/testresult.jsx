@@ -1,9 +1,10 @@
 import React from "react";
 import meditrustbg from "../../src/assets/meditrustbg.jpg";
 
-const TestResult = ({ onClose }) => {
+const TestResult = ({ onClose, disableUpload = false }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (disableUpload) return;
     console.log("Uploading test result...");
     onClose();
   };
@@ -101,7 +102,10 @@ const TestResult = ({ onClose }) => {
 
           <button
             type="submit"
-            className="text-[7px] font-medium text-white"
+            disabled={disableUpload}
+            className={`text-[7px] font-medium text-white ${
+              disableUpload ? "bg-gray-300 cursor-not-allowed" : "bg-[#829C15]"
+            }`}
             style={{
               display: "flex",
               padding: "4px 6px",
@@ -111,7 +115,6 @@ const TestResult = ({ onClose }) => {
               gap: "2px",
               flex: "1 0 0",
               borderRadius: "6px",
-              background: "#829C15",
               boxShadow:
                 "1px 1px 2px 1px rgba(255, 255, 255, 0.18) inset, -1px -1px 2px 1px rgba(255, 255, 255, 0.18) inset",
             }}

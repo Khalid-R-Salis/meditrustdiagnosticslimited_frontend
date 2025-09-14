@@ -28,7 +28,6 @@ const DashboardLayout = () => {
         return <PatientReport setActiveNav={setActiveNav} />;
 
       case "testresult":
-        // return <TestResult />;
         return <TestResult onClose={() => setShowResultTemplate(false)} />;
 
       case "resultform":
