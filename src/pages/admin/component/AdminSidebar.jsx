@@ -4,6 +4,7 @@ import logo2 from "../../../assets/logo2.png";
 import Settings from "../../../components/settings";
 
 // ICONS
+
 const OverviewIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +87,20 @@ const UserIcon = () => (
   </svg>
 );
 
-const AdminSidebar = ({ activeNav, setActiveNav }) => {
+const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
   const navigate = useNavigate();
+
+  const baseButtonClass =
+    "self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200";
+
+  const getButtonClass = (isActive) => {
+    if (disabled) {
+      return `${baseButtonClass} text-gray-400`;
+    }
+    return isActive
+      ? `${baseButtonClass} text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]`
+      : `${baseButtonClass} text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent`;
+  };
 
   return (
     <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)] relative">
@@ -99,13 +112,9 @@ const AdminSidebar = ({ activeNav, setActiveNav }) => {
         <nav className="flex flex-col justify-center items-start gap-2">
           {/* Overview */}
           <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "AdminOverview"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("AdminOverview")}
+            className={getButtonClass(activeNav === "AdminOverview")}
+            onClick={() => !disabled && setActiveNav("AdminOverview")}
+            disabled={disabled}
           >
             <OverviewIcon />
             <h2>Overview</h2>
@@ -113,13 +122,9 @@ const AdminSidebar = ({ activeNav, setActiveNav }) => {
 
           {/* Patient Reports */}
           <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "PatientReports"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("PatientReports")}
+            className={getButtonClass(activeNav === "PatientReports")}
+            onClick={() => !disabled && setActiveNav("PatientReports")}
+            disabled={disabled}
           >
             <ReportIcon />
             <h2>Patient reports</h2>
@@ -127,13 +132,9 @@ const AdminSidebar = ({ activeNav, setActiveNav }) => {
 
           {/* Pricing */}
           <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "Pricing"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("Pricing")}
+            className={getButtonClass(activeNav === "Pricing")}
+            onClick={() => !disabled && setActiveNav("Pricing")}
+            disabled={disabled}
           >
             <PricingIcon />
             <h2>Pricing</h2>
@@ -141,13 +142,9 @@ const AdminSidebar = ({ activeNav, setActiveNav }) => {
 
           {/* User Management */}
           <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "UserManagement"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("UserManagement")}
+            className={getButtonClass(activeNav === "UserManagement")}
+            onClick={() => !disabled && setActiveNav("UserManagement")}
+            disabled={disabled}
           >
             <UserIcon />
             <h2>User Management</h2>
@@ -156,7 +153,9 @@ const AdminSidebar = ({ activeNav, setActiveNav }) => {
       </div>
 
       {/* Settings */}
-      <Settings />
+      <div className={disabled ? "pointer-events-none opacity-50" : ""}>
+        <Settings />
+      </div>
     </div>
   );
 };

@@ -32,14 +32,12 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
     }))
   );
 
-  // Filter
   const filteredPatients = patients.filter(
     (p) =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       p.receipt.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Pagination
   const totalPages = Math.ceil(filteredPatients.length / ITEMS_PER_PAGE);
   const paginatedPatients = filteredPatients.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -85,7 +83,6 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
 
         <div className="mb-6 flex items-center gap-3">
-          {/* Search bar */}
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +113,6 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
             />
           </div>
 
-          {/* Dropdown */}
           <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +247,6 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
             </tbody>
           </table>
 
-          {/* Pagination */}
           <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
             <button
               onClick={handlePrevious}

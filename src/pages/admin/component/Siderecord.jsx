@@ -46,7 +46,6 @@ const mockPatientData = [
 const Siderecord = ({ setActiveNav }) => {
   return (
     <div className="flex-1 bg-[#ffffff] px-4 relative">
-      {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-[15px] font-normal leading-[24px] text-[#000] font-inter">
           Recent patient tests
@@ -66,7 +65,6 @@ const Siderecord = ({ setActiveNav }) => {
         </button>
       </div>
 
-      {/* Table */}
       <section className="bg-white overflow-auto">
         <table className="w-full text-left text-[10px] text-[#676E76] rounded-sm">
           <thead>

@@ -33,7 +33,6 @@ const activities = [
 const UserActivities = ({ setActiveNav }) => {
   return (
     <div className="mt-10 bg-white">
-      {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-[15px] font-normal leading-[24px] text-[#000] font-inter">
           User activities
