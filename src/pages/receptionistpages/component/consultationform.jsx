@@ -442,6 +442,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
             </label>
             <input
               name="phone"
+              type="number"
               value={form.phone}
               onChange={handleChange}
               placeholder="09099999999"
