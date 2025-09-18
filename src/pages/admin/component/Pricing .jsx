@@ -304,7 +304,6 @@ const Pricing = ({ setActiveNav }) => {
 
   return (
     <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
-      {/* Top bar */}
       <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           Pricing
