@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const AdminHeaderStats = () => {
   const [visibleTooltip, setVisibleTooltip] = useState(null);
@@ -11,8 +12,8 @@ const AdminHeaderStats = () => {
       label: "Total Revenue",
       tooltip: "Total money received from cash and transfer",
       breakdown: [
-        { name: "Cash received", value: 5, color: "#3C480A" },
-        { name: "Transfer received", value: 1, color: "#829C15" },
+        { name: "Cash received", value: 500, color: "#3C480A" },
+        { name: "Transfer received", value: 100, color: "#829C15" },
       ],
     },
     {
@@ -97,14 +98,14 @@ const AdminHeaderStats = () => {
                 }
 
                 return (
-                  <div
+                  <motion.div
                     key={i}
                     className="h-[3px]"
-                    style={{
-                      width: `${percentage}%`,
-                      backgroundColor: b.color,
-                    }}
-                  ></div>
+                    initial={{ width: 0 }}
+                    animate={{ width: `${percentage}%` }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    style={{ backgroundColor: b.color }}
+                  />
                 );
               })}
             </div>
