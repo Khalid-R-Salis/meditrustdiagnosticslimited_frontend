@@ -1,6 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
+const NewUser = ({
+  onClose,
+  onConfirm,
+  setSidebarDisabled,
+  setActiveNav,
+  setToast,
+}) => {
   useEffect(() => {
     if (setSidebarDisabled) setSidebarDisabled(true);
     return () => {
@@ -9,8 +15,10 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
   }, [setSidebarDisabled]);
 
   const [form, setForm] = useState({
-    testName: "",
-    testPrice: "",
+    name: "",
+    phoneNumber: "",
+    emailAddress: "",
+    role: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -26,16 +34,32 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
-    if (!form.testName.trim()) newErrors.testName = "Test name is required.";
-    if (!form.testPrice.trim()) newErrors.testPrice = "Test price is required.";
+    if (!form.name.trim()) newErrors.name = "Name is required.";
+    if (!form.phoneNumber.trim())
+      newErrors.phoneNumber = "Phone number is required.";
+    if (!form.emailAddress.trim())
+      newErrors.emailAddress = "Email address is required.";
+    if (!form.role) newErrors.role = "Role is required.";
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
     if (onConfirm) onConfirm(form);
 
-    if (setActiveNav) setActiveNav("Pricing");
-    else if (onClose) onClose();
+    if (setToast) {
+      setToast({
+        type: "success",
+        message: "New user created successfully!",
+      });
+
+      setTimeout(() => setToast(null), 3000);
+    }
+
+    if (setActiveNav) {
+      setActiveNav("UserManagement");
+    } else if (onClose) {
+      onClose();
+    }
   };
 
   const handleExternalSubmit = () => {
@@ -55,7 +79,7 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
       {/* Top bar */}
       <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
-          New test
+          New user
         </h2>
         <div className="flex justify-center items-center gap-2">
           <button
@@ -113,39 +137,96 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
       >
         <div className="space-y-4 flex flex-col gap-3">
           <h3 className="text-[15px] font-medium leading-[28px] text-black font-inter">
-            Enter test details
+            Enter user details
           </h3>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
-              Test name
+            <label
+              htmlFor="name"
+              className="text-[#676E76] font-inter text-sm font-normal leading-5 block mb-1"
+            >
+              Name
             </label>
             <input
-              name="testName"
-              value={form.testName}
+              name="name"
+              id="name"
+              value={form.name}
               onChange={handleChange}
-              placeholder="X RAY TEST"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              pattern="[A-Za-z\s]+"
+              placeholder="Enter the staff name"
+              className="flex w-full px-[14px] py-[10px] items-center gap-2 self-stretch rounded-lg border border-[#E5E7EA] bg-white focus:outline-none focus:border-[#829C15]"
             />
-            {errors.testName && (
-              <p className="text-red-500 text-sm mt-1">{errors.testName}</p>
+
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
-              Test price
+            <label
+              htmlFor="phoneNumber"
+              className="text-[#676E76] font-inter text-sm font-normal leading-5 block mb-1"
+            >
+              Phone number
             </label>
             <input
-              name="testPrice"
+              name="phoneNumber"
               type="number"
-              value={form.testPrice}
+              id="phoneNumber"
+              value={form.phoneNumber}
               onChange={handleChange}
-              placeholder="₦50,0000"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              placeholder="Enter the staff phone number"
+              className="flex w-full px-[14px] py-[10px] items-center gap-2 self-stretch rounded-lg border border-[#E5E7EA] bg-white focus:outline-none focus:border-[#829C15]"
             />
-            {errors.testPrice && (
-              <p className="text-red-500 text-sm mt-1">{errors.testPrice}</p>
+            {errors.phoneNumber && (
+              <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="emailAddress"
+              className="text-[#676E76] font-inter text-sm font-normal leading-5 block mb-1"
+            >
+              Email address
+            </label>
+            <input
+              name="emailAddress"
+              typeof="email"
+              id="emailAddress"
+              type="email"
+              value={form.emailAddress}
+              onChange={handleChange}
+              placeholder="Enter the satff email address"
+              className="flex w-full px-[14px] py-[10px] items-center gap-2 self-stretch rounded-lg border border-[#E5E7EA] bg-white focus:outline-none focus:border-[#829C15]"
+            />
+            {errors.emailAddress && (
+              <p className="text-red-500 text-sm mt-1">{errors.emailAddress}</p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="role"
+              className="text-[#676E76] font-inter text-sm font-normal leading-5 block mb-1"
+            >
+              Role
+            </label>
+            <select
+              name="role"
+              id="role"
+              value={form.role}
+              onChange={handleChange}
+              className="flex w-full px-[14px] py-[10px] items-center gap-2 self-stretch rounded-lg border border-[#E5E7EA] bg-white focus:outline-none focus:border-[#829C15]"
+            >
+              <option value="" disabled hidden>
+                Select role
+              </option>
+              <option value="Lab Technician">Lab Technician</option>
+              <option value="Receptionist">Receptionist</option>
+            </select>
+            {errors.role && (
+              <p className="text-red-500 text-sm mt-1">{errors.role}</p>
             )}
           </div>
         </div>
@@ -154,4 +235,4 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
   );
 };
 
-export default AddTest;
+export default NewUser;

@@ -110,7 +110,6 @@ const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
         </div>
 
         <nav className="flex flex-col justify-center items-start gap-2">
-          {/* Overview */}
           <button
             className={getButtonClass(activeNav === "AdminOverview")}
             onClick={() => !disabled && setActiveNav("AdminOverview")}
@@ -120,7 +119,6 @@ const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
             <h2>Overview</h2>
           </button>
 
-          {/* Patient Reports */}
           <button
             className={getButtonClass(activeNav === "PatientReports")}
             onClick={() => !disabled && setActiveNav("PatientReports")}
@@ -130,7 +128,6 @@ const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
             <h2>Patient reports</h2>
           </button>
 
-          {/* Pricing */}
           <button
             className={getButtonClass(activeNav === "Pricing")}
             onClick={() => !disabled && setActiveNav("Pricing")}
@@ -140,7 +137,6 @@ const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
             <h2>Pricing</h2>
           </button>
 
-          {/* User Management */}
           <button
             className={getButtonClass(activeNav === "UserManagement")}
             onClick={() => !disabled && setActiveNav("UserManagement")}
@@ -152,7 +148,6 @@ const AdminSidebar = ({ activeNav, setActiveNav, disabled }) => {
         </nav>
       </div>
 
-      {/* Settings */}
       <div className={disabled ? "pointer-events-none opacity-50" : ""}>
         <Settings />
       </div>

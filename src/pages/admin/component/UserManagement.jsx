@@ -3,7 +3,12 @@ import MainUserActivities from "../component/MainUserActivities";
 
 const ITEMS_PER_PAGE = 9;
 
-const UserManagement = () => {
+const UserManagement = ({
+  showNewUser,
+  setShowNewUser,
+  sidebarDisabled,
+  setSidebarDisabled,
+}) => {
   const [activitiesModalOpen, setActivitiesModalOpen] = useState(false);
 
   const [menuOpen, setMenuOpen] = useState(null);
@@ -18,7 +23,7 @@ const UserManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Modal states
-  const [modalType, setModalType] = useState(null); // "edit" | "delete" | "deactivate" | "reactivate" | "revoke"
+  const [modalType, setModalType] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
 
   // Toast state
@@ -143,11 +148,40 @@ const UserManagement = () => {
       {/* Toast */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 px-4 py-2 rounded shadow text-white z-50 ${
-            toast.type === "success" ? "bg-green-600" : "bg-red-600"
+          className={`fixed top-4 right-4 flex w-[420px] p-4 items-start gap-4 rounded-lg z-50 transition-all duration-300 transform-gpu ${
+            toast.type === "success" ? "bg-[#F6FEF9]" : "bg-[#FEF6F6]"
           }`}
+          style={{
+            boxShadow:
+              toast.type === "success"
+                ? "0 0 0 4px rgba(83, 180, 131, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08), 0 0 0 1px rgba(83, 180, 131, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12)"
+                : "0 0 0 4px rgba(247, 73, 73, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08), 0 0 0 1px rgba(247, 73, 73, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12)",
+          }}
         >
-          {toast.message}
+          <div className="flex flex-col gap-1 flex-1">
+            <h3
+              className={`font-inter text-base font-semibold leading-6 ${
+                toast.type === "success" ? "text-[#2F9461]" : "text-[#D92D20]"
+              }`}
+            >
+              {toast.type === "success" ? "Success" : "Error"}
+            </h3>
+            <p
+              className={`font-inter text-base font-semibold leading-6 ${
+                toast.type === "success" ? "text-[#2F9461]" : "text-[#D92D20]"
+              }`}
+            >
+              {toast.message}
+            </p>
+          </div>
+          <button
+            onClick={() => setToast(null)}
+            className={`text-lg font-light ${
+              toast.type === "success" ? "text-[#2F9461]" : "text-[#D92D20]"
+            }`}
+          >
+            &times;
+          </button>
         </div>
       )}
 
@@ -166,7 +200,14 @@ const UserManagement = () => {
               User activities
             </button>
 
-            <button className="flex px-3 py-1.5 justify-center items-center gap-2 rounded-lg bg-[#829C15] shadow-inner text-[#fff] text-sm font-inter font-medium leading-[20px]">
+            <button
+              className="flex px-3 py-1.5 justify-center items-center gap-2 rounded-lg bg-[#829C15] shadow-inner text-[#fff] text-sm font-inter font-medium leading-[20px]"
+              onClick={() => {
+                setShowNewUser(true);
+                setSidebarDisabled(true);
+              }}
+              disabled={sidebarDisabled}
+            >
               + New user
             </button>
           </div>
@@ -401,7 +442,6 @@ const UserManagement = () => {
                   });
                 }}
               >
-                {/* Name */}
                 <label className="block text-[14px] font-normal leading-5 text-[#676E76] font-inter mb-2">
                   Name
                 </label>
@@ -412,7 +452,6 @@ const UserManagement = () => {
                   className="w-full flex items-center gap-2 px-4 py-[10px] rounded-lg border border-[#E5E7EA] bg-white mb-6 font-inter focus:outline-none focus:border-[#829C15]"
                 />
 
-                {/* Phone */}
                 <label className="block text-[14px] font-normal leading-5 text-[#676E76] font-inter mb-1">
                   Phone number
                 </label>
@@ -423,7 +462,6 @@ const UserManagement = () => {
                   className="w-full flex items-center gap-2 px-4 py-[10px] rounded-lg border border-[#E5E7EA] bg-white mb-6 font-inter focus:outline-none focus:border-[#829C15]"
                 />
 
-                {/* Email */}
                 <label className="block text-[14px] font-normal leading-5 text-[#676E76] font-inter mb-1">
                   Email address
                 </label>
@@ -434,7 +472,6 @@ const UserManagement = () => {
                   className="w-full flex items-center gap-2 px-4 py-[10px] rounded-lg border border-[#E5E7EA] bg-white mb-6 font-inter focus:outline-none focus:border-[#829C15]"
                 />
 
-                {/* Role */}
                 <label className="block text-[14px] font-normal leading-5 text-[#676E76] font-inter mb-1">
                   Role
                 </label>
@@ -449,7 +486,6 @@ const UserManagement = () => {
 
                 {/* Buttons */}
                 <div className="flex justify-start gap-2 mt-8">
-                  {/* Cancel */}
                   <button
                     type="button"
                     onClick={() => setModalType(null)}
@@ -458,7 +494,6 @@ const UserManagement = () => {
                     Cancel
                   </button>
 
-                  {/* Update user */}
                   <button
                     type="submit"
                     className="px-3 py-1.5 rounded-lg text-white text-[14px] font-medium leading-5 font-inter bg-[#829C15] shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset]"
@@ -473,12 +508,10 @@ const UserManagement = () => {
           {/* Delete Modal */}
           {modalType === "delete" && selectedUser && (
             <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
-              {/* Heading */}
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                 Permanently delete this user?
               </h2>
 
-              {/* Subheading */}
               <p className="text-[14px] font-normal leading-5 text-[#676E76] mb-10 font-inter">
                 This action cannot be undone. Deleting a user will remove all
                 login access. Past activities performed by this user will remain
@@ -487,7 +520,6 @@ const UserManagement = () => {
 
               {/* Buttons */}
               <div className="flex justify-start gap-2 mt-2">
-                {/* Cancel */}
                 <button
                   onClick={() => setModalType(null)}
                   className="flex items-start justify-center px-3 py-1.5 gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-[14px] font-medium leading-5 font-inter"
@@ -495,7 +527,6 @@ const UserManagement = () => {
                   Cancel
                 </button>
 
-                {/* Delete user */}
                 <button
                   onClick={() => handleDeleteUser(selectedUser.id)}
                   className="flex items-center justify-center px-3 py-1.5 gap-2 rounded-lg text-white text-[14px] font-medium leading-5 font-inter bg-[#CD3636] shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset]"
@@ -509,20 +540,16 @@ const UserManagement = () => {
           {/* Deactivate Modal */}
           {modalType === "deactivate" && selectedUser && (
             <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
-              {/* Heading */}
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                 Deactivate this user?
               </h2>
 
-              {/* Subheading */}
               <p className="text-[14px] font-normal leading-5 text-[#676E76] mb-10 font-inter">
                 The user will no longer be able to log in or perform any
                 actions. You can reactivate them later from this panel.
               </p>
 
-              {/* Buttons */}
               <div className="flex justify-start gap-2 mt-2">
-                {/* Cancel */}
                 <button
                   onClick={() => setModalType(null)}
                   className="flex items-start justify-center px-3 py-1.5 gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-[14px] font-medium leading-5 font-inter"
@@ -544,12 +571,10 @@ const UserManagement = () => {
           {/* Reactivate Modal */}
           {modalType === "reactivate" && selectedUser && (
             <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
-              {/* Heading */}
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                 Reactivate this user?
               </h2>
 
-              {/* Subheading */}
               <p className="text-[14px] font-normal leading-5 text-[#676E76] mb-10 font-inter">
                 The user will now be able to log in or perform any action. You
                 can deactivate them later from this panel.
@@ -557,7 +582,6 @@ const UserManagement = () => {
 
               {/* Buttons */}
               <div className="flex justify-start gap-2 mt-2">
-                {/* Cancel */}
                 <button
                   onClick={() => setModalType(null)}
                   className="flex items-start justify-center px-3 py-1.5 gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-[14px] font-medium leading-5 font-inter"
@@ -565,7 +589,6 @@ const UserManagement = () => {
                   Cancel
                 </button>
 
-                {/* Reactivate */}
                 <button
                   onClick={() => handleReactivateUser(selectedUser.id)}
                   className="flex items-center justify-center px-2 py-1.5 gap-2 rounded-lg text-white text-[14px] font-medium leading-5 font-inter bg-[#829C15] shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset]"
@@ -579,12 +602,10 @@ const UserManagement = () => {
           {/* Revoke Modal */}
           {modalType === "revoke" && selectedUser && (
             <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
-              {/* Heading */}
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                 Revoke this user?
               </h2>
 
-              {/* Subheading */}
               <p className="text-[14px] font-normal leading-5 text-[#676E76] mb-10 font-inter">
                 This user has not yet activated their staff account. Revoking
                 will prevent them from completing their setup, and their staff
@@ -593,7 +614,6 @@ const UserManagement = () => {
 
               {/* Buttons */}
               <div className="flex justify-start gap-2 mt-2">
-                {/* Cancel */}
                 <button
                   onClick={() => setModalType(null)}
                   className="flex items-start justify-center px-3 py-1.5 gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-[14px] font-medium leading-5 font-inter"
@@ -601,7 +621,6 @@ const UserManagement = () => {
                   Cancel
                 </button>
 
-                {/* Revoke */}
                 <button
                   onClick={() => handleRevokeUser(selectedUser.id)}
                   className="flex items-center justify-center px-3 py-1.5 gap-2 rounded-lg text-white text-[14px] font-medium leading-5 font-inter bg-[#CD3636] shadow-[1px_1px_2px_1px_rgba(255,255,255,0.18)_inset,-1px_-1px_2px_1px_rgba(255,255,255,0.18)_inset]"

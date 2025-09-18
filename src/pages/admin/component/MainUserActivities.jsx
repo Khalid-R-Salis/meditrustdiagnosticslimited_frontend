@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 const MainUserActivities = ({ isOpen, onClose }) => {
-  const [activities, setActivities] = useState([]); // backend-driven
-  const [loading, setLoading] = useState(true); // loading state
-  const [error, setError] = useState(null); // error state
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const perPage = 10;
 
-  // (replace with API later)
+  // (replace with API call when fahad is done)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,14 +57,12 @@ const MainUserActivities = ({ isOpen, onClose }) => {
     fetchData();
   }, []);
 
-  // Filtered activities
   const filteredActivities = useMemo(() => {
     return activities.filter((item) =>
       item.user.toLowerCase().includes(search.toLowerCase())
     );
   }, [search, activities]);
 
-  // Paginated
   const totalPages = Math.ceil(filteredActivities.length / perPage) || 1;
   const paginated = filteredActivities.slice(
     (page - 1) * perPage,
@@ -84,7 +82,6 @@ const MainUserActivities = ({ isOpen, onClose }) => {
             "0 2px 5px 0 rgba(103, 110, 118, 0.08), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 1px 1px 0 rgba(0, 0, 0, 0.12)",
         }}
       >
-        {/* Header */}
         <div className="flex justify-between items-center">
           <h2
             className="text-[#000]"
@@ -117,7 +114,6 @@ const MainUserActivities = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Search */}
         <div className="flex">
           <input
             type="text"
@@ -141,7 +137,6 @@ const MainUserActivities = ({ isOpen, onClose }) => {
           />
         </div>
 
-        {/* Body */}
         <div className="flex-1 overflow-y-auto">
           {loading ? (
             <p className="text-gray-500 text-center">Loading activities...</p>
@@ -156,9 +151,7 @@ const MainUserActivities = ({ isOpen, onClose }) => {
                   key={item.id}
                   className="flex justify-between items-start text-sm"
                 >
-                  {/* Left side */}
                   <div className="flex items-start gap-3">
-                    {/* Icon */}
                     <div
                       dangerouslySetInnerHTML={{
                         __html: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -183,7 +176,6 @@ const MainUserActivities = ({ isOpen, onClose }) => {
                     </p>
                   </div>
 
-                  {/* Right side */}
                   <span className="text-[14px] text-[#676E76] font-inter whitespace-nowrap ml-[20px]">
                     {item.date}
                   </span>
