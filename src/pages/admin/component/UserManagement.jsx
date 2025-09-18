@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import MainUserActivities from "../component/MainUserActivities";
 
 const ITEMS_PER_PAGE = 9;
 
 const UserManagement = () => {
+  const [activitiesModalOpen, setActivitiesModalOpen] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(null);
   const menuRef = useRef(null);
 
@@ -156,9 +159,13 @@ const UserManagement = () => {
           </h1>
 
           <div className="flex items-center gap-3">
-            <button className="flex px-3 py-1.5 justify-center items-center gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-sm font-inter font-medium leading-[20px]">
+            <button
+              onClick={() => setActivitiesModalOpen(true)}
+              className="flex px-3 py-1.5 justify-center items-center gap-2 rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] text-[#000] text-sm font-inter font-medium leading-[20px]"
+            >
               User activities
             </button>
+
             <button className="flex px-3 py-1.5 justify-center items-center gap-2 rounded-lg bg-[#829C15] shadow-inner text-[#fff] text-sm font-inter font-medium leading-[20px]">
               + New user
             </button>
@@ -606,6 +613,10 @@ const UserManagement = () => {
           )}
         </div>
       )}
+      <MainUserActivities
+        isOpen={activitiesModalOpen}
+        onClose={() => setActivitiesModalOpen(false)}
+      />
     </div>
   );
 };
