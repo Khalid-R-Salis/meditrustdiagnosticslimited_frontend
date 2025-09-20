@@ -44,8 +44,6 @@ const ContactAdmin = () => {
     e.preventDefault();
     window.history.back();
   };
-
-  // Auto-hide success message after 3 seconds
   useEffect(() => {
     if (messageSent) {
       const timer = setTimeout(() => {
@@ -83,7 +81,6 @@ const ContactAdmin = () => {
       </div>
 
       <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[72px] sm:mt-0 mb-[2px]">
-        {/* Success message - shown above BACK */}
         {messageSent && (
           <p className="text-[#2E7D32] text-[13px] sm:text-[14px] font-inter mb-3 sm:mb-4 text-center sm:text-left">
             Message successfully sent to admin!
