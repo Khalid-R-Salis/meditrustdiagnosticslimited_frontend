@@ -27,7 +27,7 @@ const ContactAdmin = () => {
 
     setMessageSent(true);
 
-    // 👇 scroll to top so success message is visible
+    // Scroll to top so user sees the success message
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     // Clear form after sending
@@ -44,6 +44,8 @@ const ContactAdmin = () => {
     e.preventDefault();
     window.history.back();
   };
+
+  // Auto-hide success message after 3 seconds
   useEffect(() => {
     if (messageSent) {
       const timer = setTimeout(() => {
@@ -62,7 +64,7 @@ const ContactAdmin = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex flex-col items-center justify-center h-[100dvh] gap-[8px] bg-[#f9f9f9]"
+      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9]"
     >
       <div
         className="absolute top-0 left-0 w-full flex items-center"
@@ -81,6 +83,7 @@ const ContactAdmin = () => {
       </div>
 
       <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[72px] sm:mt-0 mb-[2px]">
+        {/* Success message - shown above BACK */}
         {messageSent && (
           <p className="text-[#2E7D32] text-[13px] sm:text-[14px] font-inter mb-3 sm:mb-4 text-center sm:text-left">
             Message successfully sent to admin!
