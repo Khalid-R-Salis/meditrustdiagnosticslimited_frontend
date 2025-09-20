@@ -65,11 +65,11 @@ const ContactAdmin = () => {
           <img
             src={logo2}
             alt="Logo"
-            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-6 mb-6"
           />
         </a>
       </div>
-      <div className="bg-white p-[40px] rounded-[24px] shadow-md w-full max-w-[500px] z-10">
+      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px]">
         <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
           <a href="#" onClick={handleBack}>
             ← BACK

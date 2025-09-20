@@ -51,7 +51,7 @@ const Newpassword = () => {
           <img
             src={logo2}
             alt="Logo"
-            className="h-[40px] w-[166px] ml-[140px] mt-6 mb-6"
+            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-6 mb-6"
           />
         </a>
       </div>
@@ -59,7 +59,7 @@ const Newpassword = () => {
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center gap-[8px] w-full"
       >
-        <div className="bg-white p-[40px] rounded-[24px] shadow-md w-[440px] mt-[80px]">
+        <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px]">
           <div className="mb-[32px]">
             <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
               You’re Almost There
