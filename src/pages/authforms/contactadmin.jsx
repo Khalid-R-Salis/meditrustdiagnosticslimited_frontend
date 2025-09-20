@@ -27,6 +27,9 @@ const ContactAdmin = () => {
 
     setMessageSent(true);
 
+    // 👇 scroll to top so success message is visible
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     // Clear form after sending
     setFormData({
       fullName: "",
