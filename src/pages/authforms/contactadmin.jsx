@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bg1 from "../../assets/bg1.png";
 import logo2 from "../../assets/logo2.png";
 
@@ -42,6 +42,16 @@ const ContactAdmin = () => {
     window.history.back();
   };
 
+  // Auto-hide success message after 3 seconds
+  useEffect(() => {
+    if (messageSent) {
+      const timer = setTimeout(() => {
+        setMessageSent(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [messageSent]);
+
   return (
     <form
       action=""
@@ -68,12 +78,21 @@ const ContactAdmin = () => {
           />
         </a>
       </div>
-      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[72px] sm:mt-0">
+
+      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[72px] sm:mt-0 mb-[2px]">
+        {/* Success message - shown above BACK */}
+        {messageSent && (
+          <p className="text-[#2E7D32] text-[13px] sm:text-[14px] font-inter mb-3 sm:mb-4 text-center sm:text-left">
+            Message successfully sent to admin!
+          </p>
+        )}
+
         <div className="mb-[2px] sm:mb-8 text-[#383F45] text-[13px] sm:text-[14px] font-inter font-normal leading-[20px]">
           <a href="#" onClick={handleBack}>
             ← BACK
           </a>
         </div>
+
         <h1 className="text-black text-[19px] sm:text-[20px] font-semibold leading-[30px] font-inter mb-1">
           Contact Admin
         </h1>
@@ -165,12 +184,6 @@ const ContactAdmin = () => {
         >
           Send to Admin
         </button>
-
-        {messageSent && (
-          <p className="text-[#2E7D32] mt-4 text-[13px] sm:text-[14px] font-inter">
-            Message successfully sent to admin!
-          </p>
-        )}
       </div>
     </form>
   );
