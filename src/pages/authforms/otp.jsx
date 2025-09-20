@@ -56,7 +56,7 @@ const OTPInput = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex flex-col items-center justify-center min-h-screen gap-[8px] bg-[#f9f9f9] relative"
+      className="flex flex-col items-center justify-center h-[100dvh] gap-[8px] bg-[#f9f9f9] relative"
     >
       <div
         className="absolute top-0 left-0 w-full flex items-center"
