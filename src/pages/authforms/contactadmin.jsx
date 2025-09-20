@@ -61,7 +61,6 @@ const ContactAdmin = () => {
         }}
       >
         <a href="/">
-          {" "}
           <img
             src={logo2}
             alt="Logo"
@@ -69,22 +68,22 @@ const ContactAdmin = () => {
           />
         </a>
       </div>
-      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px]">
-        <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
+      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[4px] sm:mt-0">
+        <div className="mb-[2px] sm:mb-8 text-[#383F45] text-[13px] sm:text-[14px] font-inter font-normal leading-[20px]">
           <a href="#" onClick={handleBack}>
             ← BACK
           </a>
         </div>
-        <h1 className="text-black text-[20px] font-semibold leading-[30px] font-inter mb-1">
+        <h1 className="text-black text-[19px] sm:text-[20px] font-semibold leading-[30px] font-inter mb-1">
           Contact Admin
         </h1>
-        <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-inter mb-6">
+        <p className="text-[#383F45] text-[13px] sm:text-[14px] leading-[20px] font-normal font-inter mb-6">
           Kindly fill the form below and your complaint will be sent directly to
           the administrator.
         </p>
 
         <div className="mb-4">
-          <label className="text-[#454C52] text-[14px] font-normal leading-5 font-inter mb-2 block">
+          <label className="text-[#454C52] text-[13px] sm:text-[14px] font-normal leading-5 font-inter mb-2 block">
             Full Name
           </label>
           <input
@@ -94,12 +93,12 @@ const ContactAdmin = () => {
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none"
+            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none text-[13px] sm:text-[14px]"
           />
         </div>
 
         <div className="mb-4">
-          <label className="text-[#454C52] text-[14px] font-normal leading-5 font-inter mb-2 block">
+          <label className="text-[#454C52] text-[13px] sm:text-[14px] font-normal leading-5 font-inter mb-2 block">
             Role
           </label>
           <select
@@ -107,7 +106,7 @@ const ContactAdmin = () => {
             value={formData.role}
             onChange={handleChange}
             required
-            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none"
+            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none text-[13px] sm:text-[14px]"
           >
             <option value="">Select your role</option>
             <option value="Receptionist">Receptionist</option>
@@ -116,7 +115,7 @@ const ContactAdmin = () => {
         </div>
 
         <div className="mb-4">
-          <label className="text-[#454C52] text-[14px] font-normal leading-5 font-inter mb-2 block">
+          <label className="text-[#454C52] text-[13px] sm:text-[14px] font-normal leading-5 font-inter mb-2 block">
             Email Address
           </label>
           <input
@@ -126,12 +125,12 @@ const ContactAdmin = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none"
+            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none text-[13px] sm:text-[14px]"
           />
         </div>
 
         <div className="mb-4">
-          <label className="text-[#454C52] text-[14px] font-normal leading-5 font-inter mb-2 block">
+          <label className="text-[#454C52] text-[13px] sm:text-[14px] font-normal leading-5 font-inter mb-2 block">
             Phone Number
           </label>
           <input
@@ -141,12 +140,12 @@ const ContactAdmin = () => {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none"
+            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none text-[13px] sm:text-[14px]"
           />
         </div>
 
         <div className="mb-6">
-          <label className="text-[#454C52] text-[14px] font-normal leading-5 font-inter mb-2 block">
+          <label className="text-[#454C52] text-[13px] sm:text-[14px] font-normal leading-5 font-inter mb-2 block">
             Complaint Description
           </label>
           <textarea
@@ -156,19 +155,19 @@ const ContactAdmin = () => {
             onChange={handleChange}
             rows={4}
             required
-            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none resize-none"
+            className="w-full rounded-[8px] bg-white shadow-custom px-[14px] py-[10px] focus:outline-none resize-none text-[13px] sm:text-[14px]"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium shadow-sm"
+          className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium shadow-sm text-[13px] sm:text-[14px]"
         >
           Send to Admin
         </button>
 
         {messageSent && (
-          <p className="text-[#2E7D32] mt-4 text-[14px] font-inter">
+          <p className="text-[#2E7D32] mt-4 text-[13px] sm:text-[14px] font-inter">
             Message successfully sent to admin!
           </p>
         )}
