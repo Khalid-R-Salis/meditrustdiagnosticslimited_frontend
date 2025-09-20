@@ -124,9 +124,9 @@ const OTPInput = () => {
         </form>
 
         <p className="text-[12px] text-[#383F45] font-[500] text-left font-inter leading-[28px]">
-          <span className="text-[#829C15] cursor-pointer">
+          {/* <span className="text-[#829C15] cursor-pointer">
             <a href="/contactadmin">Contact administrator</a>
-          </span>
+          </span> */}
         </p>
       </div>
     </div>

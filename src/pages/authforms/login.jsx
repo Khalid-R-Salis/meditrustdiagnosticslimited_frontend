@@ -13,15 +13,21 @@ const Login = () => {
 
   React.useEffect(() => {
     const checkTablet = () => {
-      const width = window.innerWidth;
+      // Device screen resolution in pixels
+      const widthPx = window.screen.width * window.devicePixelRatio;
+      const heightPx = window.screen.height * window.devicePixelRatio;
+      const diagonalPx = Math.sqrt(widthPx ** 2 + heightPx ** 2);
 
-      setIsTablet(
-        // Portrait tablets
-        (width >= 600 && width <= 1200) ||
-          // Landscape tablets
-          (width >= 1200 && width <= 2200 && window.innerHeight <= 1300)
-      );
+      // Approximate diagonal size in inches
+      const diagonalInches = diagonalPx / 96; // assume 96 CSS dpi
+
+      if (diagonalInches <= 12) {
+        setIsTablet(true);
+      } else {
+        setIsTablet(false);
+      }
     };
+
     checkTablet();
     window.addEventListener("resize", checkTablet);
     return () => window.removeEventListener("resize", checkTablet);

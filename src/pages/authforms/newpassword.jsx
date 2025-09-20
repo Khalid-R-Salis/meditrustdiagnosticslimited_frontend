@@ -126,12 +126,12 @@ const Newpassword = () => {
             Reset password
           </button>
 
-          <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
+          {/* <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
             Need help?{" "}
             <span className="text-[#829C15] cursor-pointer">
               <a href="/contactadmin">Contact administrator</a>
             </span>
-          </p>
+          </p> */}
         </div>
       </form>
     </div>
