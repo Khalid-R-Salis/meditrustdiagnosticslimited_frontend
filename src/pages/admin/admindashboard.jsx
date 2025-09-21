@@ -156,7 +156,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        <div className="flex-1 p-6 flex">
+        <div class="flex-1 py-6 px-0 sm:px-6 flex">
           {showNewUser ? (
             <NewUser
               onClose={() => {

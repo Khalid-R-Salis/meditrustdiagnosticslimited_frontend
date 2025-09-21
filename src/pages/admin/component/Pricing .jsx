@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const ITEMS_PER_PAGE = 10;
+// const ITEMS_PER_PAGE = 10;
 
 const testOptions = [
   { label: "2 Hours Post Prandial (2PP)", price: 3500 },
@@ -17,212 +17,6 @@ const testOptions = [
   { label: "Bilirubin Conjugated", price: 2000 },
   { label: "Bilirubin Total", price: 2000 },
   { label: "Blood culture", price: 17000 },
-  { label: "BLOOD FILM", price: 2000 },
-  { label: "Blood Group", price: 2000 },
-  { label: "C - REACTIVE PROTEIN  (CRP)", price: 12000 },
-  { label: "Ca 125", price: 25000 },
-  { label: "Ca 15-3", price: 20000 },
-  { label: "Ca 19-9", price: 20000 },
-  { label: "Calcium & phosphate", price: 4000 },
-  { label: "Calcium Aspirate", price: 2500 },
-  { label: "Calcium Serum", price: 3000 },
-  { label: "CEA", price: 15000 },
-  { label: "CEA", price: 15000 },
-  { label: "CEREBROSPINAL FLUID (CSF)", price: 14400 },
-  { label: "Cholesterol HDL", price: 3500 },
-  { label: "CKMB", price: 20000 },
-  { label: "Clotting profile", price: 22000 },
-  { label: "C-Reactive Protein (CRP)", price: 12500 },
-  { label: "Creatine Kinase Total (CK)", price: 7000 },
-  { label: "Creatinine 24hr Urine", price: 3500 },
-  { label: "Creatinine Aspirate", price: 3500 },
-  { label: "Creatinine Clearance", price: 4000 },
-  { label: "Creatinine Clearance 24hr Urine", price: 3500 },
-  { label: "Creatinine Serum", price: 3000 },
-  { label: "Creatinine Urine", price: 3000 },
-  { label: "Creatinine Urine (24hr)", price: 3000 },
-  { label: "CSF Analysis", price: 17000 },
-  { label: "D-DIMER", price: 9500 },
-  { label: "DIRECT COMBO TEST", price: 30000 },
-  { label: "DIRECT COOMBS", price: 30000 },
-  { label: "Electrolytes", price: 5000 },
-  { label: "ENDO CERVICAL SWAB", price: 4500 },
-  { label: "ESR (Erythrocyte Sedimentation Rate)", price: 2500 },
-  { label: "ESTRADIOL    (E2)", price: 18500 },
-  { label: "Estrogen-S (E2)", price: 15000 },
-  { label: "FERRITIN", price: 12500 },
-  { label: "FOLLICLE STIMULATING HORMONE (FSH)", price: 19000 },
-  { label: "Follicle Stimulating Hormone (FSH)", price: 19000 },
-  { label: "PREGNANCY TEST (PT)", price: 1500 },
-  { label: "Free T3", price: 6000 },
-  { label: "Free T4", price: 6000 },
-  { label: "Free Testosterone", price: 40000 },
-  { label: "Full / Complete Blood Count", price: 3500 },
-  { label: "Gamma GT", price: 2000 },
-  { label: "Glucose Fasting", price: 2000 },
-  { label: "Glucose Random", price: 2000 },
-  { label: "Growth Hormone", price: 55000 },
-  { label: "Growth Hormone Suppression", price: 104000 },
-  { label: "H.PYLORI", price: 2500 },
-  { label: "HB Electrophoresis", price: 9000 },
-  { label: "HB Genotype", price: 2500 },
-  { label: "HbA1C", price: 12500 },
-  { label: "HBsAg viral load", price: 42000 },
-  { label: "HCV", price: 2500 },
-  { label: "Helicobacter pylori Ag Stool", price: 7000 },
-  { label: "Helicobacter pylori IgA Ab", price: 21000 },
-  { label: "Helicobacter pylori IgG Ab", price: 21000 },
-  { label: "Hepatitis A Virus IgG Ab", price: 11500 },
-  { label: "Hepatitis A Virus IgM Ab", price: 11500 },
-  { label: "Hepatitis B Profile", price: 130000 },
-  { label: "Hepatitis B Virus core Ab", price: 4500 },
-  { label: "Hepatitis B Virus core IgM Ab", price: 4500 },
-  { label: "Hepatitis B Virus e Ab", price: 8000 },
-  { label: "Hepatitis B Virus e Ag", price: 9000 },
-  { label: "Hepatitis B Virus surface Ab", price: 6500 },
-  { label: "Hepatitis B Virus surface Ag", price: 3000 },
-  { label: "Hepatitis B virus surface Ag Stat", price: 1500 },
-  { label: "HIGH VAGINAL SWAB", price: 4500 },
-  { label: "HIV Stat", price: 2500 },
-  { label: "HIV Type 1 & 2 + p24 Ag(VIDAS)", price: 9000 },
-  { label: "HIV Viral load", price: 48000 },
-  { label: "INDIRECT COOMBS", price: 3800 },
-  { label: "LEUTINIZING HORMONE", price: 19000 },
-  { label: "LFT Liver Function Test", price: 10000 },
-  { label: "LIPID PROFILE", price: 10000 },
-  { label: "Liver Enzymes", price: 2500 },
-  { label: "Liver Function & Protein", price: 10000 },
-  { label: "Luteinizing Hormone (LH)", price: 19000 },
-  { label: "Magnesium serum", price: 2000 },
-  { label: "Malaria Thick Film (MPS)", price: 1000 },
-  { label: "Malaria Thin Film   (MPS)", price: 1000 },
-  { label: "Microscopy & Urinalysis", price: 2500 },
-  { label: "Microscopy Stool", price: 2500 },
-  { label: "Microscopy Urine", price: 2000 },
-  { label: "Non-Gynaecological Cytology", price: 17000 },
-  { label: "ORAL GLUCOSE TOLERANCE   (OGTT)", price: 4000 },
-  { label: "Packed Cell Volume (PCV)", price: 2000 },
-  { label: "Platelet Count", price: 2000 },
-  { label: "POTASSIUM SERUM", price: 1000 },
-  { label: "POTASSIUM URINE", price: 4100 },
-  { label: "PROGESTERONE", price: 19000 },
-  { label: "PROLACTIN", price: 19000 },
-  { label: "PGREGNANCY TEST  (PT)", price: 1500 },
-  { label: "PROSTATE SPECIFIC ANTIGEN (PSA)", price: 13000 },
-  { label: "PROTEIN SERUM", price: 3000 },
-  { label: "ROTAVIRUS ANTIGEN", price: 2500 },
-  { label: "RUBELLA IGM", price: 9000 },
-  { label: "RVS", price: 2500 },
-  { label: "Rh FACTOR", price: 12000 },
-  { label: "Semen M/C/S", price: 6500 },
-  { label: "Serum calcium & phosphate", price: 3500 },
-  { label: "TESTOSTERONE", price: 19000 },
-  { label: "THYROID FUNCTION TEST", price: 15000 },
-  { label: "TOXOPLASMA 1gM", price: 11000 },
-  { label: "TOXOPLASMA IgG", price: 11000 },
-  { label: "Troponin-I", price: 18000 },
-  { label: "TSH", price: 8000 },
-  { label: "U/E", price: 4000 },
-  { label: "U/E/CR", price: 9500 },
-  { label: "Urea Serum", price: 2500 },
-  { label: "URETHRAL SWAB", price: 4500 },
-  { label: "URIC ACID", price: 3500 },
-  { label: "Urine Analysis", price: 2000 },
-  { label: "Urine m/c/s", price: 4500 },
-  { label: "VDRL", price: 2500 },
-  { label: "VITAMIN B12", price: 10000 },
-  { label: "WIDAL", price: 1000 },
-  { label: "Wound swab", price: 4500 },
-  { label: "ANOMALY ULTRASOUND", price: 20000 },
-  { label: "DOPPLER CAROTID", price: 20000 },
-  { label: "DOPPLER EXTREMITY ARTERIAL (BILATERAL)", price: 23000 },
-  { label: "DOPPLER EXTREMITY ARTERIAL (SINGLE)", price: 17000 },
-  { label: "Doppler Obstetrics", price: 17000 },
-  { label: "DOPPLER RENAL", price: 20000 },
-  { label: "ECHOCARDIOGRAM", price: 22000 },
-  { label: "FOLLICLE MONITORING", price: 17000 },
-  { label: "RENAL BIOPSY UNDER ULTRASOUND", price: 20000 },
-  { label: "TRANSVAGINAL ULTRASOUND", price: 11000 },
-  { label: "ULTRASOND GALL BLADDER STUDY", price: 7000 },
-  { label: "OBSTETRICS USS", price: 4000 },
-  { label: "ULTRASOUND ABDOMEN AND PELVIS (WHOLE ABDOMEN)", price: 4000 },
-  { label: "ULTRASOUND ANKLE (SINGLE PART)", price: 7000 },
-  { label: "ULTRASOUND DOPPLER TESTES", price: 17000 },
-  { label: "ULTRASOUND KUB", price: 6000 },
-  { label: "ULTRASOUND KUB & PROSTATE", price: 8000 },
-  { label: "ULTRASOUND OF THE BREAST", price: 9000 },
-  { label: "ULTRASOUND PAROTID (SINGLE PART)", price: 9000 },
-  { label: "ULTRASOUND PELVIS (SINGLE PART)", price: 4000 },
-  { label: "ULTRASOUND PROSTATE", price: 7000 },
-  { label: "ULTRASOUND SCROTUM", price: 9000 },
-  { label: "ULTRASOUND TRANSFONTANELLE", price: 9000 },
-  { label: "USS EYE", price: 9000 },
-  { label: "USS NECK", price: 6500 },
-  { label: "USS THYROID", price: 9000 },
-  { label: "USS TRANSVAGINAL", price: 11000 },
-  { label: "Xray Abdomen /KUB", price: 6000 },
-  { label: "Xray Acromioclavicular Joint", price: 6000 },
-  { label: "Xray paranasal sinuses", price: 7000 },
-  { label: "Xray jaw/mandible", price: 8000 },
-  { label: "Xray Barium Enema", price: 30000 },
-  { label: "Xray Barium Meal/swallow", price: 35000 },
-  { label: "Xray Both Ankle Joint AP/LAT", price: 10500 },
-  { label: "Xray Both Clavicle", price: 10500 },
-  { label: "Xray Both Elbow Joint AP/LAT", price: 10500 },
-  { label: "XRAY BOTH FOOT AP/LAT", price: 10500 },
-  { label: "XRAY BOTH FOOT AP/LAT/OBL", price: 10500 },
-  { label: "Xray Both Foot AP/OBL", price: 10500 },
-  { label: "Xray Both Forearm (Radius / Ulna) AP/LAT", price: 10500 },
-  { label: "Xray Both Hand AP/OBL", price: 10500 },
-  { label: "Xray Both Heel LAT/Axial", price: 10500 },
-  { label: "Xray Both Hip Joints Frog View", price: 10500 },
-  { label: "Xray Both Humerus AP/LAT", price: 10500 },
-  { label: "Xray Both Knee AP/LAT Standing", price: 10500 },
-  { label: "Xray Both Knee Axial View", price: 10500 },
-  { label: "Xray Both Patella Skyline View", price: 10500 },
-  { label: "Xray Both Sacro-iliac Joint OBL", price: 10500 },
-  { label: "Xray Both Shoulder Joint AP/LAT", price: 10500 },
-  { label: "Xray Both Tibia & Fibula PA/LAT", price: 10500 },
-  { label: "Xray Both Toe AP/LAT", price: 10500 },
-  { label: "Xray Both Wrist Joint AP/LAT", price: 10500 },
-  { label: "Xray Cervical Spine", price: 7000 },
-  { label: "Xray Chest PA View", price: 6000 },
-  { label: "Xray Chest Right LAT View", price: 6000 },
-  { label: "Xray Dorsal Spine AP/LAT", price: 6000 },
-  { label: "Xray Finger AP/LAT", price: 6000 },
-  { label: "Xray Fistulogram", price: 30000 },
-  { label: "Xray Hand with Wrist AP For Bone Age", price: 17500 },
-  { label: "XRAY HSG", price: 25000 },
-  { label: "Xray IVP", price: 30000 },
-  { label: "Xray KUB", price: 6000 },
-  { label: "Xray L S Spine – AP / LAT", price: 8000 },
-  { label: "Xray Ankle Joint AP/LAT", price: 7000 },
-  { label: "Xray Clavicle", price: 6000 },
-  { label: "Xray Elbow Joint AP/LAT", price: 6000 },
-  { label: "Xray Foot AP/OBL", price: 7000 },
-  { label: "Xray Forearm AP/LAT", price: 7000 },
-  { label: "XRAY HAND AP/LAT", price: 6000 },
-  { label: "Xray Humerus AP/LAT", price: 6000 },
-  { label: "Xray Knee AP/LAT", price: 6000 },
-  { label: "Xray Left Shoulder Joint AP", price: 6000 },
-  { label: "Xray Left Tibia & Fibula PA/LAT", price: 6000 },
-  { label: "Xray Lumbar Spine AP/LAT", price: 8000 },
-  { label: "Xray Mastoid", price: 6000 },
-  { label: "Xray RUG/MCUG", price: 30000 },
-  { label: "Xray Post Nasal Space", price: 7000 },
-  { label: "XRAY RETROGRADE PYELOGRAPHY", price: 6000 },
-  { label: "Xray Right Elbow Joint AP/LAT", price: 6000 },
-  { label: "Xray Right Wrist", price: 6000 },
-  { label: "Xray Shoulder", price: 7000 },
-  { label: "Xray Skull", price: 8000 },
-  { label: "Xray Pelvic", price: 8000 },
-  { label: "Xray Thoracic Inlet", price: 8000 },
-  { label: "Xray Urethrogram", price: 35000 },
-  { label: "Xray Whole Spine", price: 17500 },
-  { label: "Xray Abdomen (Erect & Supine)", price: 8000 },
-  { label: "RE-PRINTING OF RESULT - FILMS", price: 3000 },
-  { label: "RE-PRINTING OF RESULT -A4 PAPER", price: 500 },
-  { label: "RE-PRINTING OF RESULT -CD", price: 1000 },
 ];
 
 const Pricing = ({ setActiveNav }) => {
@@ -231,6 +25,26 @@ const Pricing = ({ setActiveNav }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [menuOpen, setMenuOpen] = useState(null);
   const menuRef = useRef(null);
+
+  //
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(8);
+      } else {
+        setItemsPerPage(10);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  //
 
   const [tests, setTests] = useState(() =>
     testOptions.map((t, i) => ({
@@ -248,10 +62,10 @@ const Pricing = ({ setActiveNav }) => {
     t.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredTests.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredTests.length / itemsPerPage);
   const paginatedTests = filteredTests.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
 
   const handlePrevious = () => {
@@ -303,7 +117,7 @@ const Pricing = ({ setActiveNav }) => {
   };
 
   return (
-    <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
+    <div className="bg-white w-full flex flex-col mt-10 mx-5 sm:py-7 sm:px-[72px] sm:mt-0 sm:mx-0 h-full relative">
       <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           Pricing
@@ -365,7 +179,7 @@ const Pricing = ({ setActiveNav }) => {
       </div>
 
       {/* Table */}
-      <section className="bg-white p-4 overflow-auto">
+      <section className="bg-white p-0 sm:p-4 overflow-auto">
         <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
           <thead>
             <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
@@ -380,7 +194,7 @@ const Pricing = ({ setActiveNav }) => {
             {paginatedTests.map((test, i) => (
               <tr key={test.id} className="border-b hover:bg-gray-50 relative">
                 <td className="px-5 py-3 text-black text-[12px] font-medium font-inter">
-                  {(currentPage - 1) * ITEMS_PER_PAGE + i + 1}
+                  {(currentPage - 1) * itemsPerPage + i + 1}
                 </td>
                 <td className="px-5 py-3 text-[#676E76] text-[12px] font-medium font-inter">
                   {test.name}
