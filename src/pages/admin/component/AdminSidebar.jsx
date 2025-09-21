@@ -109,7 +109,7 @@ const AdminSidebar = ({
   };
 
   return (
-    <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)] relative">
+    <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-full max-w-xs m-4 pt-[32px] px-[12px] mx-[16px] min-h-screen overflow-y-auto relative">
       <div>
         <div className="flex items-center justify-between px-4 mb-5">
           <img src={logo2} alt="logo" className="h-10 object-contain" />

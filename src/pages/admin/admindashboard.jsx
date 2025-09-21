@@ -61,7 +61,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Overlay click disables page interaction when sidebar is open
   return (
     <>
       {/* Hamburger for mobile */}
@@ -86,7 +85,6 @@ const AdminDashboard = () => {
       </div>
 
       <div className="flex">
-        {/* Sidebar: hidden on mobile, visible on desktop */}
         <div>
           {/* Desktop sidebar */}
           <div className="hidden md:block">
@@ -106,7 +104,7 @@ const AdminDashboard = () => {
                 onClick={closeSidebar}
                 style={{ cursor: "not-allowed" }}
               />
-              {/* Sidebar itself: preserve your original styling */}
+
               <div className={`relative z-40 animate-${sidebarAnim}`}>
                 <AdminSidebar
                   activeNav={activeNav}
