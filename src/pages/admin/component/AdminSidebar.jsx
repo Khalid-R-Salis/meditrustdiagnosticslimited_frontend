@@ -115,7 +115,7 @@ const AdminSidebar = ({
       flex flex-col justify-between 
       bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] 
       w-full md:w-[20rem] 
-      h-[calc(100dvh-4rem)] md:h-full 
+      h-[calc(100dvh-2rem)] md:h-full 
       overflow-y-auto 
       px-[12px] pt-[32px]
     "
