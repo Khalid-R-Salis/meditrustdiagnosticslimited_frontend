@@ -385,97 +385,33 @@ const Pricing = ({ setActiveNav }) => {
       </div>
 
       {/* Table */}
-      <section className="bg-white p-0 sm:p-4 overflow-x-auto">
-        <table className="min-w-[600px] w-full text-left text-[12px] text-[#676E76] rounded-sm">
-          <thead>
-            <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-              <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
-              <th className="bg-[#FAFAFA] p-5">Test Name</th>
-              <th className="bg-[#FAFAFA] p-5">Test Price</th>
-              <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
+      <table className="w-full text-left text-[10px] sm:text-[12px] text-[#676E76] rounded-sm">
+        <thead>
+          <tr className="text-[#676E76] border-b text-[10px] sm:text-[12px] font-medium leading-[18px] font-inter">
+            <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
+            <th className="bg-[#FAFAFA] p-5">Test Name</th>
+            <th className="bg-[#FAFAFA] p-5">Test Price</th>
+            <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {paginatedTests.map((test, i) => (
+            <tr key={test.id} className="border-b hover:bg-gray-50 relative">
+              <td className="px-5 py-3 text-black text-[10px] sm:text-[12px] font-medium font-inter">
+                {(currentPage - 1) * itemsPerPage + i + 1}
+              </td>
+              <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
+                {test.name}
+              </td>
+              <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
+                {test.price}
+              </td>
+              ...
             </tr>
-          </thead>
-
-          <tbody>
-            {paginatedTests.map((test, i) => (
-              <tr key={test.id} className="border-b hover:bg-gray-50 relative">
-                <td className="px-5 py-3 text-black text-[12px] font-medium font-inter">
-                  {(currentPage - 1) * itemsPerPage + i + 1}
-                </td>
-                <td className="px-5 py-3 text-[#676E76] text-[12px] font-medium font-inter">
-                  {test.name}
-                </td>
-                <td className="px-5 py-3 text-[#676E76] text-[12px] font-medium font-inter">
-                  {test.price}
-                </td>
-
-                <td className="px-5 py-3">
-                  <div className="flex items-center justify-end relative">
-                    <button
-                      onClick={() => setMenuOpen(menuOpen === i ? null : i)}
-                      className="menu-toggle p-1 hover:bg-gray-100 rounded"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="block text-[#676E76]"
-                      >
-                        <circle cx="8" cy="3" r="1.5" />
-                        <circle cx="8" cy="8" r="1.5" />
-                        <circle cx="8" cy="13" r="1.5" />
-                      </svg>
-                    </button>
-
-                    {menuOpen === i && (
-                      <div
-                        ref={menuRef}
-                        className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
-                      >
-                        <button
-                          onClick={() => handleEditTest(test)}
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#596066] text-[14px] font-normal font-inter"
-                        >
-                          Edit test
-                        </button>
-                        <button
-                          onClick={() => handleDeleteTest(test)}
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#596066] text-[14px] font-normal font-inter"
-                        >
-                          Delete test
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* Pagination */}
-        <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
-          <button
-            onClick={handlePrevious}
-            disabled={currentPage === 1}
-            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-          >
-            Previous
-          </button>
-
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-          >
-            Next
-          </button>
-        </div>
-      </section>
+          ))}
+        </tbody>
+      </table>
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
