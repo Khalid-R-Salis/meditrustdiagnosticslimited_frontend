@@ -4,6 +4,8 @@ import AdminOverview from "../admin/component/AdminOverview";
 import PatientReports from "../admin/component/PatientReports ";
 import Pricing from "../admin/component/Pricing ";
 import UserManagement from "../admin/component/UserManagement";
+import Complaints from "../admin/component/Complaints";
+
 import AddTest from "../admin/component/AddTest";
 import NewUser from "../admin/component/NewUser";
 
@@ -189,6 +191,15 @@ const AdminDashboard = () => {
                   setSidebarDisabled={setSidebarDisabled}
                 />
               )}
+
+              {activeNav === "Complaints" && (
+                <Complaints
+                  sidebarDisabled={sidebarDisabled}
+                  setSidebarDisabled={setSidebarDisabled}
+                  setToast={setToast}
+                />
+              )}
+
               {activeNav === "AddTest" && (
                 <AddTest
                   onClose={() => setActiveNav("Pricing")}
