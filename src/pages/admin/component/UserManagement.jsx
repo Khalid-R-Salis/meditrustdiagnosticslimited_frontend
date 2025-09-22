@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import MainUserActivities from "../component/MainUserActivities";
+import Spinner from "../../../components/spinner";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -22,14 +23,12 @@ const UserManagement = ({
   const [filterRange, setFilterRange] = useState("today");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Modal states
   const [modalType, setModalType] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // Toast state
   const [toast, setToast] = useState(null);
 
-  // Simulate API fetch
+  // Simulate API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -44,7 +43,8 @@ const UserManagement = ({
           "Olivia Pam",
         ];
 
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        // just to demosntrate loading state
+        // await new Promise((resolve) => setTimeout(resolve, 500));
 
         const data = [...Array(25)].map((_, i) => ({
           id: i,
@@ -104,13 +104,11 @@ const UserManagement = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Toast helper
   const showToast = (message, type = "success") => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
   };
 
-  // Action handlers
   const handleDeleteUser = (id) => {
     setUsers(users.filter((u) => u.id !== id));
     showToast("User deleted successfully", "success");
@@ -186,7 +184,6 @@ const UserManagement = ({
       )}
 
       <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
-        {/* Header */}
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
             User Management
@@ -213,7 +210,6 @@ const UserManagement = ({
           </div>
         </div>
 
-        {/* Search + Date filter */}
         <div className="mb-6 flex items-center gap-3">
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <input
@@ -245,7 +241,10 @@ const UserManagement = ({
         {/* Table */}
         <section className="bg-white p-4 overflow-auto">
           {loading ? (
-            <p className="text-gray-500 text-sm">Loading users...</p>
+            <div className="flex flex-col items-center justify-center py-10">
+              <Spinner />
+              <p className="mt-3 text-sm text-gray-500">Loading users...</p>
+            </div>
           ) : error ? (
             <p className="text-red-500 text-sm">{error}</p>
           ) : (
@@ -413,10 +412,8 @@ const UserManagement = ({
         </section>
       </div>
 
-      {/* Overlay + Modals */}
       {modalType && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          {/* Edit Modal */}
           {modalType === "edit" && selectedUser && (
             <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
@@ -484,7 +481,6 @@ const UserManagement = ({
                   <option>Receptionist</option>
                 </select>
 
-                {/* Buttons */}
                 <div className="flex justify-start gap-2 mt-8">
                   <button
                     type="button"
