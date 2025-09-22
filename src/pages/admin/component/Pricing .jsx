@@ -32,7 +32,7 @@ const Pricing = ({ setActiveNav }) => {
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth < 640) {
-        setItemsPerPage(8);
+        setItemsPerPage(6);
       } else {
         setItemsPerPage(10);
       }
@@ -117,8 +117,8 @@ const Pricing = ({ setActiveNav }) => {
   };
 
   return (
-    <div className="bg-white w-full flex flex-col mt-10 mx-5 sm:py-7 sm:px-[72px] sm:mt-0 sm:mx-0 h-full relative">
-      <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
+    <div className="bg-white w-full flex flex-col mt-8 mx-5 sm:py-7 sm:px-[72px] sm:mt-0 sm:mx-0 h-full relative">
+      <div class="flex justify-between items-center mb-[30px] sm:border-b sm:pb-[24px] sm:mb-[40px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           Pricing
         </h2>
@@ -133,7 +133,7 @@ const Pricing = ({ setActiveNav }) => {
         </div>
       </div>
 
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-6 flex items-center gap-8 sm:gap-3">
         <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@ const Pricing = ({ setActiveNav }) => {
           />
         </div>
 
-        <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
+        {/* <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
           <select
             className="bg-transparent outline-none text-sm"
             value={filterRange}
@@ -175,7 +175,7 @@ const Pricing = ({ setActiveNav }) => {
             <option value="month">This Month</option>
             <option value="always">Always</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       {/* Table */}
