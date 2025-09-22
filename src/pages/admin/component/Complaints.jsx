@@ -6,11 +6,9 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
   const [filterRange, setFilterRange] = useState("today");
   const menuRef = useRef(null);
 
-  // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const complaintsPerPage = 10;
 
-  // demo complaints
   const [complaints, setComplaints] = useState([
     {
       id: 1,
@@ -104,7 +102,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     },
   ]);
 
-  // auto close menu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -119,7 +116,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // auto close toast
   const showToast = (msg) => {
     setToast({ type: "success", message: msg });
     setTimeout(() => setToast(null), 2000);
@@ -131,7 +127,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     setSelectedComplaint(null);
   };
 
-  // Pagination logic
   const indexOfLast = currentPage * complaintsPerPage;
   const indexOfFirst = indexOfLast - complaintsPerPage;
   const currentComplaints = complaints.slice(indexOfFirst, indexOfLast);
@@ -146,9 +141,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
 
   return (
     <div className="flex w-full">
-      {/* Main content wrapper */}
       <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
-        {/* Page Header */}
         <div className="flex justify-start items-center mb-10">
           <h1 className="text-[24px] font-semibold leading-[32px] text-black mr-10 font-inter">
             Manage staff complaints
@@ -291,7 +284,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
       {selectedComplaint && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
           <div className="bg-white p-8 rounded-[6px] shadow-lg relative w-[90%] max-w-lg max-h-[80vh] overflow-y-auto">
-            {/* Close button (X) */}
             <button
               className="absolute top-2 right-4 text-gray-600 text-lg font-bold"
               onClick={() => setSelectedComplaint(null)}
@@ -299,7 +291,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
               ✕
             </button>
 
-            {/* Complaint details */}
             <h2 className="text-lg font-semibold mb-4">Staff Complain</h2>
             <p className="mb-2">
               <b>Name:</b> {selectedComplaint.name}
@@ -317,9 +308,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
               <b>Complain:</b> {selectedComplaint.complain}
             </p>
 
-            {/* Footer with Cancel + Resolve buttons */}
             <div className="flex gap-3 mt-6">
-              {/* Cancel */}
               <button
                 onClick={() => setSelectedComplaint(null)}
                 className="text-black text-sm font-medium leading-5 font-inter 
@@ -329,7 +318,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
                 Cancel
               </button>
 
-              {/* Resolve */}
               <button
                 onClick={() => handleResolve(selectedComplaint.id)}
                 className="text-white text-sm font-medium leading-5 font-inter 
