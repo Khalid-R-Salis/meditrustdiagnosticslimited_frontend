@@ -481,7 +481,7 @@ const Pricing = ({ setActiveNav }) => {
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl shadow-lg p-20 max-w-[30rem] w-full text-center">
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full text-center m-6 p-[15px] sm:m-0 sm:p-6">
             <p className="text-gray-800 text-base mb-12">
               Are you sure you want to delete this test? <br />
               <b className="uppercase text-red-600">
@@ -513,8 +513,15 @@ const Pricing = ({ setActiveNav }) => {
       {showEditModal && selectedTest && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div
-            className="flex flex-col w-[480px] p-10 items-start gap-4 rounded-lg bg-white
-                       shadow-[0_2px_5px_0_rgba(103,110,118,0.08),0_0_0_1px_rgba(103,110,118,0.16),0_1px_1px_0_rgba(0,0,0,0.12)] relative"
+            className="
+    flex flex-col 
+    w-full max-w-[480px] 
+    p-[15px] md:p-10 
+    mx-6 md:mx-0 
+    items-start gap-4 rounded-lg bg-white
+    shadow-[0_2px_5px_0_rgba(103,110,118,0.08),0_0_0_1px_rgba(103,110,118,0.16),0_1px_1px_0_rgba(0,0,0,0.12)] 
+    relative
+  "
           >
             <button
               onClick={() => setShowEditModal(false)}
