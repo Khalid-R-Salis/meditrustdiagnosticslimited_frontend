@@ -385,33 +385,58 @@ const Pricing = ({ setActiveNav }) => {
       </div>
 
       {/* Table */}
-      <table className="w-full text-left text-[10px] sm:text-[12px] text-[#676E76] rounded-sm">
-        <thead>
-          <tr className="text-[#676E76] border-b text-[10px] sm:text-[12px] font-medium leading-[18px] font-inter">
-            <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
-            <th className="bg-[#FAFAFA] p-5">Test Name</th>
-            <th className="bg-[#FAFAFA] p-5">Test Price</th>
-            <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {paginatedTests.map((test, i) => (
-            <tr key={test.id} className="border-b hover:bg-gray-50 relative">
-              <td className="px-5 py-3 text-black text-[10px] sm:text-[12px] font-medium font-inter">
-                {(currentPage - 1) * itemsPerPage + i + 1}
-              </td>
-              <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
-                {test.name}
-              </td>
-              <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
-                {test.price}
-              </td>
-              ...
+      <section className="bg-white p-0 sm:p-4 overflow-auto">
+        <table className="w-full text-left text-[10px] sm:text-[12px] text-[#676E76] rounded-sm">
+          <thead>
+            <tr className="text-[#676E76] border-b text-[10px] sm:text-[12px] font-medium leading-[18px] font-inter">
+              <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
+              <th className="bg-[#FAFAFA] p-5">Test Name</th>
+              <th className="bg-[#FAFAFA] p-5">Test Price</th>
+              <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {paginatedTests.map((test, i) => (
+              <tr key={test.id} className="border-b hover:bg-gray-50 relative">
+                <td className="px-5 py-3 text-black text-[10px] sm:text-[12px] font-medium font-inter">
+                  {(currentPage - 1) * itemsPerPage + i + 1}
+                </td>
+                <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
+                  {test.name}
+                </td>
+                <td className="px-5 py-3 text-[#676E76] text-[10px] sm:text-[12px] font-medium font-inter">
+                  {test.price}
+                </td>
+                ...
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Pagination */}
+        <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
+          <button
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Previous
+          </button>
+
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Next
+          </button>
+        </div>
+      </section>
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
