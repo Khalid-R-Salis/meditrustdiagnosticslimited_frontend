@@ -51,7 +51,7 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
   };
 
   return (
-    <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
+    <div className="bg-white w-full flex flex-col mt-8 mx-5 sm:py-7 sm:px-[72px] sm:mt-0 sm:mx-0 h-full relative">
       {/* Top bar */}
       <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
@@ -77,7 +77,7 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
 
       {showCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full text-center m-6 p-[15px] sm:m-0 sm:p-6">
             <p className="text-gray-800 text-base mb-6">
               Are you sure you want to close this page? <br />
               <b className="uppercase text-red-600">Changes are Unsaved!</b>
@@ -109,7 +109,7 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="flex-1 max-h-[70vh] overflow-y-auto pr-2 space-y-4 custom-scroll max-w-2xl"
+        className="flex-1 max-h-[70vh] overflow-y-auto space-y-4 custom-scroll max-w-2xl"
       >
         <div className="space-y-4 flex flex-col gap-3">
           <h3 className="text-[15px] font-medium leading-[28px] text-black font-inter">

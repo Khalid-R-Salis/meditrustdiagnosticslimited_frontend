@@ -386,9 +386,9 @@ const Pricing = ({ setActiveNav }) => {
 
       {/* Table */}
       <section className="bg-white p-0 sm:p-4 overflow-auto">
-        <table className="w-full text-left text-[12px] md:text-[12px] text-[10px] text-[#676E76] rounded-sm">
+        <table className="w-full text-left md:text-[12px] text-[10px] text-[#676E76] rounded-sm">
           <thead>
-            <tr className="text-[#676E76] border-b text-[12px] md:text-[12px] text-[10px] font-medium leading-[18px] font-inter">
+            <tr className="text-[#676E76] border-b md:text-[12px] text-[10px] font-medium leading-[18px] font-inter">
               <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
               <th className="bg-[#FAFAFA] p-5">Test Name</th>
               <th className="bg-[#FAFAFA] p-5">Test Price</th>
