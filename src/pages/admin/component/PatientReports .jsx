@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import ReceiptTemplate from "../../../components/receipttemplate";
 import ResultTemplate from "../../../components/testresult";
 
-const ITEMS_PER_PAGE = 10;
+const ROW_HEIGHT = 56;
 
 const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
   const [showReceipt, setShowReceipt] = useState(false);
@@ -13,6 +13,19 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRange, setFilterRange] = useState("today");
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  // Calculate items per page based on the height of device currently viewing the site
+  useEffect(() => {
+    function updateItemsPerPage() {
+      const availableHeight = window.innerHeight - 260;
+      const rows = Math.floor(availableHeight / ROW_HEIGHT);
+      setItemsPerPage(rows > 0 ? rows : 1);
+    }
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   const [patients] = useState(() =>
     [...Array(25)].map((_, i) => ({
@@ -33,10 +46,10 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       p.receipt.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredPatients.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredPatients.length / itemsPerPage);
   const paginatedPatients = filteredPatients.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
 
   const handlePrevious = () => {
@@ -76,7 +89,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
 
         {/* Filters */}
-        <div className="mb-6 flex items-center gap-3">
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-[5px] sm:mt-0">
           {/* Search */}
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <svg
@@ -109,7 +122,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
           </div>
 
           {/* Date filter */}
-          <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
+          <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white mt-[5px] sm:mt-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -141,8 +154,8 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
 
         {/* Scrollable table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[500px] scrollbar-thin-green">
-          <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
+          <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
                 <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">

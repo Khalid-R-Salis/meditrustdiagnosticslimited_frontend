@@ -77,12 +77,12 @@ const NewUser = ({
   return (
     <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
       {/* Top bar */}
-      <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
-        <h2 className="text-[16px] sm:text-[20px] md:text-[24px] font-semibold leading-tight text-black font-inter">
+      <div className="flex flex-wrap justify-between items-center border-b pb-[24px] mb-[40px] mt-[5px] sm:mt-0">
+        <h2 className="text-[16px] sm:text-[20px] md:text-[24px] font-semibold leading-tight text-black font-inter mt-[5px] sm:mt-0">
           New user
         </h2>
 
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 mt-[5px] sm:mt-0">
           <button
             type="button"
             onClick={() => setShowCancelConfirm(true)}

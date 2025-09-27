@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
+const ROW_HEIGHT = 56;
+
 const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
   const [menuOpen, setMenuOpen] = useState(null);
   const [selectedComplaint, setSelectedComplaint] = useState(null);
@@ -7,7 +9,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
   const menuRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const complaintsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const [complaints, setComplaints] = useState([
     {
@@ -102,6 +104,18 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     },
   ]);
 
+  // Dynamically calculate itemsPerPage based on screen height
+  useEffect(() => {
+    function updateItemsPerPage() {
+      const availableHeight = window.innerHeight - 280;
+      const rows = Math.floor(availableHeight / ROW_HEIGHT);
+      setItemsPerPage(rows > 0 ? rows : 1);
+    }
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -127,10 +141,11 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     setSelectedComplaint(null);
   };
 
-  const indexOfLast = currentPage * complaintsPerPage;
-  const indexOfFirst = indexOfLast - complaintsPerPage;
+  // Pagination using dynamic itemsPerPage
+  const totalPages = Math.ceil(complaints.length / itemsPerPage);
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
   const currentComplaints = complaints.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(complaints.length / complaintsPerPage);
 
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
@@ -139,6 +154,10 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+
   return (
     <div className="flex w-full">
       <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
@@ -146,7 +165,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
           <h1 className="text-[15px] sm:text-[24px] font-semibold leading-[20px] sm:leading-[32px] text-black font-inter">
             Manage staff complaints
           </h1>
-
           {/* Dropdown */}
           <div className="ml-0 sm:ml-[15px] flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
             <select
@@ -163,7 +181,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
         </div>
 
         {/* Complaints Table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[500px] scrollbar-thin-green">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
           <section className="bg-white">
             <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
               <thead>
@@ -176,7 +194,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
                   <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
                 </tr>
               </thead>
-
               <tbody>
                 {currentComplaints.map((c, i) => (
                   <tr
@@ -215,7 +232,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
                             <circle cx="8" cy="13" r="1.5" />
                           </svg>
                         </button>
-
                         {menuOpen === i && (
                           <div
                             ref={menuRef}
@@ -257,32 +273,9 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
                 )}
               </tbody>
             </table>
-
-            {/* Pagination controls */}
-            <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
-              <button
-                onClick={handlePrevious}
-                disabled={currentPage === 1}
-                className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-              >
-                Previous
-              </button>
-
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                onClick={handleNext}
-                disabled={currentPage === totalPages}
-                className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-              >
-                Next
-              </button>
-            </div>
           </section>
         </div>
-        {/* Pagination controls */}
+        {/* Pagination */}
         <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
           <button
             onClick={handlePrevious}
@@ -291,11 +284,9 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
           >
             Previous
           </button>
-
           <span>
             Page {currentPage} of {totalPages}
           </span>
-
           <button
             onClick={handleNext}
             disabled={currentPage === totalPages}
@@ -305,7 +296,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
           </button>
         </div>
       </div>
-
       {/* Complaint Modal */}
       {selectedComplaint && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
@@ -316,7 +306,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
             >
               ✕
             </button>
-
             <h2 className="text-lg font-semibold mb-4">Staff Complain</h2>
             <p className="mb-2">
               <b>Name:</b> {selectedComplaint.name}
@@ -333,7 +322,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
             <p className="mb-4 whitespace-pre-line">
               <b>Complain:</b> {selectedComplaint.complain}
             </p>
-
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setSelectedComplaint(null)}
@@ -343,7 +331,6 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
               >
                 Cancel
               </button>
-
               <button
                 onClick={() => handleResolve(selectedComplaint.id)}
                 className="text-white text-sm font-medium leading-5 font-inter 

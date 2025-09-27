@@ -123,7 +123,7 @@ const Settings = () => {
             onClick={() => setShowDotsMenu(false)}
           >
             <div
-              className="absolute left-[70px] bottom-[95px] w-[160px] font-inter text-sm rounded-lg border border-[#E5E7EA] bg-white shadow-[0_1px_16px_0_rgba(0,0,0,0.12)]"
+              className="absolute left-[120px] bottom-[100px] w-[160px] font-inter text-sm rounded-lg border border-[#E5E7EA] bg-white shadow-[0_1px_16px_0_rgba(0,0,0,0.12)]"
               onClick={(e) => e.stopPropagation()}
             >
               <button

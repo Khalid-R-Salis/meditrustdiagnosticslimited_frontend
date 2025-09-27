@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import MainUserActivities from "../component/MainUserActivities";
 import Spinner from "../../../components/spinner";
 
-const ITEMS_PER_PAGE = 9;
+const ESTIMATED_ROW_HEIGHT = 56;
 
 const UserManagement = ({
   showNewUser,
@@ -27,6 +27,10 @@ const UserManagement = ({
   const [selectedUser, setSelectedUser] = useState(null);
 
   const [toast, setToast] = useState(null);
+
+  // Dynamic items per page
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const tableContainerRef = useRef(null);
 
   // Simulate API
   useEffect(() => {
@@ -70,16 +74,40 @@ const UserManagement = ({
     fetchUsers();
   }, []);
 
+  // Calculate itemsPerPage based on container height
+  useEffect(() => {
+    function calculateItemsPerPage() {
+      let containerHeight = 500;
+      if (tableContainerRef.current) {
+        containerHeight = tableContainerRef.current.offsetHeight;
+      }
+
+      const availableHeight = containerHeight - 56;
+      const rows = Math.max(
+        1,
+        Math.floor(availableHeight / ESTIMATED_ROW_HEIGHT)
+      );
+      setItemsPerPage(rows);
+    }
+
+    calculateItemsPerPage();
+    window.addEventListener("resize", calculateItemsPerPage);
+    return () => window.removeEventListener("resize", calculateItemsPerPage);
+  }, []);
+
   const filteredUsers = users.filter(
     (u) =>
       u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       u.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredUsers.length / itemsPerPage)
+  );
   const paginatedUsers = filteredUsers.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
 
   const handlePrevious = () => {
@@ -141,6 +169,10 @@ const UserManagement = ({
     setModalType(null);
   };
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage, searchTerm]);
+
   return (
     <div className="flex w-full relative">
       {/* Toast */}
@@ -183,7 +215,7 @@ const UserManagement = ({
         </div>
       )}
 
-      <div className="flex-1 bg-white pt-8 pb-0 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+      <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
         <div className="flex flex-col sm:flex-row justify-between items-center mt-[5px] sm:mt-0 mb-8 gap-2">
           <h1 className="text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
             User Management
@@ -210,12 +242,12 @@ const UserManagement = ({
           </div>
         </div>
 
-        <div className="mb-6 flex items-center gap-3">
+        <div className="mb-6 flex items-center gap-3 mx-4">
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <input
               type="text"
               placeholder="Search a name or email address"
-              className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
+              className=" w-full text-sm placeholder:text-[#9EA5AD] outline-none"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -249,9 +281,12 @@ const UserManagement = ({
             <p className="text-red-500 text-sm">{error}</p>
           ) : (
             <>
-              <div className="overflow-x-auto overflow-y-auto max-h-[500px] scrollbar-thin-green">
+              <div
+                className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green"
+                ref={tableContainerRef}
+              >
                 <section className="bg-white">
-                  <table className="min-w-[850px] text-left text-[10px] text-[#676E76] rounded-sm">
+                  <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
                     <thead>
                       <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
                         <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">Name</th>
@@ -272,25 +307,25 @@ const UserManagement = ({
                           className="border-b hover:bg-gray-50 relative"
                         >
                           <td
-                            className="px-5 py-3 max-w-[140px] truncate"
+                            className="px-3 py-1 max-w-[140px] truncate"
                             title={user.name}
                           >
                             {user.name}
                           </td>
                           <td
-                            className="px-5 py-3 max-w-[180px] truncate"
+                            className="px-3 py-1 max-w-[180px] truncate"
                             title={user.email}
                           >
                             {user.email}
                           </td>
                           <td
-                            className="px-5 py-3 max-w-[140px] truncate"
+                            className="px-3 py-1 max-w-[140px] truncate"
                             title={user.role}
                           >
                             {user.role}
                           </td>
                           <td
-                            className="px-5 py-3 max-w-[120px] truncate"
+                            className="px-3 py-1 max-w-[120px] truncate"
                             title={user.phone}
                           >
                             {user.phone}

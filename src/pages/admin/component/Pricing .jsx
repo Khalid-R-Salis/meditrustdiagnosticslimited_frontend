@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-// const ITEMS_PER_PAGE = 10;
-
 const testOptions = [
   { label: "2 Hours Post Prandial (2PP)", price: 3500 },
   { label: "Albumin Serum", price: 3000 },
@@ -225,32 +223,27 @@ const testOptions = [
   { label: "RE-PRINTING OF RESULT -CD", price: 1000 },
 ];
 
+const ROW_HEIGHT = 56;
+
 const Pricing = ({ setActiveNav }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRange, setFilterRange] = useState("today");
   const [currentPage, setCurrentPage] = useState(1);
   const [menuOpen, setMenuOpen] = useState(null);
   const menuRef = useRef(null);
-
-  //
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
+  // Dynamically calculate items per page based on screen height
   useEffect(() => {
-    const updateItemsPerPage = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(10);
-      } else {
-        setItemsPerPage(10);
-      }
-    };
-
+    function updateItemsPerPage() {
+      const availableHeight = window.innerHeight - 280;
+      const rows = Math.floor(availableHeight / ROW_HEIGHT);
+      setItemsPerPage(rows > 0 ? rows : 1);
+    }
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
-
     return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
-
-  //
 
   const [tests, setTests] = useState(() =>
     testOptions.map((t, i) => ({
@@ -324,11 +317,11 @@ const Pricing = ({ setActiveNav }) => {
 
   return (
     <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
-      <div class="flex justify-between items-center mb-[30px] sm:border-b sm:pb-[24px] sm:mb-[40px]">
-        <h2 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
+      <div className="flex flex-wrap justify-between items-center mb-[30px] sm:border-b sm:pb-[24px] sm:mb-[40px] mt-[5px] sm:mt-0">
+        <h2 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter mt-[5px] sm:mt-0">
           Pricing
         </h2>
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 mt-[5px] sm:mt-0">
           <button
             type="button"
             onClick={() => setActiveNav("AddTest")}
@@ -369,24 +362,10 @@ const Pricing = ({ setActiveNav }) => {
             }}
           />
         </div>
-
-        {/* <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
-          <select
-            className="bg-transparent outline-none text-sm"
-            value={filterRange}
-            onChange={(e) => setFilterRange(e.target.value)}
-          >
-            <option value="today">Today</option>
-            <option value="week">This Week</option>
-            <option value="month">This Month</option>
-            <option value="always">Always</option>
-          </select>
-        </div> */}
       </div>
 
       {/* Table */}
-
-      <div className="overflow-x-auto overflow-y-auto max-h-[500px] scrollbar-thin-green">
+      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
         <section className="bg-white">
           <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
@@ -456,7 +435,7 @@ const Pricing = ({ setActiveNav }) => {
         </section>
       </div>
 
-      {/* Pagination controls */}
+      {/* Pagination */}
       <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
         <button
           onClick={handlePrevious}
@@ -513,17 +492,7 @@ const Pricing = ({ setActiveNav }) => {
       {/* Edit Test Modal */}
       {showEditModal && selectedTest && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div
-            className="
-    flex flex-col 
-    w-full max-w-[480px] 
-    p-[15px] md:p-10 
-    mx-6 md:mx-0 
-    items-start gap-4 rounded-lg bg-white
-    shadow-[0_2px_5px_0_rgba(103,110,118,0.08),0_0_0_1px_rgba(103,110,118,0.16),0_1px_1px_0_rgba(0,0,0,0.12)] 
-    relative
-  "
-          >
+          <div className="flex flex-col w-full max-w-[480px] p-[15px] md:p-10 mx-6 md:mx-0 items-start gap-4 rounded-lg bg-white shadow-[0_2px_5px_0_rgba(103,110,118,0.08),0_0_0_1px_rgba(103,110,118,0.16),0_1px_1px_0_rgba(0,0,0,0.12)] relative">
             <button
               onClick={() => setShowEditModal(false)}
               className="absolute top-3 right-3 w-8 h-8 flex-shrink-0"

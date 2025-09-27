@@ -53,21 +53,21 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
   return (
     <div className="bg-white w-full flex flex-col mt-8 mx-5 sm:py-7 sm:px-[72px] sm:mt-0 sm:mx-0 h-full relative">
       {/* Top bar */}
-      <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
-        <h2 className="text-[20px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] text-black font-inter">
+      <div className="flex flex-col sm:flex-row justify-between items-center border-b pb-[24px] mb-[40px] mt-[5px] sm:mt-0 gap-2">
+        <h2 className="text-[24px] md:text-[24px] font-semibold leading-[28px] md:leading-[32px] text-black font-inter mt-[5px] sm:mt-0">
           New test
         </h2>
 
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 mt-[5px] sm:mt-0">
           <button
             type="button"
             onClick={() => setShowCancelConfirm(true)}
             className="
-  rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] 
-  px-2 py-[4px] text-[10px] font-medium leading-4 
-  text-center hover:bg-gray-100 font-inter
-  md:px-3 md:py-[6px] md:text-sm md:leading-5
-"
+        rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] 
+        px-2 py-[10px] text-[20px] font-medium leading-4 
+        text-center hover:bg-gray-100 font-inter
+        md:px-3 md:py-[6px] md:text-sm md:leading-5
+      "
           >
             Cancel
           </button>
@@ -75,11 +75,11 @@ const AddTest = ({ onClose, onConfirm, setSidebarDisabled, setActiveNav }) => {
             type="button"
             onClick={handleExternalSubmit}
             className="
-  rounded-lg bg-[#829C15] 
-  px-2 py-[4px] text-[10px] font-medium leading-4 
-  text-white text-center font-inter hover:bg-[#6f8911] 
-  md:px-3 md:py-[6px] md:text-sm md:leading-5
-"
+        rounded-lg bg-[#829C15] 
+        px-2 py-[8px] text-[20px] font-medium leading-4 
+        text-white text-center font-inter hover:bg-[#6f8911] 
+        md:px-3 md:py-[6px] md:text-sm md:leading-5
+      "
           >
             Confirm creation
           </button>
