@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import HeaderStats from "../../labtechnichains/component/ltheaderstats";
 import ReceiptTemplate from "../../../components/receipttemplate";
 import ResultTemplate from "../../../components/testresult";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 10;
 
 const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
   const [showReceipt, setShowReceipt] = useState(false);
@@ -14,10 +13,6 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRange, setFilterRange] = useState("today");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const handleViewAll = () => {
-    setActiveNav("patientreport");
-  };
 
   const [patients] = useState(() =>
     [...Array(25)].map((_, i) => ({
@@ -63,9 +58,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -75,14 +68,16 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
+      <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
         <div className="flex justify-between items-center mb-10">
-          <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+          <h1 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Patient reports"}
           </h1>
         </div>
 
+        {/* Filters */}
         <div className="mb-6 flex items-center gap-3">
+          {/* Search */}
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,6 +108,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
             />
           </div>
 
+          {/* Date filter */}
           <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,8 +140,9 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
           </div>
         </div>
 
-        <section className="bg-white p-4 overflow-auto">
-          <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
+        {/* Scrollable table */}
+        <div className="overflow-x-auto overflow-y-auto max-h-[500px] scrollbar-thin-green">
+          <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
                 <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
@@ -159,7 +156,6 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
                 <th className="bg-[#FAFAFA] p-5 rounded-tr-lg">Status</th>
               </tr>
             </thead>
-
             <tbody>
               {paginatedPatients.map((patient, i) => (
                 <tr
@@ -246,35 +242,36 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
               ))}
             </tbody>
           </table>
+        </div>
 
-          <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
-            <button
-              onClick={handlePrevious}
-              disabled={currentPage === 1}
-              className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-            >
-              Previous
-            </button>
+        {/* Pagination */}
+        <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
+          <button
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Previous
+          </button>
 
-            <span>
-              Page {currentPage} of {totalPages}
-            </span>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
 
-            <button
-              onClick={handleNext}
-              disabled={currentPage === totalPages}
-              className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-            >
-              Next
-            </button>
-          </div>
-        </section>
+          <button
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Next
+          </button>
+        </div>
       </div>
 
       {/* Receipt Modal */}
       {showReceipt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
+          <div className="mt-16 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
             <button
               className="absolute top-2 right-2 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}

@@ -4,6 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom thin green scrollbar */
+.scrollbar-thin-green {
+  scrollbar-width: thin;
+  scrollbar-color: #9ea5ad transparent;
+}
+
+.scrollbar-thin-green::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+
+.scrollbar-thin-green::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin-green::-webkit-scrollbar-thumb {
+  background-color: rgba(22, 163, 74, 0.4);
+  border-radius: 9999px;
+}
+
 @media print {
   body {
     margin: 0;

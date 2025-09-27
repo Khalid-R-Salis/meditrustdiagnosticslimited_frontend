@@ -74,7 +74,7 @@ const MainUserActivities = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div
-        className="flex flex-col w-[1000px] rounded-lg bg-white shadow-md"
+        className="flex flex-col w-full max-w-[1000px] max-h-[90vh] overflow-auto rounded-lg bg-white shadow-md mx-4 my-6"
         style={{
           padding: "16px",
           gap: "16px",

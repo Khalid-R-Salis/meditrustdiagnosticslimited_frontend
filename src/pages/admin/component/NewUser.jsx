@@ -78,21 +78,22 @@ const NewUser = ({
     <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
       {/* Top bar */}
       <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
-        <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+        <h2 className="text-[16px] sm:text-[20px] md:text-[24px] font-semibold leading-tight text-black font-inter">
           New user
         </h2>
+
         <div className="flex justify-center items-center gap-2">
           <button
             type="button"
             onClick={() => setShowCancelConfirm(true)}
-            className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
+            className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-[12px] sm:text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={handleExternalSubmit}
-            className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
+            className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-[12px] sm:text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
           >
             Confirm creation
           </button>
@@ -101,12 +102,12 @@ const NewUser = ({
 
       {showCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+          <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-md mx-4 text-center">
             <p className="text-gray-800 text-base mb-6">
               Are you sure you want to close this page? <br />
               <b className="uppercase text-red-600">Changes are Unsaved!</b>
             </p>
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-3 flex-wrap">
               <button
                 type="button"
                 onClick={() => setShowCancelConfirm(false)}
@@ -222,8 +223,9 @@ const NewUser = ({
               <option value="" disabled hidden>
                 Select role
               </option>
-              <option value="Lab Technician">Lab Technician</option>
               <option value="Receptionist">Receptionist</option>
+              <option value="Lab Technician">Lab Technician</option>
+              <option value="Receptionist">Radiologiest</option>
             </select>
             {errors.role && (
               <p className="text-red-500 text-sm mt-1">{errors.role}</p>

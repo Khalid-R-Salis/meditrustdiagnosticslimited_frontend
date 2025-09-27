@@ -65,8 +65,8 @@ const Siderecord = ({ setActiveNav }) => {
         </button>
       </div>
 
-      <section className="bg-white overflow-auto">
-        <table className="w-full text-left text-[10px] text-[#676E76] rounded-sm">
+      <section className="bg-white overflow-x-auto max-w-full">
+        <table className="min-w-[600px] w-full text-left text-[10px] text-[#676E76] rounded-sm">
           <thead>
             <tr className="border-b font-inter">
               <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">

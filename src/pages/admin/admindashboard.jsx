@@ -54,7 +54,6 @@ const AdminDashboard = () => {
     setTimeout(() => setSidebarOpen(false), 300);
   };
 
-  // When a nav is clicked on mobile, close sidebar with animation
   const handleNavChange = (nav) => {
     setActiveNav(nav);
     if (sidebarOpen) {
@@ -66,25 +65,27 @@ const AdminDashboard = () => {
   return (
     <>
       {/* Hamburger for mobile */}
-      <div className="md:hidden fixed top-3 left-3 z-50">
-        {!sidebarOpen && (
-          <button
-            onClick={openSidebar}
-            style={{
-              display: "flex",
-              padding: "8px",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "8px",
-              borderRadius: "8px",
-              border: "1px solid #CED2D6",
-              background: "#fff",
-            }}
-          >
-            <HamburgerIcon />
-          </button>
-        )}
-      </div>
+      {!showNewUser && activeNav !== "AddTest" && (
+        <div className="md:hidden fixed top-3 left-3 z-50">
+          {!sidebarOpen && (
+            <button
+              onClick={openSidebar}
+              style={{
+                display: "flex",
+                padding: "8px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "8px",
+                borderRadius: "8px",
+                border: "1px solid #CED2D6",
+                background: "#fff",
+              }}
+            >
+              <HamburgerIcon />
+            </button>
+          )}
+        </div>
+      )}
 
       <div className="flex">
         <div>
@@ -158,7 +159,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        <div className="flex-1 py-6 px-0 sm:px-6 flex">
+        <div className="flex-1 min-h-screen overflow-y-auto overflow-x-auto py-0 px-0 sm:px-6 flex">
           {showNewUser ? (
             <NewUser
               onClose={() => {
