@@ -38,10 +38,10 @@ const Newpassword = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex flex-col items-center justify-center min-h-[100dvh] gap-[8px] bg-[#f9f9f9] relative overflow-y-auto"
+      className="flex items-center justify-center min-h-[100dvh] bg-[#f9f9f9] relative"
     >
       <div
-        className="absolute top-0 left-0 w-full flex items-center"
+        className="absolute top-0 left-0 w-full flex items-center z-10"
         style={{
           borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
           height: "64px",
@@ -51,15 +51,16 @@ const Newpassword = () => {
           <img
             src={logo2}
             alt="Logo"
-            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-6 mb-6"
+            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-4 mb-4"
           />
         </a>
       </div>
+
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-[8px] w-full"
+        className="flex flex-col items-center justify-center w-full h-full px-4 overflow-y-auto"
       >
-        <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px]">
+        <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[80px] mb-[20px]">
           <div className="mb-[32px]">
             <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
               You’re Almost There
@@ -125,13 +126,6 @@ const Newpassword = () => {
           >
             Reset password
           </button>
-
-          {/* <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
-            Need help?{" "}
-            <span className="text-[#829C15] cursor-pointer">
-              <a href="/contactadmin">Contact administrator</a>
-            </span>
-          </p> */}
         </div>
       </form>
     </div>
