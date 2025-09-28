@@ -19,11 +19,26 @@ const Login = () => {
       const widthMm = (widthPx / dpi) * 25.4;
       const heightMm = (heightPx / dpi) * 25.4;
 
+      // let type = "mobile"; // default
+
+      // if (widthMm >= 260 && heightMm >= 170) {
+      //   type = "desktop";
+      // } else if (widthMm >= 200 && heightMm >= 130) {
+      //   type = "tablet";
+      // }
+
       let type = "mobile"; // default
 
+      // Desktop first (so big laptops like your Envy aren’t mistaken as tablets)
       if (widthMm >= 260 && heightMm >= 170) {
         type = "desktop";
-      } else if (widthMm >= 200 && heightMm >= 130) {
+      }
+      // Phone: 110mm or less width
+      else if (widthMm <= 140) {
+        type = "mobile";
+      }
+      // Anything else = tablet
+      else {
         type = "tablet";
       }
 
