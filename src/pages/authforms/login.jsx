@@ -8,38 +8,38 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // tablet view detection
-  const [isTablet, setIsTablet] = useState(false);
+  // device type detection
+  const [deviceType, setDeviceType] = useState("desktop");
 
   React.useEffect(() => {
     const checkDeviceType = () => {
       const widthPx = window.screen.width;
       const heightPx = window.screen.height;
-      const dpi = 96 * window.devicePixelRatio; // approximate real dpi
+      const dpi = 96 * window.devicePixelRatio;
       const widthMm = (widthPx / dpi) * 25.4;
       const heightMm = (heightPx / dpi) * 25.4;
 
-      // Tablet check
-      if (
-        (widthMm >= 247.6 && heightMm >= 157.4) ||
-        (heightMm >= 247.6 && widthMm >= 157.4)
-      ) {
-        setIsTablet(true);
+      let type = "mobile"; // default
+
+      if (widthMm >= 260 && heightMm >= 170) {
+        type = "desktop";
+      } else if (widthMm >= 200 && heightMm >= 130) {
+        type = "tablet";
       }
-      // Computer check
-      else if (widthMm >= 280 && heightMm >= 180) {
-        setIsTablet(false);
-      }
-      // Default = not tablet
-      else {
-        setIsTablet(false);
-      }
+
+      setDeviceType(type);
     };
 
     checkDeviceType();
     window.addEventListener("resize", checkDeviceType);
     return () => window.removeEventListener("resize", checkDeviceType);
   }, []);
+
+  const roleAccess = {
+    Receptionist: ["tablet", "desktop"],
+    Admin: ["mobile", "desktop"],
+    "Lab Technician": ["desktop"],
+  };
 
   const getDashboardText = (type) => {
     switch (type) {
@@ -62,7 +62,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (showTabletRestriction) {
+    if (showRestriction) {
       return;
     }
     clearForm();
@@ -72,29 +72,44 @@ const Login = () => {
     setUserType(type);
     clearForm();
   };
-  const showTabletRestriction = isTablet && userType !== "Receptionist";
+
+  // Restriction check
+  const showRestriction = !roleAccess[userType].includes(deviceType);
+
+  // Suggest allowed device type for this role
+  const allowedDevices = roleAccess[userType];
+  const suggestedDevice = allowedDevices.includes("mobile")
+    ? "mobile"
+    : allowedDevices.includes("tablet")
+    ? "tablet"
+    : "desktop";
 
   return (
     <>
-      {showTabletRestriction && (
+      {showRestriction && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-90">
           <div className="bg-white p-8 rounded-2xl shadow-lg text-center max-w-md w-full">
             <h2 className="text-[#CD3636] text-xl font-bold mb-4">
-              Tablet Access Restricted
+              Access Restricted
             </h2>
             <p className="text-[#383F45] text-base mb-4">
-              Only{" "}
-              <span className="font-semibold text-[#829C15]">Receptionist</span>{" "}
-              is authorized to use a tablet to access this site.
+              The{" "}
+              <span className="font-semibold text-[#829C15]">{userType}</span>{" "}
+              is not authorized to use this device ({deviceType}).
               <br />
-              Kindly switch to Receptionist login or use a desktop/mobile
-              device.
+              Allowed devices:{" "}
+              <span className="font-semibold text-[#829C15]">
+                {allowedDevices.join(", ")}
+              </span>
+              .
             </p>
             <button
               className="mt-4 px-4 py-2 rounded-lg bg-[#829C15] text-white font-medium"
-              onClick={() => setUserType("Receptionist")}
+              onClick={() =>
+                alert(`Please switch to a ${suggestedDevice} to login`)
+              }
             >
-              Switch to Receptionist Login
+              Switch to {suggestedDevice} Login
             </button>
           </div>
         </div>
