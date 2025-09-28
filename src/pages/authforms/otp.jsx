@@ -56,10 +56,11 @@ const OTPInput = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex flex-col items-center justify-center h-[100dvh] gap-[8px] bg-[#f9f9f9] relative"
+      className="flex items-center justify-center min-h-[100dvh] bg-[#f9f9f9] relative"
     >
+      {/* Logo Header */}
       <div
-        className="absolute top-0 left-0 w-full flex items-center"
+        className="absolute top-0 left-0 w-full flex items-center z-10"
         style={{
           borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
           height: "64px",
@@ -69,65 +70,63 @@ const OTPInput = () => {
           <img
             src={logo2}
             alt="Logo"
-            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-6 mb-6"
+            className="h-[40px] w-[166px] ml-4 sm:ml-[140px] mt-4 mb-4"
           />
         </a>
       </div>
-      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px]">
-        <div className="mb-[32px]">
-          <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
-            <a href="/emailreset">← BACK</a>
-          </div>
-          <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
-            Enter your OTP
-          </h1>
-          <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-inter mt-1">
-            An OTP has been sent to your registered email. Enter the OTP to
-            securely update your login details.
-          </p>
-        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="flex justify-left gap-2 mb-2">
-            {otp.map((digit, index) => (
-              <input
-                key={index}
-                type="text"
-                maxLength={1}
-                value={digit}
-                required
-                onChange={(e) => handleChange(e.target.value, index)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                ref={(el) => (inputsRef.current[index] = el)}
-                className={`w-[40px] h-[40px] text-center text-lg border rounded-[8px] focus:outline-none shadow-sm font-inter
-                  ${
-                    isError
-                      ? "bg-[#FFFBFA] border-[#F34141] shadow-[0_2px_5px_0_rgba(243,65,65,0.08),_0_0_0_2px_rgba(243,65,65,0.40),_0_1px_1px_0_rgba(0,0,0,0.12)]"
-                      : "border-gray-300 focus:ring-2 focus:ring-[#829C15] bg-[#FFF]"
-                  }`}
-              />
-            ))}
-          </div>
-
-          {isError && (
-            <p className="text-[#F34141] text-[14px] font-inter font-normal leading-[20px] mb-6">
-              OTP incorrect, please try again
+      {/* Form */}
+      <div className="flex flex-col items-center justify-center w-full h-full px-4 overflow-y-auto">
+        <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-[90%] sm:w-[440px] max-w-[440px] mt-[80px] mb-[20px]">
+          <div className="mb-[32px]">
+            <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
+              <a href="/emailreset">← BACK</a>
+            </div>
+            <h1 className="text-black font-inter text-[20px] font-semibold leading-[30px]">
+              Enter your OTP
+            </h1>
+            <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-inter mt-1">
+              An OTP has been sent to your registered email. Enter the OTP to
+              securely update your login details.
             </p>
-          )}
+          </div>
 
-          <button
-            type="submit"
-            className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium my-6 shadow-sm"
-          >
-            Continue
-          </button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div className="flex justify-left gap-2 mb-2">
+              {otp.map((digit, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  maxLength={1}
+                  value={digit}
+                  required
+                  onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  ref={(el) => (inputsRef.current[index] = el)}
+                  className={`w-[40px] h-[40px] text-center text-lg border rounded-[8px] focus:outline-none shadow-sm font-inter
+                    ${
+                      isError
+                        ? "bg-[#FFFBFA] border-[#F34141] shadow-[0_2px_5px_0_rgba(243,65,65,0.08),_0_0_0_2px_rgba(243,65,65,0.40),_0_1px_1px_0_rgba(0,0,0,0.12)]"
+                        : "border-gray-300 focus:ring-2 focus:ring-[#829C15] bg-[#FFF]"
+                    }`}
+                />
+              ))}
+            </div>
 
-        <p className="text-[12px] text-[#383F45] font-[500] text-left font-inter leading-[28px]">
-          {/* <span className="text-[#829C15] cursor-pointer">
-            <a href="/contactadmin">Contact administrator</a>
-          </span> */}
-        </p>
+            {isError && (
+              <p className="text-[#F34141] text-[14px] font-inter font-normal leading-[20px] mb-6">
+                OTP incorrect, please try again
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium my-6 shadow-sm"
+            >
+              Continue
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
