@@ -45,12 +45,11 @@ const mockPatientData = [
 
 const Siderecord = ({ setActiveNav }) => {
   return (
-    <div className="flex-1 bg-[#ffffff] px-4 relative">
+    <div className="flex-1 bg-[#ffffff] px-2 sm:px-4 relative">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-[15px] font-normal leading-[24px] text-[#000] font-inter">
           Recent patient tests
         </h2>
-
         <button
           onClick={() => setActiveNav("PatientReports")}
           className="
@@ -65,49 +64,50 @@ const Siderecord = ({ setActiveNav }) => {
         </button>
       </div>
 
-      <section className="bg-white overflow-x-auto max-w-full">
-        <table className="min-w-[600px] w-full text-left text-[10px] text-[#676E76] rounded-sm">
-          <thead>
-            <tr className="border-b font-inter">
-              <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
-                Patient’s info
-              </th>
-              <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
-                Test type
-              </th>
-              <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
-                Date and time
-              </th>
-              <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
-                Amount paid
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {mockPatientData.map((item) => (
-              <tr key={item.id} className="border-b hover:bg-gray-50">
-                <td className="px-3 py-[5px]">
-                  <div className="flex flex-col space-y-[1px]">
-                    <span className="font-medium leading-[16px] text-[#000] font-inter">
-                      {item.name}
-                    </span>
-                    <span className="font-normal leading-[16px] text-[#676E76] font-inter">
-                      {item.phone}
-                    </span>
-                  </div>
-                </td>
-
-                <td className="px-3 py-[5px] truncate max-w-[150px]">
-                  {item.testType}
-                </td>
-                <td className="px-3 py-[5px]">{item.dateTime}</td>
-                <td className="px-3 py-[5px]">{item.amount}</td>
+      {/*, scrollable table */}
+      <div className="overflow-x-auto max-h-[230px] ">
+        <section className="bg-white">
+          <table className="min-w-[900px] w-full text-left text-[10px] text-[#676E76] rounded-sm">
+            <thead>
+              <tr className="border-b font-inter">
+                <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
+                  Patient’s info
+                </th>
+                <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
+                  Test type
+                </th>
+                <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
+                  Date and time
+                </th>
+                <th className="px-3 py-[7px] font-medium leading-[16px] text-[#676E76] font-inter">
+                  Amount paid
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+            </thead>
+            <tbody>
+              {mockPatientData.map((item) => (
+                <tr key={item.id} className="border-b hover:bg-gray-50">
+                  <td className="px-3 py-[5px]">
+                    <div className="flex flex-col space-y-[1px]">
+                      <span className="font-medium leading-[16px] text-[#000] font-inter">
+                        {item.name}
+                      </span>
+                      <span className="font-normal leading-[16px] text-[#676E76] font-inter">
+                        {item.phone}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-3 py-[5px] truncate max-w-[150px]">
+                    {item.testType}
+                  </td>
+                  <td className="px-3 py-[5px]">{item.dateTime}</td>
+                  <td className="px-3 py-[5px]">{item.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      </div>
     </div>
   );
 };

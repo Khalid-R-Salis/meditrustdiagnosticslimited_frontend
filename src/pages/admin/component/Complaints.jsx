@@ -160,9 +160,9 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+      <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
         <div className="flex flex-col sm:flex-row justify-start items-center mt-[5px] sm:mt-0 mb-10 gap-2">
-          <h1 className="text-[15px] sm:text-[24px] font-semibold leading-[20px] sm:leading-[32px] text-black font-inter">
+          <h1 className="mt-5 sm:mt-0 text-[15px] sm:text-[24px] font-semibold leading-[20px] sm:leading-[32px] text-black font-inter">
             Manage staff complaints
           </h1>
           {/* Dropdown */}
@@ -181,7 +181,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
         </div>
 
         {/* Complaints Table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
           <section className="bg-white">
             <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
               <thead>

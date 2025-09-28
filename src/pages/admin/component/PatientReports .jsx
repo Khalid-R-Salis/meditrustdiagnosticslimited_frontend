@@ -81,9 +81,9 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
-        <div className="flex justify-between items-center mb-10">
-          <h1 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
+      <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+        <div className="flex justify-between items-center mb-6 md:mb-10">
+          <h1 className="ml-8 mt-3 sm:ml-0 sm:mt-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Patient reports"}
           </h1>
         </div>
@@ -154,7 +154,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
 
         {/* Scrollable table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
           <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
@@ -299,7 +299,9 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       {/* Result Modal */}
       {showResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
+          <div className="mt-10 bg-white p-8 sm:p-10 rounded-lg shadow-lg max-w-sm mx-4 max-h-[90vh] relative scale-[1.5] sm:scale-[1.8]">
+            {/* <div className="bg-white p-8 sm:p-10 rounded-[6px] shadow-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto relative"> */}
+
             <button
               className="absolute top-2 right-2 text-gray-600 text-sm"
               onClick={() => setShowResult(false)}

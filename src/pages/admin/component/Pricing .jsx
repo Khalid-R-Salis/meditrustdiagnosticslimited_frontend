@@ -316,9 +316,9 @@ const Pricing = ({ setActiveNav }) => {
   };
 
   return (
-    <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+    <div className="flex-1 bg-white py-8 relative overflow-x-hidden pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
       <div className="flex flex-wrap justify-between items-center mb-[30px] sm:border-b sm:pb-[24px] sm:mb-[40px] mt-[5px] sm:mt-0">
-        <h2 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter mt-[5px] sm:mt-0">
+        <h2 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter mt-[10px] sm:mt-0">
           Pricing
         </h2>
         <div className="flex justify-center items-center gap-2 mt-[5px] sm:mt-0">
@@ -365,7 +365,7 @@ const Pricing = ({ setActiveNav }) => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green">
+      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
         <section className="bg-white">
           <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>

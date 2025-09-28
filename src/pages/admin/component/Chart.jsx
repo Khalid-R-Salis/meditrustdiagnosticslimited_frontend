@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const Chart = () => {
   const data = [
@@ -14,14 +14,14 @@ const Chart = () => {
   ];
 
   return (
-    <div className="flex flex-col items-start relative w-[250px]">
+    <div className="flex flex-col items-center md:items-start w-full max-w-sm mx-auto">
       {/* Header */}
-      <div className="flex justify-between items-center w-full mb-2">
-        <h2 className="text-[15px] font-normal leading-[24px] text-[#000] font-inter">
+      <div className="flex justify-between items-center w-full mb-1 px-1">
+        <h2 className="text-[15px] font-normal leading-[24px] text-[#000] font-inter ml-[5px]">
           Most requested tests
         </h2>
 
-        <select className="border rounded-lg px-1 py-0.5 text-[11px] text-gray-600 font-inter w-[85px] outline-none">
+        <select className="border rounded-lg px-2 py-1 text-[11px] text-gray-600 font-inter w-[75px] outline-none">
           <option>Today</option>
           <option>This week</option>
           <option>This month</option>
@@ -29,22 +29,24 @@ const Chart = () => {
       </div>
 
       {/* Chart */}
-      <div className="relative w-[160px] h-[160px] my-1 mx-auto">
-        <PieChart width={160} height={160}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={45}
-            outerRadius={65}
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell key={index} fill={entry.color} />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
+      <div className="w-[160px] h-[160px] md:w-[160px] md:h-[160px] relative">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={40}
+              outerRadius={65}
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell key={index} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
 
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-lg font-bold text-gray-800 font-inter">
@@ -53,7 +55,8 @@ const Chart = () => {
         </div>
       </div>
 
-      <div className="mt-2 space-y-[2px] w-full">
+      {/* Legend */}
+      <div className="mt-1 space-y-[1px] w-full px-1">
         {data.map((item, i) => (
           <div
             key={i}

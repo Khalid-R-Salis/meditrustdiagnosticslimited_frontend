@@ -75,7 +75,7 @@ const NewUser = ({
   };
 
   return (
-    <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
+    <div className="bg-white w-full flex flex-col pt-5 pb-1 px-[72px] h-full relative">
       {/* Top bar */}
       <div className="flex flex-wrap justify-between items-center border-b pb-[24px] mb-[40px] mt-[5px] sm:mt-0">
         <h2 className="text-[16px] sm:text-[20px] md:text-[24px] font-semibold leading-tight text-black font-inter mt-[5px] sm:mt-0">

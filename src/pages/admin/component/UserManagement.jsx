@@ -215,9 +215,9 @@ const UserManagement = ({
         </div>
       )}
 
-      <div className="flex-1 bg-white py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+      <div className="flex-1 bg-white py-0 md:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
         <div className="flex flex-col sm:flex-row justify-between items-center mt-[5px] sm:mt-0 mb-8 gap-2">
-          <h1 className="text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
+          <h1 className="mt-4 sm:mt-0 text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
             User Management
           </h1>
 
@@ -282,7 +282,7 @@ const UserManagement = ({
           ) : (
             <>
               <div
-                className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-310px)] scrollbar-thin-green"
+                className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green"
                 ref={tableContainerRef}
               >
                 <section className="bg-white">
@@ -456,9 +456,9 @@ const UserManagement = ({
       </div>
 
       {modalType && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
           {modalType === "edit" && selectedUser && (
-            <div className="bg-white p-10 rounded-lg shadow-lg w-[400px]">
+            <div className="bg-white p-8 sm:p-10 rounded-[6px] shadow-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto relative">
               <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                 Edit user
               </h2>
@@ -548,12 +548,7 @@ const UserManagement = ({
           {/* Delete Modal */}
           {modalType === "delete" && selectedUser && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div
-                className="
-        bg-white p-6 sm:p-10 rounded-lg shadow-lg 
-        w-full max-w-[400px] mx-4
-      "
-              >
+              <div className="bg-white p-8 sm:p-10 rounded-[6px] shadow-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto relative">
                 <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                   Permanently delete this user?
                 </h2>
@@ -587,7 +582,7 @@ const UserManagement = ({
           {/* Deactivate Modal */}
           {modalType === "deactivate" && selectedUser && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-[400px] mx-4">
+              <div className="bg-white p-8 sm:p-10 rounded-[6px] shadow-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto relative">
                 <h2 className="text-[16px] font-semibold leading-6 text-[#596066] mb-4 font-inter">
                   Deactivate this user?
                 </h2>

@@ -150,10 +150,10 @@ const Settings = () => {
           onClick={handleLogoutCancel}
         >
           <div
-            className="bg-white rounded-lg p-10 w-[400px] shadow-lg relative"
+            className="bg-white rounded-lg p-10 w-[90%] max-w-sm shadow-lg relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-[#596066] font-inter text-[16px] font-semibold leading-[24px] mb-4 ">
+            <h2 className="text-[#596066] font-inter text-[16px] font-semibold leading-[24px] mb-4">
               Are you sure you want to logout?
             </h2>
             <p className="text-[#676E76] font-inter text-[14px] font-normal leading-[20px] mb-6">
@@ -185,11 +185,11 @@ const Settings = () => {
           onClick={handleChangePasswordCancel}
         >
           <form
-            className="bg-white rounded-lg py-8 px-[48px] w-[360px] shadow-lg relative flex flex-col gap-4"
+            className="bg-white rounded-lg py-8 px-6 sm:px-[48px] w-[90%] max-w-md shadow-lg relative flex flex-col gap-4"
             onClick={(e) => e.stopPropagation()}
             onSubmit={handleChangePasswordSubmit}
           >
-            <div className=" absolute top-8 left-6">
+            <div className="absolute top-8 left-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -200,17 +200,17 @@ const Settings = () => {
                 <path
                   d="M9.375 9.375L9.40957 9.35771C9.88717 9.11891 10.4249 9.55029 10.2954 10.0683L9.70458 12.4317C9.57507 12.9497 10.1128 13.3811 10.5904 13.1423L10.625 13.125M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.875H10.0063V6.88125H10V6.875Z"
                   stroke="#596066"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
-            <div className=" flex flex-col gap-2 items-start mb-4">
+
+            <div className="flex flex-col gap-2 items-start mb-4">
               <h2 className="text-[#596066] font-inter text-base font-semibold leading-6">
                 Change your password
               </h2>
-
               <p className="text-[#676E76] font-inter text-sm font-normal leading-5">
                 Confirm your password to create a new one. Be sure to remember
                 your password
@@ -248,6 +248,7 @@ const Settings = () => {
              }`}
               />
             </label>
+
             <label className="flex flex-col justify-start gap-2 text-sm text-[#454C52] font-inter font-[400]">
               Confirm New Password
               <input
@@ -268,6 +269,7 @@ const Settings = () => {
                 </span>
               )}
             </label>
+
             <div className="flex justify-start gap-4 mt-4">
               <button
                 type="button"
