@@ -137,6 +137,8 @@ const ContactAdmin = () => {
               <option value="">Select your role</option>
               <option value="Receptionist">Receptionist</option>
               <option value="Lab Technician">Lab Technician</option>
+              <option value="Lab Technician">Radiologist</option>
+              <option value="Lab Technician">Sub Satff</option>
             </select>
           </div>
 

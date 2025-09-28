@@ -70,10 +70,10 @@ const ConsultationPage = () => {
   };
 
   return (
-    <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative h-screen overflow-y-auto">
+    <div className="flex-1 bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
       <div className="flex justify-between items-center mb-10">
         <h1
-          className="text-[24px] font-semibold leading-[32px] text-black font-inter"
+          className="text-[24px] font-semibold leading-[32px] text-black font-inter mt-4 ml-10 lg:mt-0 lg:ml-0"
           style={{
             color: "var(--Primary-Black, #000)",
             fontFamily: "Inter",
@@ -84,139 +84,150 @@ const ConsultationPage = () => {
         </h1>
       </div>
 
-      <div className="mb-6 flex items-center gap-3">
-        {/* Search bar */}
-        <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            className="shrink-0"
-          >
-            <path
-              d="M15.75 15.75L11.8525 11.8525M11.8525 11.8525C12.8704 10.8346 13.5 9.4283 13.5 7.875C13.5 4.7684 10.9816 2.25 7.875 2.25C4.7684 2.25 2.25 4.7684 2.25 7.875C2.25 10.9816 4.7684 13.5 7.875 13.5C9.4283 13.5 10.8346 12.8704 11.8525 11.8525Z"
-              stroke="#9EA5AD"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+      {/* <div className="mb-6 flex items-center gap-3 mx-4">
+          <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md"> */}
+
+      <div className="mb-6 flex flex-wrap items-center gap-3 mx-4">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 max-w-md w-full px-3 py-1.5">
+          {/* Search bar */}
+          <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              className="shrink-0"
+            >
+              <path
+                d="M15.75 15.75L11.8525 11.8525M11.8525 11.8525C12.8704 10.8346 13.5 9.4283 13.5 7.875C13.5 4.7684 10.9816 2.25 7.875 2.25C4.7684 2.25 2.25 4.7684 2.25 7.875C2.25 10.9816 4.7684 13.5 7.875 13.5C9.4283 13.5 10.8346 12.8704 11.8525 11.8525Z"
+                stroke="#9EA5AD"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
+            <input
+              type="text"
+              placeholder="Search by name or receipt number"
+              className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
             />
-          </svg>
+          </div>
 
-          <input
-            type="text"
-            placeholder="Search by name or receipt number"
-            className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
+          {/* Dropdown */}
+          <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              className="mr-2 shrink-0"
+            >
+              <path
+                d="M5.0625 2.25V3.9375M12.9375 2.25V3.9375M2.25 14.0625V5.625C2.25 4.69302 3.00552 3.9375 3.9375 3.9375H14.0625C14.9945 3.9375 15.75 4.69302 15.75 5.625V14.0625M2.25 14.0625C2.25 14.9945 3.00552 15.75 3.9375 15.75H14.0625C14.9945 15.75 15.75 14.9945 15.75 14.0625M2.25 14.0625V8.4375C2.25 7.50552 3.00552 6.75 3.9375 6.75H14.0625C14.9945 6.75 15.75 7.50552 15.75 8.4375"
+                stroke="#9EA5AD"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
 
-        {/* Dropdown */}
-        <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            className="mr-2 shrink-0"
-          >
-            <path
-              d="M5.0625 2.25V3.9375M12.9375 2.25V3.9375M2.25 14.0625V5.625C2.25 4.69302 3.00552 3.9375 3.9375 3.9375H14.0625C14.9945 3.9375 15.75 4.69302 15.75 5.625V14.0625M2.25 14.0625C2.25 14.9945 3.00552 15.75 3.9375 15.75H14.0625C14.9945 15.75 15.75 14.9945 15.75 14.0625M2.25 14.0625V8.4375C2.25 7.50552 3.00552 6.75 3.9375 6.75H14.0625C14.9945 6.75 15.75 7.50552 15.75 8.4375"
-              stroke="#9EA5AD"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-
-          <select
-            className="bg-transparent outline-none text-sm"
-            value={filterRange}
-            onChange={(e) => setFilterRange(e.target.value)}
-          >
-            <option value="today">Today</option>
-            <option value="week">This Week</option>
-            <option value="month">This Month</option>
-            <option value="always">Always</option>
-          </select>
+            <select
+              className="bg-transparent outline-none text-sm"
+              value={filterRange}
+              onChange={(e) => setFilterRange(e.target.value)}
+            >
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="always">Always</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <section className="bg-white p-4 overflow-auto">
-        <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
-          <thead>
-            <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-              <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">Receipt number</th>
-              <th className="bg-[#FAFAFA] p-5">Patient info</th>
-              <th className="bg-[#FAFAFA] p-5">Sex</th>
-              <th className="bg-[#FAFAFA] p-5">Test type</th>
-              <th className="bg-[#FAFAFA] p-5">Date & Time</th>
-              <th className="bg-[#FAFAFA] p-5">Amount paid</th>
-              <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {paginatedData.map((item) => (
-              <tr key={item.id} className="border-b hover:bg-gray-50">
-                <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
-                  {item.receiptNumber}
-                </td>
-                <td className="flex-col items-start justify-center py-4 max-w-[140px] truncate">
-                  {item.name} – {item.phone}
-                </td>
-                <td className="px-5 py-4 max-w-[60px] truncate">{item.sex}</td>
-                <td className="px-5 py-4 max-w-[140px] truncate">
-                  {item.testType}
-                </td>
-                <td className="px-5 py-4 max-w-[160px] truncate">
-                  {item.dateTime}
-                </td>
-                <td className="px-5 py-4 max-w-[120px] truncate">
-                  {item.amount}
-                </td>
-                <td className="px-5 py-4">
-                  <button
-                    className="text-[#829C15]"
-                    onClick={() => setShowReceipt(true)}
-                  >
-                    View
-                  </button>
-                </td>
+      <div className="w-full block max-h-[calc(100vh-330px)] overflow-y-auto scrollbar-thin-green">
+        <div className="w-full overflow-x-auto scrollbar-thin-green">
+          <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
+            <thead>
+              <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
+                  Receipt number
+                </th>
+                <th className="bg-[#FAFAFA] p-5">Patient info</th>
+                <th className="bg-[#FAFAFA] p-5">Sex</th>
+                <th className="bg-[#FAFAFA] p-5">Test type</th>
+                <th className="bg-[#FAFAFA] p-5">Date & Time</th>
+                <th className="bg-[#FAFAFA] p-5">Amount paid</th>
+                <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
 
-        {/* Pagination */}
-        <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
-          <button
-            onClick={handlePrevious}
-            disabled={currentPage === 1}
-            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-          >
-            Previous
-          </button>
-
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-          >
-            Next
-          </button>
+            <tbody>
+              {paginatedData.map((item) => (
+                <tr key={item.id} className="border-b hover:bg-gray-50">
+                  <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
+                    {item.receiptNumber}
+                  </td>
+                  <td className="flex-col items-start justify-center py-4 max-w-[140px] truncate">
+                    {item.name} – {item.phone}
+                  </td>
+                  <td className="px-5 py-4 max-w-[60px] truncate">
+                    {item.sex}
+                  </td>
+                  <td className="px-5 py-4 max-w-[140px] truncate">
+                    {item.testType}
+                  </td>
+                  <td className="px-5 py-4 max-w-[160px] truncate">
+                    {item.dateTime}
+                  </td>
+                  <td className="px-5 py-4 max-w-[120px] truncate">
+                    {item.amount}
+                  </td>
+                  <td className="px-5 py-4">
+                    <button
+                      className="text-[#829C15]"
+                      onClick={() => setShowReceipt(true)}
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
+        <button
+          onClick={handlePrevious}
+          disabled={currentPage === 1}
+          className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+        >
+          Previous
+        </button>
+
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+        >
+          Next
+        </button>
+      </div>
 
       {/* Receipt Modal */}
       {showReceipt && (

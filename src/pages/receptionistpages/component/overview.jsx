@@ -24,9 +24,16 @@ const OverviewPage = ({ setActiveNav }) => {
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative ">
+      <div className="flex-1 bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <div className="flex justify-between items-center mb-10">
-          <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+          <h1
+            className="text-[24px] font-semibold leading-[32px] text-black font-inter mt-4 ml-10 lg:mt-0 lg:ml-0"
+            style={{
+              color: "var(--Primary-Black, #000)",
+              fontFamily: "Inter",
+              fontStyle: "normal",
+            }}
+          >
             Overview
           </h1>
 
