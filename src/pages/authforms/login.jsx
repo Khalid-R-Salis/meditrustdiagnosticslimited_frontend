@@ -29,12 +29,12 @@ const Login = () => {
 
       let type = "mobile"; // default
 
-      // Desktop first (so big laptops like your Envy aren’t mistaken as tablets)
+      // Desktop
       if (widthMm >= 260 && heightMm >= 170) {
         type = "desktop";
       }
-      // Phone: 110mm or less width
-      else if (widthMm <= 140) {
+      // Phone: 120mm or less width
+      else if (widthMm <= 100) {
         type = "mobile";
       }
       // Anything else = tablet
@@ -120,11 +120,9 @@ const Login = () => {
             </p>
             <button
               className="mt-4 px-4 py-2 rounded-lg bg-[#829C15] text-white font-medium"
-              onClick={() =>
-                alert(`Please switch to a ${suggestedDevice} to login`)
-              }
+              onClick={() => setUserType("Receptionist")}
             >
-              Switch to {suggestedDevice} Login
+              Back
             </button>
           </div>
         </div>
