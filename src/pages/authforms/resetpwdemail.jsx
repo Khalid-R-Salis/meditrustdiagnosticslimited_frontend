@@ -137,46 +137,40 @@ const Resetpassword = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex flex-col items-center justify-center h-[100dvh] bg-[#f9f9f9] relative px-4"
+      className="flex flex-col items-center justify-center min-h-screen w-full px-4 sm:px-6 md:px-8 bg-[#f9f9f9] relative"
     >
-      {/* Header with Logo */}
-      <div
-        className="absolute top-0 left-0 w-full flex items-center"
-        style={{
-          borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-          height: "64px",
-        }}
-      >
-        <a href="/" className="mx-auto sm:mx-0 sm:ml-[140px]">
+      {/* Top Navbar */}
+      <div className="absolute top-0 left-0 w-full flex items-center border-b border-black/10 h-16 bg-white/70 backdrop-blur-md">
+        <a href="/" className="flex items-center">
           <img
             src={logo2}
             alt="Logo"
-            className="h-[40px] w-[166px] mt-6 mb-6"
+            className="h-10 w-auto ml-4 sm:ml-10 md:ml-20"
           />
         </a>
       </div>
 
-      {/* Main Box */}
-      <div className="bg-[#FFF] p-[24px] sm:p-[40px] rounded-[24px] shadow-md w-full max-w-[440px] mt-[80px] mb-6 overflow-y-auto">
-        <div className="mb-[32px]">
-          <div className="mb-8 text-[#383F45] text-[14px] font-inter font-normal leading-[20px]">
+      {/* Reset Password Box */}
+      <div className="bg-white mt-20 sm:mt-24 p-6 sm:p-8 md:p-10 rounded-2xl shadow-md w-full max-w-md">
+        <div className="mb-8">
+          <div className="mb-6 text-[#383F45] text-sm font-inter">
             <a href="/login">← BACK</a>
           </div>
-          <h1 className="text-black font-[inter] text-[20px] font-semibold leading-[30px]">
+          <h1 className="text-black font-inter text-xl sm:text-2xl font-semibold leading-snug">
             Having Trouble Signing In?
           </h1>
-          <p className="text-[#383F45] text-[14px] leading-[20px] font-normal font-[inter] mt-1">
+          <p className="text-[#383F45] text-sm leading-relaxed font-inter mt-2">
             Enter your registered email address, and we’ll send you an OTP to
             reset your password securely.
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <h2 className="text-[#454C52] text-[14px] font-[inter] font-normal leading-5 mb-2">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Email Input */}
+          <div>
+            <label className="block text-[#454C52] text-sm font-inter mb-2">
               Email
-            </h2>
+            </label>
             <input
               type="email"
               placeholder="you@email.com"
@@ -186,14 +180,14 @@ const Resetpassword = () => {
                 if (error) setError(false);
               }}
               required
-              className={`w-full px-[14px] py-[10px] mb-2 focus:outline-none rounded-[8px] ${
+              className={`w-full px-4 py-2 rounded-lg border focus:outline-none ${
                 error
-                  ? "bg-[#FFFBFA] shadow-[0_2px_5px_0_rgba(243,65,65,0.08),_0_0_0_2px_rgba(243,65,65,0.40),_0_1px_1px_0_rgba(0,0,0,0.12)]"
-                  : "bg-white shadow-custom"
+                  ? "bg-[#FFFBFA] border-red-400 shadow-[0_0_0_2px_rgba(243,65,65,0.40)]"
+                  : "bg-white border-gray-300 shadow-sm"
               }`}
             />
             {error && (
-              <p className="text-[#F34141] text-[14px] font-inter font-normal leading-[20px] mb-6">
+              <p className="text-red-500 text-sm mt-2">
                 This email address isn't registered with us
               </p>
             )}
@@ -201,17 +195,17 @@ const Resetpassword = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#829C15] text-white py-[10px] px-[18px] rounded-lg font-medium mb-6 shadow-sm"
+            className="w-full bg-[#829C15] text-white py-2 px-4 rounded-lg font-medium shadow-sm hover:bg-[#6c8112] transition"
           >
             Reset Password
           </button>
         </form>
 
-        <p className="text-[12px] text-[#383F45] font-medium text-left font-inter leading-[28px]">
+        <p className="text-xs sm:text-sm text-[#383F45] font-medium text-left font-inter leading-6 mt-6">
           Need help?{" "}
-          <span className="text-[#829C15] cursor-pointer">
-            <a href="/contactadmin">Contact administrator</a>
-          </span>
+          <a href="/contactadmin" className="text-[#829C15] hover:underline">
+            Contact administrator
+          </a>
         </p>
       </div>
     </div>
