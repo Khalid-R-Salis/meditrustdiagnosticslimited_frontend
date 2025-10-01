@@ -64,8 +64,8 @@ const Siderecord = ({ setActiveNav }) => {
         </button>
       </div>
 
-      {/*, scrollable table */}
-      <div className="overflow-x-auto max-h-[230px] ">
+      {/* table */}
+      <div className="overflow-x-auto max-h-[230px] scrollbar-thin-green ">
         <section className="bg-white">
           <table className="min-w-[900px] w-full text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>

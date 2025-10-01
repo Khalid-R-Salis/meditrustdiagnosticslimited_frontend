@@ -1,6 +1,18 @@
 import { useState } from "react";
 import ReceiptTemplate from "../../../components/receipttemplate";
 
+const HamburgerIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+    <path
+      d="M3 12H21M3 6H21M3 18H21"
+      stroke="#596066"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const names = [
   "Khalid Rabiu",
   "Fatima Bello",
@@ -42,7 +54,7 @@ const mockConsultations = Array.from({ length: 25 }, (_, i) => ({
 
 const ITEMS_PER_PAGE = 10;
 
-const ConsultationPage = () => {
+const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
   const [showReceipt, setShowReceipt] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,25 +83,34 @@ const ConsultationPage = () => {
 
   return (
     <div className="flex-1 bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
-      <div className="flex justify-between items-center mb-10">
-        <h1
-          className="text-[24px] font-semibold leading-[32px] text-black font-inter mt-4 ml-10 lg:mt-0 lg:ml-0"
-          style={{
-            color: "var(--Primary-Black, #000)",
-            fontFamily: "Inter",
-            fontStyle: "normal",
-          }}
-        >
-          Consultations
-        </h1>
+      {/* Top bar */}
+      <div className="flex justify-between items-center mb-10 sticky top-0 bg-white z-20 py-3">
+        <div className="flex items-center gap-3">
+          {(deviceType === "mobile" || deviceType === "tablet") && (
+            <button
+              className="flex p-2 justify-center items-center rounded-lg border border-gray-300 bg-white shadow"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <HamburgerIcon />
+            </button>
+          )}
+
+          <h1
+            className="text-[24px] font-semibold leading-[32px] text-black font-inter"
+            style={{
+              color: "var(--Primary-Black, #000)",
+              fontFamily: "Inter",
+              fontStyle: "normal",
+            }}
+          >
+            Consultations
+          </h1>
+        </div>
       </div>
 
-      {/* <div className="mb-6 flex items-center gap-3 mx-4">
-          <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md"> */}
-
-      <div className="mb-6 flex flex-wrap items-center gap-3 mx-4">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 max-w-md w-full px-3 py-1.5">
-          {/* Search bar */}
+      {/* Search & Filter */}
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 max-w-md w-full py-1.5">
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +141,6 @@ const ConsultationPage = () => {
             />
           </div>
 
-          {/* Dropdown */}
           <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -153,9 +173,10 @@ const ConsultationPage = () => {
         </div>
       </div>
 
-      <div className="w-full block max-h-[calc(100vh-330px)] overflow-y-auto scrollbar-thin-green">
-        <div className="w-full overflow-x-auto scrollbar-thin-green">
-          <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
+      {/* Table & Pagination */}
+      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
+        <section className="bg-white">
+          <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
                 <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
@@ -203,7 +224,7 @@ const ConsultationPage = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
       </div>
 
       {/* Pagination */}

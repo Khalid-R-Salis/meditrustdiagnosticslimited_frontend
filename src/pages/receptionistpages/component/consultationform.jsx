@@ -341,15 +341,21 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
   );
 
   return (
-    <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
-      <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
+    <div
+      className="bg-white w-full flex flex-col h-full relative 
+  pb-1 px-1 
+  sm:pb-1 sm:px-1 
+  lg:py-7 lg:px-[72px]"
+    >
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-[24px] mb-[40px] gap-3 text-center sm:text-left mt-[5px] sm:mt-0">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           New Consultation
         </h2>
-        <div className="flex justify-center items-center gap-2">
+
+        <div className="flex justify-center sm:justify-end items-center gap-2">
           <button
             type="button"
-            onClick={() => setShowCancelConfirm(true)} // ✅ show modal first
+            onClick={() => setShowCancelConfirm(true)}
             className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
           >
             Cancel
@@ -367,12 +373,12 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
 
       {showCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+          <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-md mx-4 text-center">
             <p className="text-gray-800 text-base mb-6">
               Are you sure you want to close this page? <br />
               <b className="uppercase text-red-600">Changes are Unsaved!</b>
             </p>
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-3 flex-wrap">
               <button
                 type="button"
                 onClick={() => setShowCancelConfirm(false)}
@@ -380,12 +386,11 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               >
                 NO
               </button>
-
               <button
                 type="button"
                 onClick={() => {
                   setShowCancelConfirm(false);
-                  onClose(); // actually close
+                  if (onClose) onClose();
                 }}
                 className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
               >
@@ -399,7 +404,8 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="flex-1 max-h-[70vh] overflow-y-auto pr-2 space-y-4 custom-scroll max-w-2xl"
+        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll 
+  max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
       >
         <div className="space-y-4 flex flex-col gap-3">
           {/* Patient Details */}

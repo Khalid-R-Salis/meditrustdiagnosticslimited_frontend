@@ -53,14 +53,21 @@ const Sidebar = ({ activeNav, setActiveNav, sidebarDisabled, onClose }) => {
       }`}
     >
       <div>
-        {/* Logo + Cancel Icon Row */}
-        <div className="flex items-center justify-between px-4 mb-8">
-          <img src={logo2} alt="logo" className="w-36" />
-          {onClose && (
-            <button onClick={onClose} className="p-2">
-              <CancelIcon />
-            </button>
-          )}
+        {/* Logo + Dashboard Title + Cancel Icon Row */}
+        <div className="flex flex-col px-4 mb-8">
+          <div className="flex items-center justify-between">
+            <img src={logo2} alt="logo" className="w-36" />
+            {onClose && (
+              <button onClick={onClose} className="p-2">
+                <CancelIcon />
+              </button>
+            )}
+          </div>
+
+          {/* Dashboard title */}
+          <h3 className="mt-4 text-lg font-semibold text-[#383F45]">
+            Receptionist Dashboard
+          </h3>
         </div>
 
         {/* Navigation */}
@@ -95,7 +102,9 @@ const Sidebar = ({ activeNav, setActiveNav, sidebarDisabled, onClose }) => {
         </nav>
       </div>
 
-      <Settings />
+      <div className="md:mb-[30px]">
+        <Settings />
+      </div>
     </div>
   );
 };

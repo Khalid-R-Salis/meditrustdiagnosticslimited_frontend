@@ -159,7 +159,7 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        <div className="flex-1 min-h-screen overflow-y-auto overflow-x-auto py-0 px-0 sm:px-6 flex">
+        <div className="flex-1 min-h-screen overflow-y-auto overflow-x-auto py-0 px-0 sm:px-6 flex scrollbar-thin-green">
           {showNewUser ? (
             <NewUser
               onClose={() => {

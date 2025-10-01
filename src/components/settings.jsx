@@ -189,7 +189,7 @@ const Settings = () => {
             onClick={(e) => e.stopPropagation()}
             onSubmit={handleChangePasswordSubmit}
           >
-            <div className="absolute top-8 left-6">
+            <div className="absolute top-8 left-6 hidden md:block">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"

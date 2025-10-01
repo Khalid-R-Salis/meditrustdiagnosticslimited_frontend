@@ -136,26 +136,32 @@ const AdminSidebar = ({
     "
       >
         <div>
-          <div className="flex items-center justify-between px-4 mb-5">
-            <img src={logo2} alt="logo" className="h-10 object-contain" />
-            {showCancel && (
-              <button
-                onClick={onCancel}
-                className="md:hidden flex items-center justify-center p-2 ml-3 rounded-lg border border-[#CED2D6] bg-white"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 640 640"
-                  width="20"
-                  height="20"
+          <div className="flex flex-col px-4 mb-5">
+            <div className="flex items-center justify-between px-4 mb-5">
+              <img src={logo2} alt="logo" className="h-10 object-contain" />
+              {showCancel && (
+                <button
+                  onClick={onCancel}
+                  className="md:hidden flex items-center justify-center p-2 ml-3 rounded-lg border border-[#CED2D6] bg-white"
                 >
-                  <path
-                    d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
-                    fill="#596066"
-                  />
-                </svg>
-              </button>
-            )}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
+                      fill="#596066"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            <h3 className="mt-3 text-lg font-semibold text-[#383F45]">
+              Admin Dashboard
+            </h3>
           </div>
 
           <nav className="flex flex-col justify-center items-start gap-2">

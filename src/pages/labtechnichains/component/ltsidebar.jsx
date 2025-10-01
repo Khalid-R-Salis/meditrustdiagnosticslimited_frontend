@@ -50,8 +50,12 @@ const Sidebar = ({ activeNav, setActiveNav, disableNav = false }) => {
   return (
     <div className="flex flex-col justify-between bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] w-[20rem] m-4 pt-[32px] px-[12px] mx-[16px] min-h-[calc(100vh-2rem)] relative">
       <div>
-        <div className="ml-6 w-[166px] h-[40px] mb-5">
-          <img src={logo2} alt="logo" className="w-36 mb-10" />
+        <div className="ml-6 mb-5">
+          <img src={logo2} alt="logo" className="w-36" />
+
+          <h3 className="mt-3 text-lg font-semibold text-[#383F45]">
+            Lab Professional Dashboard
+          </h3>
         </div>
 
         <nav className="flex flex-col justify-center items-start gap-2">
@@ -82,34 +86,6 @@ const Sidebar = ({ activeNav, setActiveNav, disableNav = false }) => {
             <ReportIcon />
             <h2>Patient Reports</h2>
           </button>
-
-          {/* Overview */}
-          {/* <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "overview"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("overview")}
-          >
-            <OverviewIcon />
-            <h2>Overview</h2>
-          </button> */}
-
-          {/* Patient Reports */}
-          {/* <button
-            className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
-              ${
-                activeNav === "patientreport"
-                  ? "text-black bg-[#F8FCE9] border border-[#E5E7EA] shadow-[0_2px_6px_0_rgba(211,211,211,0.12)]"
-                  : "text-[#596066] hover:text-black hover:bg-gray-100 border border-transparent"
-              }`}
-            onClick={() => setActiveNav("patientreport")}
-          >
-            <ReportIcon />
-            <h2>Patient Reports</h2>
-          </button> */}
         </nav>
       </div>
       {/* Settings */}
