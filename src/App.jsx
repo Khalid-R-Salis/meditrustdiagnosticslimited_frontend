@@ -41,7 +41,7 @@ function App() {
           <Route path="/receptionist" element={<ReceptionistDashboard />} />
 
           {/*  */}
-          <Route path="/labtechnician" element={<LabtechnicialDashboard />} />
+          <Route path="/technician" element={<LabtechnicialDashboard />} />
 
           {/*  */}
           <Route path="/admin" element={<AdminDashboard />} />
