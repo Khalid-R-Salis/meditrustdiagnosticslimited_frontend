@@ -340,7 +340,22 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
     <div className="flex flex-col items-center py-4">
       <div
         id="receipt"
-        className="w-full max-w-[230px] font-inter text-black text-[7px] print:bg-[#F8F9F4] print:shadow-none print:text-black print:p-0 p-4 border"
+        className="
+    w-full 
+    max-w-[230px] 
+    mx-auto 
+    my-4      /* space from top and bottom */
+    p-4       /* internal padding */
+    font-inter 
+    text-black 
+    text-[7px] 
+    print:bg-[#F8F9F4] 
+    print:shadow-none 
+    print:text-black 
+    print:p-0 
+    border 
+    rounded-sm
+  "
         style={{ backgroundColor: "#F8F9F4" }}
       >
         {/* Header */}
@@ -357,7 +372,7 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
               key={idx}
               className="flex flex-col border-b border-dashed border-gray-300 pb-1"
             >
-              <div className="flex justify-between w-full">
+              <div className="flex flex-col items-center py-4 px-2 min-h-screen overflow-y-auto">
                 <span
                   style={{
                     color: "var(--Grey-500, #676E76)",
