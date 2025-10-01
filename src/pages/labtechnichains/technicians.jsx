@@ -38,7 +38,9 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex justify-between items-start bg-white overflow-hidden">
+    <div className="flex justify-between items-start bg-white  overflow-x-auto overflow-y-auto">
+      {/* <div className="flex-1 "> */}
+
       <Sidebar
         activeNav={activeNav}
         setActiveNav={setActiveNav}

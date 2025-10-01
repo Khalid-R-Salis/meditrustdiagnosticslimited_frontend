@@ -148,142 +148,143 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
           </div>
         </div>
 
-        <section className="bg-white p-4 overflow-auto">
-          <table className="w-full text-left text-[12px] text-[#676E76] rounded-sm">
-            <thead>
-              <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-                <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
-                  Receipt number
-                </th>
-                <th className="bg-[#FAFAFA] p-5">Patient info</th>
-                <th className="bg-[#FAFAFA] p-5">Sex</th>
-                <th className="bg-[#FAFAFA] p-5">Test type</th>
-                <th className="bg-[#FAFAFA] p-5">Date & Time</th>
-                <th className="bg-[#FAFAFA] p-5">Amount paid</th>
-                <th className="bg-[#FAFAFA] p-5 rounded-tr-lg">Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {paginatedPatients.map((patient, i) => (
-                <tr
-                  key={patient.id}
-                  className="border-b hover:bg-gray-50 relative"
-                >
-                  <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
-                    {patient.receipt}
-                  </td>
-                  <td className="px-5 py-4 max-w-[140px] truncate">
-                    {patient.name}
-                  </td>
-                  <td className="px-5 py-4 max-w-[60px] truncate">
-                    {patient.sex}
-                  </td>
-                  <td className="px-5 py-4 max-w-[140px] truncate">
-                    {patient.test}
-                  </td>
-                  <td className="px-5 py-4 max-w-[160px] truncate">
-                    {patient.date}
-                  </td>
-                  <td className="px-5 py-4 max-w-[120px] truncate">
-                    {patient.amount}
-                  </td>
-
-                  <td className="px-5 py-4">
-                    <div className="flex items-center justify-between relative">
-                      <span
-                        className={
-                          patient.status === "Completed"
-                            ? "text-green-600"
-                            : "text-yellow-600"
-                        }
-                      >
-                        {patient.status}
-                      </span>
-                      <button
-                        onClick={() => setMenuOpen(menuOpen === i ? null : i)}
-                        className="menu-toggle p-1 hover:bg-gray-100 rounded ml-6"
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="block"
-                        >
-                          <circle cx="8" cy="3" r="1.5" />
-                          <circle cx="8" cy="8" r="1.5" />
-                          <circle cx="8" cy="13" r="1.5" />
-                        </svg>
-                      </button>
-
-                      {menuOpen === i && (
-                        <div
-                          ref={menuRef}
-                          className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
-                        >
-                          <button
-                            onClick={() => {
-                              setShowReceipt(true);
-                              setMenuOpen(null);
-                            }}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                          >
-                            View report
-                          </button>
-
-                          {patient.status === "Completed" ? (
-                            <button
-                              onClick={() => {
-                                setShowResult(true);
-                                setMenuOpen(null);
-                              }}
-                              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                              View test result
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => {
-                                setActiveNav("resultform");
-                                setMenuOpen(null);
-                              }}
-                              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                              Upload test result
-                            </button>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </td>
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
+          <section className="bg-white">
+            <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
+              <thead>
+                <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                  <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
+                    Receipt number
+                  </th>
+                  <th className="bg-[#FAFAFA] p-5">Patient info</th>
+                  <th className="bg-[#FAFAFA] p-5">Sex</th>
+                  <th className="bg-[#FAFAFA] p-5">Test type</th>
+                  <th className="bg-[#FAFAFA] p-5">Date & Time</th>
+                  <th className="bg-[#FAFAFA] p-5">Amount paid</th>
+                  <th className="bg-[#FAFAFA] p-5 rounded-tr-lg">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
-          {/* Pagination */}
-          <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
-            <button
-              onClick={handlePrevious}
-              disabled={currentPage === 1}
-              className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-            >
-              Previous
-            </button>
+              <tbody>
+                {paginatedPatients.map((patient, i) => (
+                  <tr
+                    key={patient.id}
+                    className="border-b hover:bg-gray-50 relative"
+                  >
+                    <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
+                      {patient.receipt}
+                    </td>
+                    <td className="px-5 py-4 max-w-[140px] truncate">
+                      {patient.name}
+                    </td>
+                    <td className="px-5 py-4 max-w-[60px] truncate">
+                      {patient.sex}
+                    </td>
+                    <td className="px-5 py-4 max-w-[140px] truncate">
+                      {patient.test}
+                    </td>
+                    <td className="px-5 py-4 max-w-[160px] truncate">
+                      {patient.date}
+                    </td>
+                    <td className="px-5 py-4 max-w-[120px] truncate">
+                      {patient.amount}
+                    </td>
 
-            <span>
-              Page {currentPage} of {totalPages}
-            </span>
+                    <td className="px-5 py-4">
+                      <div className="flex items-center justify-between relative">
+                        <span
+                          className={
+                            patient.status === "Completed"
+                              ? "text-green-600"
+                              : "text-yellow-600"
+                          }
+                        >
+                          {patient.status}
+                        </span>
+                        <button
+                          onClick={() => setMenuOpen(menuOpen === i ? null : i)}
+                          className="menu-toggle p-1 hover:bg-gray-100 rounded ml-6"
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="block"
+                          >
+                            <circle cx="8" cy="3" r="1.5" />
+                            <circle cx="8" cy="8" r="1.5" />
+                            <circle cx="8" cy="13" r="1.5" />
+                          </svg>
+                        </button>
 
-            <button
-              onClick={handleNext}
-              disabled={currentPage === totalPages}
-              className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
-            >
-              Next
-            </button>
-          </div>
-        </section>
+                        {menuOpen === i && (
+                          <div
+                            ref={menuRef}
+                            className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                          >
+                            <button
+                              onClick={() => {
+                                setShowReceipt(true);
+                                setMenuOpen(null);
+                              }}
+                              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                            >
+                              View report
+                            </button>
+
+                            {patient.status === "Completed" ? (
+                              <button
+                                onClick={() => {
+                                  setShowResult(true);
+                                  setMenuOpen(null);
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                              >
+                                View test result
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  setActiveNav("resultform");
+                                  setMenuOpen(null);
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                              >
+                                Upload test result
+                              </button>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </div>
+        {/* Pagination */}
+        <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
+          <button
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Previous
+          </button>
+
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="px-4 py-1.5 rounded-lg border border-[#E5E7EA] bg-white text-[#454C52] disabled:opacity-50 shadow-sm"
+          >
+            Next
+          </button>
+        </div>
       </div>
 
       {/* Receipt Modal */}

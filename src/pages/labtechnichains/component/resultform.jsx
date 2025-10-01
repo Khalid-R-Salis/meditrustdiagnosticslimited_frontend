@@ -609,9 +609,9 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
       : "Name";
 
   return (
-    <div className="bg-white w-full flex flex-col py-7 px-[72px] h-full relative">
+    <div className="bg-white w-full flex flex-col py-4 px-[72px] h-full relative">
       {/* Header */}
-      <div className="flex justify-between items-center border-b pb-[24px] mb-[40px]">
+      <div className="flex justify-between items-center border-b pb-[24px] mb-[25px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           New Report
         </h2>
@@ -638,7 +638,7 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll max-w-[60rem]"
+        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll max-w-[60rem] scrollbar-thin-green"
       >
         {/* Test Result */}
         <RichTextEditor
@@ -715,7 +715,7 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
         </div>
         {showCancelConfirm && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-xl shadow-lg p-6 max-w-md w-full text-center">
+            <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-md mx-4 text-center">
               <p className="text-gray-800 text-base mb-6">
                 Are you sure you want to close this page? <br />
                 <b className="uppercase text-red-600">Changes are Unsaved!</b>
