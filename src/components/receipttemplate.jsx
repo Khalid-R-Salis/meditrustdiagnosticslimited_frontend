@@ -337,27 +337,10 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
   };
 
   return (
-    <div className="flex flex-col items-center py-4">
+    <div className="flex items-center justify-center min-h-screen px-4 py-6 overflow-auto">
       <div
         id="receipt"
-        className="
-    w-full 
-    max-w-[230px] 
-    mx-auto         /* centers horizontally */
-    my-2            /* vertical margin */
-    px-3            /* horizontal padding inside container */
-    py-4 
-    font-inter 
-    text-black 
-    text-[7px] 
-    print:bg-[#F8F9F4] 
-    print:shadow-none 
-    print:text-black 
-    print:p-0 
-    border 
-    rounded-sm      
-    shadow-sm        
-  "
+        className="w-full max-w-[230px] bg-[#F8F9F4] font-inter text-black text-[7px] print:bg-[#F8F9F4] print:shadow-none print:text-black print:p-0 border rounded-sm shadow-sm mx-auto my-2 p-4 flex-shrink-0"
         style={{ backgroundColor: "#F8F9F4" }}
       >
         {/* Header */}
@@ -408,19 +391,7 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
       <div className="flex justify-between mt-2 gap-2 w-full max-w-[230px] print:hidden">
         <button
           onClick={handleDownload}
-          style={{
-            borderRadius: "5px",
-            border: "1px solid var(--Grey-200, #E5E7EA)",
-            background: "var(--Grey-50, #FAFAFA)",
-            color: "var(--Primary-Black, #000)",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "8px",
-            fontWeight: 400,
-            lineHeight: "16px",
-            padding: "2px 8px",
-            width: "40%",
-            textAlign: "center",
-          }}
+          className="flex-1 border border-gray-300 bg-gray-100 text-black text-[8px] font-inter font-normal py-1 px-2 rounded"
         >
           Download
         </button>
@@ -428,22 +399,11 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
         <button
           onClick={!disablePrint ? handleBluetoothPrint : undefined}
           disabled={disablePrint}
-          style={{
-            borderRadius: "5px",
-            background: disablePrint ? "#9CA3AF" : "var(--Brand-dark, #829C15)",
-            boxShadow:
-              "1px 1px 2px 1px rgba(255,255,255,0.18) inset, -1px -1px 2px 1px rgba(255,255,255,0.18) inset",
-            color: "var(--Primary-White, #FFF)",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "8px",
-            fontWeight: 400,
-            lineHeight: "16px",
-            padding: "2px 8px",
-            width: "40%",
-            textAlign: "center",
-            cursor: disablePrint ? "not-allowed" : "pointer",
-            opacity: disablePrint ? 0.6 : 1,
-          }}
+          className={`flex-1 text-[8px] font-inter font-normal py-1 px-2 rounded ${
+            disablePrint
+              ? "bg-gray-400 cursor-not-allowed text-white opacity-60"
+              : "bg-green-700 text-white"
+          }`}
         >
           Print
         </button>
