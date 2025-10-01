@@ -343,9 +343,10 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
         className="
     w-full 
     max-w-[230px] 
-    mx-auto 
-    my-4      /* space from top and bottom */
-    p-4       /* internal padding */
+    mx-auto         /* centers horizontally */
+    my-2            /* vertical margin */
+    px-3            /* horizontal padding inside container */
+    py-4 
     font-inter 
     text-black 
     text-[7px] 
@@ -354,7 +355,8 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
     print:text-black 
     print:p-0 
     border 
-    rounded-sm
+    rounded-sm      
+    shadow-sm        
   "
         style={{ backgroundColor: "#F8F9F4" }}
       >
@@ -372,7 +374,7 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
               key={idx}
               className="flex flex-col border-b border-dashed border-gray-300 pb-1"
             >
-              <div className="flex flex-col items-center py-4 px-2 min-h-screen overflow-y-auto">
+              <div className="flex justify-between w-full">
                 <span
                   style={{
                     color: "var(--Grey-500, #676E76)",
