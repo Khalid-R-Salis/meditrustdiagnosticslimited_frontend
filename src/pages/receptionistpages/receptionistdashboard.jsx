@@ -76,7 +76,8 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex bg-white">
+    <div className="flex bg-white min-h-screen">
+      {/* Desktop sidebar (static) */}
       {deviceType === "desktop" && (
         <Sidebar
           activeNav={activeNav}
@@ -85,8 +86,10 @@ const DashboardLayout = () => {
         />
       )}
 
+      {/* Mobile / Tablet sidebar (overlay) */}
       {sidebarOpen && (deviceType === "mobile" || deviceType === "tablet") && (
         <div className="fixed inset-0 z-40 flex">
+          {/* dimmed overlay */}
           <div
             className="absolute inset-0 bg-black bg-opacity-40"
             onClick={() => setSidebarOpen(false)}
@@ -105,6 +108,7 @@ const DashboardLayout = () => {
         </div>
       )}
 
+      {/* Main content */}
       <div className="flex-1 px-4 md:px-10 lg:px-16 xl:px-20 2xl:px-24 py-2 md:py-6 overflow-x-auto overflow-y-auto">
         {renderContent()}
       </div>

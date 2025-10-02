@@ -82,9 +82,9 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
   };
 
   return (
-    <div className="flex-1 bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+    <div className="flex-1 relative max-h-screen overflow-y-auto bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
       {/* Top bar */}
-      <div className="flex justify-between items-center mb-10 sticky top-0 bg-white z-20 py-3">
+      <div className="flex justify-between items-center mb-5 sticky top-0 bg-white z-20 py-3">
         <div className="flex items-center gap-3">
           {(deviceType === "mobile" || deviceType === "tablet") && (
             <button
@@ -174,7 +174,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
       </div>
 
       {/* Table & Pagination */}
-      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
+      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-320px)] scrollbar-thin-green">
         <section className="bg-white">
           <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
             <thead>
