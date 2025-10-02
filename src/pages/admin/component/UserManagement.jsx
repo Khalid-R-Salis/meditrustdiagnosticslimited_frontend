@@ -327,7 +327,9 @@ const UserManagement = ({
                         >
                           {user.phone}
                         </td>
-                        <td className="px-5 py-3">{user.lastLogin}</td>
+                        <td className="px-5 py-3 w-[160px] whitespace-nowrap text-right">
+                          {user.lastLogin}
+                        </td>
                         <td className="px-5 py-3">
                           <div className="flex items-center justify-between relative">
                             <span
