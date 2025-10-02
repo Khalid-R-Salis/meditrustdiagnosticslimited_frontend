@@ -43,7 +43,6 @@ const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarAnim, setSidebarAnim] = useState("slideIn");
 
-  // Handle sidebar open/close with animation
   const openSidebar = () => {
     setSidebarAnim("slideIn");
     setSidebarOpen(true);
@@ -87,7 +86,7 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      <div className="flex">
+      <div className="flex min-h-screen">
         <div>
           {/* Desktop sidebar */}
           <div className="hidden md:block">

@@ -215,9 +215,9 @@ const UserManagement = ({
         </div>
       )}
 
-      <div className="flex-1 bg-white py-0 md:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-[5px] sm:mt-0 mb-8 gap-2">
-          <h1 className="mt-4 sm:mt-0 text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
+      <div className="flex-1 relative max-h-screen overflow-y-auto overflow-x-hidden  bg-white py-0 md:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-[15px] mb-8 gap-2">
+          <h1 className="mt-4 sm:mt-0 sm:ml-[4px] text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
             User Management
           </h1>
 
@@ -282,150 +282,146 @@ const UserManagement = ({
           ) : (
             <>
               <div
-                className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green"
+                className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-290px)] scrollbar-thin-green"
                 ref={tableContainerRef}
               >
-                <section className="bg-white">
-                  <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
-                    <thead>
-                      <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-                        <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">Name</th>
-                        <th className="bg-[#FAFAFA] p-5">Email</th>
-                        <th className="bg-[#FAFAFA] p-5">Role</th>
-                        <th className="bg-[#FAFAFA] p-5">Phone</th>
-                        <th className="bg-[#FAFAFA] p-5">Last login</th>
-                        <th className="bg-[#FAFAFA] p-5 rounded-tr-lg">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
+                <table className="min-w-full text-left text-[12px] text-[#676E76] rounded-sm">
+                  <thead>
+                    <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                      <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">Name</th>
+                      <th className="bg-[#FAFAFA] p-5">Email</th>
+                      <th className="bg-[#FAFAFA] p-5">Role</th>
+                      <th className="bg-[#FAFAFA] p-5">Phone</th>
+                      <th className="bg-[#FAFAFA] p-5">Last login</th>
+                      <th className="bg-[#FAFAFA] p-5 rounded-tr-lg">Status</th>
+                    </tr>
+                  </thead>
 
-                    <tbody>
-                      {paginatedUsers.map((user, i) => (
-                        <tr
-                          key={user.id}
-                          className="border-b hover:bg-gray-50 relative"
+                  <tbody>
+                    {paginatedUsers.map((user, i) => (
+                      <tr
+                        key={user.id}
+                        className="border-b hover:bg-gray-50 relative"
+                      >
+                        <td
+                          className="px-3 py-1 max-w-[140px] truncate"
+                          title={user.name}
                         >
-                          <td
-                            className="px-3 py-1 max-w-[140px] truncate"
-                            title={user.name}
-                          >
-                            {user.name}
-                          </td>
-                          <td
-                            className="px-3 py-1 max-w-[180px] truncate"
-                            title={user.email}
-                          >
-                            {user.email}
-                          </td>
-                          <td
-                            className="px-3 py-1 max-w-[140px] truncate"
-                            title={user.role}
-                          >
-                            {user.role}
-                          </td>
-                          <td
-                            className="px-3 py-1 max-w-[120px] truncate"
-                            title={user.phone}
-                          >
-                            {user.phone}
-                          </td>
-                          <td className="px-5 py-3">{user.lastLogin}</td>
-                          <td className="px-5 py-3">
-                            <div className="flex items-center justify-between relative">
-                              <span
-                                className={
-                                  user.status === "Active"
-                                    ? "text-[#2F9461]"
-                                    : user.status === "Deactivated"
-                                    ? "text-[#CD3636]"
-                                    : "text-[#C8811A]"
-                                }
-                              >
-                                {user.status}
-                              </span>
-                              <button
-                                onClick={() =>
-                                  setMenuOpen(menuOpen === i ? null : i)
-                                }
-                                className="menu-toggle p-1 hover:bg-gray-100 rounded ml-6 text-lg font-bold"
-                              >
-                                ⋮
-                              </button>
+                          {user.name}
+                        </td>
+                        <td
+                          className="px-3 py-1 max-w-[180px] truncate"
+                          title={user.email}
+                        >
+                          {user.email}
+                        </td>
+                        <td
+                          className="px-3 py-1 max-w-[140px] truncate"
+                          title={user.role}
+                        >
+                          {user.role}
+                        </td>
+                        <td
+                          className="px-3 py-1 max-w-[120px] truncate"
+                          title={user.phone}
+                        >
+                          {user.phone}
+                        </td>
+                        <td className="px-5 py-3">{user.lastLogin}</td>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center justify-between relative">
+                            <span
+                              className={
+                                user.status === "Active"
+                                  ? "text-[#2F9461]"
+                                  : user.status === "Deactivated"
+                                  ? "text-[#CD3636]"
+                                  : "text-[#C8811A]"
+                              }
+                            >
+                              {user.status}
+                            </span>
+                            <button
+                              onClick={() =>
+                                setMenuOpen(menuOpen === i ? null : i)
+                              }
+                              className="menu-toggle p-1 hover:bg-gray-100 rounded ml-6 text-lg font-bold"
+                            >
+                              ⋮
+                            </button>
 
-                              {menuOpen === i && (
-                                <div
-                                  ref={menuRef}
-                                  className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
-                                >
-                                  {user.status === "Pending" ? (
+                            {menuOpen === i && (
+                              <div
+                                ref={menuRef}
+                                className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                              >
+                                {user.status === "Pending" ? (
+                                  <button
+                                    onClick={() => {
+                                      setSelectedUser(user);
+                                      setModalType("revoke");
+                                      setMenuOpen(null);
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                                  >
+                                    Revoke request
+                                  </button>
+                                ) : (
+                                  <>
                                     <button
                                       onClick={() => {
                                         setSelectedUser(user);
-                                        setModalType("revoke");
+                                        setModalType("edit");
                                         setMenuOpen(null);
                                       }}
-                                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                     >
-                                      Revoke request
+                                      Edit user
                                     </button>
-                                  ) : (
-                                    <>
+                                    {user.status === "Active" && (
                                       <button
                                         onClick={() => {
                                           setSelectedUser(user);
-                                          setModalType("edit");
+                                          setModalType("deactivate");
                                           setMenuOpen(null);
                                         }}
                                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                       >
-                                        Edit user
+                                        Deactivate user
                                       </button>
-                                      {user.status === "Active" && (
-                                        <button
-                                          onClick={() => {
-                                            setSelectedUser(user);
-                                            setModalType("deactivate");
-                                            setMenuOpen(null);
-                                          }}
-                                          className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                        >
-                                          Deactivate user
-                                        </button>
-                                      )}
-                                      {user.status === "Deactivated" && (
-                                        <button
-                                          onClick={() => {
-                                            setSelectedUser(user);
-                                            setModalType("reactivate");
-                                            setMenuOpen(null);
-                                          }}
-                                          className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                        >
-                                          Reactivate user
-                                        </button>
-                                      )}
+                                    )}
+                                    {user.status === "Deactivated" && (
                                       <button
                                         onClick={() => {
                                           setSelectedUser(user);
-                                          setModalType("delete");
+                                          setModalType("reactivate");
                                           setMenuOpen(null);
                                         }}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                       >
-                                        Delete user
+                                        Reactivate user
                                       </button>
-                                    </>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </section>
+                                    )}
+                                    <button
+                                      onClick={() => {
+                                        setSelectedUser(user);
+                                        setModalType("delete");
+                                        setMenuOpen(null);
+                                      }}
+                                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                                    >
+                                      Delete user
+                                    </button>
+                                  </>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
 
               {/* Pagination controls */}

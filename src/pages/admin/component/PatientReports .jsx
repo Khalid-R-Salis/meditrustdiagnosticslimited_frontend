@@ -81,7 +81,8 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+      {/* <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden"> */}
+      <div className="flex-1 relative max-h-screen overflow-y-auto pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
         <div className="flex justify-between items-center mb-6 md:mb-10">
           <h1 className="ml-8 mt-3 sm:ml-0 sm:mt-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Patient reports"}
@@ -154,8 +155,8 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
 
         {/* Scrollable table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
-          <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-290px)] scrollbar-thin-green">
+          <table className="min-w-full text-left text-[12px] text-[#676E76] rounded-sm">
             <thead>
               <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
                 <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">

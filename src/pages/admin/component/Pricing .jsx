@@ -316,7 +316,7 @@ const Pricing = ({ setActiveNav }) => {
   };
 
   return (
-    <div className="flex-1 bg-white py-8 relative overflow-x-hidden pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+    <div className=" flex-1 relative max-h-screen overflow-y-auto bg-white py-8 overflow-x-hidden  pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
       <div className="flex flex-wrap justify-between items-center mb-[30px] sm:border-b sm:pb-[24px] sm:mb-[40px] mt-[5px] sm:mt-0">
         <h2 className="ml-8 sm:ml-0 text-[24px] font-semibold leading-[32px] text-black font-inter mt-[10px] sm:mt-0">
           Pricing
@@ -365,74 +365,72 @@ const Pricing = ({ setActiveNav }) => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
-        <section className="bg-white">
-          <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
-            <thead>
-              <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-                <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
-                <th className="bg-[#FAFAFA] p-5">Test Name</th>
-                <th className="bg-[#FAFAFA] p-5">Test Price</th>
-                <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
-              </tr>
-            </thead>
+      <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-290px)] scrollbar-thin-green">
+        <table className="min-w-full text-left text-[12px] text-[#676E76] rounded-sm">
+          <thead>
+            <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+              <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">S/N</th>
+              <th className="bg-[#FAFAFA] p-5">Test Name</th>
+              <th className="bg-[#FAFAFA] p-5">Test Price</th>
+              <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {paginatedTests.map((test, i) => (
-                <tr key={test.id} className="border-b hover:bg-gray-50">
-                  <td className="px-5 py-4 text-black text-[12px] font-medium font-inter">
-                    {(currentPage - 1) * itemsPerPage + i + 1}
-                  </td>
-                  <td className="px-5 py-4 text-[#676E76] text-[12px] font-medium font-inter">
-                    {test.name}
-                  </td>
-                  <td className="px-5 py-4 text-[#676E76] text-[12px] font-medium font-inter">
-                    {test.price}
-                  </td>
-                  <td className="px-5 py-4">
-                    <div className="flex items-center justify-end relative">
-                      <button
-                        onClick={() => setMenuOpen(menuOpen === i ? null : i)}
-                        className="menu-toggle p-1 hover:bg-gray-100 rounded"
+          <tbody>
+            {paginatedTests.map((test, i) => (
+              <tr key={test.id} className="border-b hover:bg-gray-50">
+                <td className="px-5 py-4 text-black text-[12px] font-medium font-inter">
+                  {(currentPage - 1) * itemsPerPage + i + 1}
+                </td>
+                <td className="px-5 py-4 text-[#676E76] text-[12px] font-medium font-inter">
+                  {test.name}
+                </td>
+                <td className="px-5 py-4 text-[#676E76] text-[12px] font-medium font-inter">
+                  {test.price}
+                </td>
+                <td className="px-5 py-4">
+                  <div className="flex items-center justify-end relative">
+                    <button
+                      onClick={() => setMenuOpen(menuOpen === i ? null : i)}
+                      className="menu-toggle p-1 hover:bg-gray-100 rounded"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="block text-[#676E76]"
                       >
-                        <svg
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="block text-[#676E76]"
-                        >
-                          <circle cx="8" cy="3" r="1.5" />
-                          <circle cx="8" cy="8" r="1.5" />
-                          <circle cx="8" cy="13" r="1.5" />
-                        </svg>
-                      </button>
+                        <circle cx="8" cy="3" r="1.5" />
+                        <circle cx="8" cy="8" r="1.5" />
+                        <circle cx="8" cy="13" r="1.5" />
+                      </svg>
+                    </button>
 
-                      {menuOpen === i && (
-                        <div
-                          ref={menuRef}
-                          className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                    {menuOpen === i && (
+                      <div
+                        ref={menuRef}
+                        className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                      >
+                        <button
+                          onClick={() => handleEditTest(test)}
+                          className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                         >
-                          <button
-                            onClick={() => handleEditTest(test)}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                          >
-                            Edit test
-                          </button>
-                          <button
-                            onClick={() => handleDeleteTest(test)}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                          >
-                            Delete test
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+                          Edit test
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTest(test)}
+                          className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        >
+                          Delete test
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Pagination */}

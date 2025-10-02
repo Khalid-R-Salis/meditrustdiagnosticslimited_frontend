@@ -160,7 +160,7 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
 
   return (
     <div className="flex w-full">
-      <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden">
+      <div className="flex-1 relative max-h-screen overflow-y-auto overflow-x-hidden bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
         <div className="flex flex-col sm:flex-row justify-start items-center mt-[5px] sm:mt-0 mb-10 gap-2">
           <h1 className="mt-5 sm:mt-0 text-[15px] sm:text-[24px] font-semibold leading-[20px] sm:leading-[32px] text-black font-inter">
             Manage staff complaints
@@ -181,99 +181,95 @@ const Complaints = ({ sidebarDisabled, setSidebarDisabled, setToast }) => {
         </div>
 
         {/* Complaints Table */}
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
-          <section className="bg-white">
-            <table className="min-w-[900px] text-left text-[10px] text-[#676E76] rounded-sm">
-              <thead>
-                <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
-                  <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">NAME</th>
-                  <th className="bg-[#FAFAFA] p-5">ROLE</th>
-                  <th className="bg-[#FAFAFA] p-5">PHONE NUMBER</th>
-                  <th className="bg-[#FAFAFA] p-5">EMAIL</th>
-                  <th className="bg-[#FAFAFA] p-5">COMPLAIN</th>
-                  <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentComplaints.map((c, i) => (
-                  <tr
-                    key={c.id}
-                    className="border-b hover:bg-gray-50 relative text-black"
-                  >
-                    <td className="px-5 py-4 font-medium truncate max-w-[150px]">
-                      {c.name}
-                    </td>
-                    <td className="px-5 py-4 truncate max-w-[120px]">
-                      {c.role}
-                    </td>
-                    <td className="px-5 py-4 truncate max-w-[130px]">
-                      {c.phone}
-                    </td>
-                    <td className="px-5 py-4 truncate max-w-[150px]">
-                      {c.email}
-                    </td>
-                    <td className="px-5 py-4 truncate max-w-[200px]">
-                      {c.complain}
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="flex items-center justify-between relative">
-                        <button
-                          onClick={() => setMenuOpen(menuOpen === i ? null : i)}
-                          className="menu-toggle p-1 hover:bg-gray-100 rounded"
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-290px)] scrollbar-thin-green">
+          <table className="min-w-full text-left text-[12px] text-[#676E76] rounded-sm">
+            <thead>
+              <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">NAME</th>
+                <th className="bg-[#FAFAFA] p-5">ROLE</th>
+                <th className="bg-[#FAFAFA] p-5">PHONE NUMBER</th>
+                <th className="bg-[#FAFAFA] p-5">EMAIL</th>
+                <th className="bg-[#FAFAFA] p-5">COMPLAIN</th>
+                <th className="bg-[#FAFAFA] p-5 rounded-tr-lg"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentComplaints.map((c, i) => (
+                <tr
+                  key={c.id}
+                  className="border-b hover:bg-gray-50 relative text-black"
+                >
+                  <td className="px-5 py-4 font-medium truncate max-w-[150px]">
+                    {c.name}
+                  </td>
+                  <td className="px-5 py-4 truncate max-w-[120px]">{c.role}</td>
+                  <td className="px-5 py-4 truncate max-w-[130px]">
+                    {c.phone}
+                  </td>
+                  <td className="px-5 py-4 truncate max-w-[150px]">
+                    {c.email}
+                  </td>
+                  <td className="px-5 py-4 truncate max-w-[200px]">
+                    {c.complain}
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="flex items-center justify-between relative">
+                      <button
+                        onClick={() => setMenuOpen(menuOpen === i ? null : i)}
+                        className="menu-toggle p-1 hover:bg-gray-100 rounded"
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="block"
                         >
-                          <svg
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="block"
+                          <circle cx="8" cy="3" r="1.5" />
+                          <circle cx="8" cy="8" r="1.5" />
+                          <circle cx="8" cy="13" r="1.5" />
+                        </svg>
+                      </button>
+                      {menuOpen === i && (
+                        <div
+                          ref={menuRef}
+                          className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                        >
+                          <button
+                            onClick={() => {
+                              setSelectedComplaint(c);
+                              setMenuOpen(null);
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                           >
-                            <circle cx="8" cy="3" r="1.5" />
-                            <circle cx="8" cy="8" r="1.5" />
-                            <circle cx="8" cy="13" r="1.5" />
-                          </svg>
-                        </button>
-                        {menuOpen === i && (
-                          <div
-                            ref={menuRef}
-                            className="absolute right-0 top-full mt-2 bg-white border rounded shadow-md z-50 w-40"
+                            View complain
+                          </button>
+                          <button
+                            onClick={() => {
+                              handleResolve(c.id);
+                              setMenuOpen(null);
+                            }}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                           >
-                            <button
-                              onClick={() => {
-                                setSelectedComplaint(c);
-                                setMenuOpen(null);
-                              }}
-                              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                              View complain
-                            </button>
-                            <button
-                              onClick={() => {
-                                handleResolve(c.id);
-                                setMenuOpen(null);
-                              }}
-                              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                            >
-                              Resolve complain
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {currentComplaints.length === 0 && (
-                  <tr>
-                    <td
-                      colSpan={6}
-                      className="text-center py-6 text-gray-500 italic"
-                    >
-                      No complaints found.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </section>
+                            Resolve complain
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {currentComplaints.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="text-center py-6 text-gray-500 italic"
+                  >
+                    No complaints found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
         {/* Pagination */}
         <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
