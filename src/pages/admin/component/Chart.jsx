@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 const Chart = () => {
   const data = [
     {
-      name: "FOLLICLE STIMULATING HORMONE (FSH) HORMONE",
+      name: "FOLLICLE STIMULATING HORMONE (FSH) HORMONE FOLLICLE STIMULATING HORMONE (FSH) HORMONEFOLLICLE STIMULATING HORMONE (FSH) HORMONEFOLLICLE STIMULATING HORMONE (FSH) HORMONEFOLLICLE STIMULATING HORMONE (FSH) HORMONEFOLLICLE STIMULATING HORMONE (FSH) HORMONE",
       value: 32,
       color: "#3C480A",
     },
@@ -56,25 +56,28 @@ const Chart = () => {
       </div>
 
       {/* Legend */}
-      <div className="mt-1 space-y-[1px] w-full px-1">
+      <div className="mt-1 w-full px-1 max-h-[200px] overflow-y-auto overflow-x-auto scrollbar-thin-green">
         {data.map((item, i) => (
           <div
             key={i}
             className="flex items-center gap-2 rounded-[4px] bg-[#FAFAFA] px-2 py-[1px] w-full"
           >
+            {/* Color dot */}
             <span
               className="w-2 h-2 rounded-full shrink-0"
               style={{ backgroundColor: item.color }}
             ></span>
 
+            {/* Name  */}
             <span
-              className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-inter text-[10px] font-normal leading-[14px] text-[#596066]"
+              className="flex-1 min-w-0 overflow-x-auto whitespace-nowrap font-inter text-[10px] font-normal leading-[14px] text-[#596066] scrollbar-thin-green"
               title={item.name}
             >
               {item.name}
             </span>
 
-            <span className="font-inter text-[10px] leading-[14px] text-[#596066] font-medium">
+            {/* Value */}
+            <span className="font-inter text-[10px] leading-[14px] text-[#596066] font-medium shrink-0">
               {item.value}
             </span>
           </div>

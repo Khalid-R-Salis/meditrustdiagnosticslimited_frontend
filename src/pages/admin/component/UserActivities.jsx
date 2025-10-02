@@ -51,7 +51,7 @@ const UserActivities = ({ setActiveNav }) => {
         </button>
       </div>
 
-      <div className="overflow-y-auto max-h-[80px] pr-2 scrollbar-thin-green">
+      <div className="overflow-y-auto pr-2">
         <ul className="space-y-4">
           {activities.map((item) => (
             <li key={item.id} className="flex justify-between items-start">
