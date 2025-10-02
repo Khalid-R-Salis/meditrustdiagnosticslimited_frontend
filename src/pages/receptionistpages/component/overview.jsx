@@ -45,7 +45,7 @@ const OverviewPage = ({ setActiveNav, setSidebarOpen, deviceType }) => {
             )}
 
             <h1
-              className="text-[10px] sm:text-[24px] font-semibold leading-[14px] sm:leading-[32px] text-black font-inter mt-1 lg:mt-0"
+              className="text-[15px] sm:text-[24px] font-semibold leading-[14px] sm:leading-[32px] text-black font-inter mt-1 lg:mt-0"
               style={{
                 color: "var(--Primary-Black, #000)",
                 fontFamily: "Inter",
