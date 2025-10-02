@@ -84,7 +84,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       {/* <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden"> */}
       <div className="flex-1 relative max-h-screen overflow-y-auto pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
         <div className="flex justify-between items-center mb-6 md:mb-10">
-          <h1 className="ml-8 mt-3 sm:ml-0 sm:mt-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
+          <h1 className="ml-8 mt-4 sm:ml-0 sm:mt-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Patient reports"}
           </h1>
         </div>
