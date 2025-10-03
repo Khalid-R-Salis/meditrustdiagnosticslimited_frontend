@@ -227,7 +227,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-[17px] font-semibold leading-[20px] font-inter">
+      <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-[15px] font-semibold leading-[20px] font-inter">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
