@@ -33,7 +33,7 @@ const OverviewPage = ({ setActiveNav, setSidebarOpen, deviceType }) => {
       {/* Main content */}
       <div className="flex-1 bg-[#ffffff] lg:py-5 py-4 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         {/* Top bar */}
-        <div className="flex justify-between items-center mb-10 ">
+        <div className="flex justify-between items-center mb-0 ">
           <div className="flex items-center gap-3">
             {(deviceType === "mobile" || deviceType === "tablet") && (
               <button

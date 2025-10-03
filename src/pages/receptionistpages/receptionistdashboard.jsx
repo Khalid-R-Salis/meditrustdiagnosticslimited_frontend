@@ -77,14 +77,16 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex bg-white min-h-screen">
-      {/* Desktop sidebar (static) */}
-      {deviceType === "desktop" && (
-        <Sidebar
-          activeNav={activeNav}
-          setActiveNav={setActiveNav}
-          sidebarDisabled={sidebarDisabled}
-        />
-      )}
+      {/* Desktop sidebar */}
+      <div className="hidden md:block">
+        {deviceType === "desktop" && (
+          <Sidebar
+            activeNav={activeNav}
+            setActiveNav={setActiveNav}
+            sidebarDisabled={sidebarDisabled}
+          />
+        )}
+      </div>
 
       {/* Mobile / Tablet sidebar (overlay) */}
       {sidebarOpen && (deviceType === "mobile" || deviceType === "tablet") && (
