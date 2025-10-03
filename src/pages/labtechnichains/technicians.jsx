@@ -9,12 +9,6 @@ const DashboardLayout = () => {
   const [activeNav, setActiveNav] = useState("overview");
   const [showResultTemplate, setShowResultTemplate] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Uploading test result...");
-    onClose();
-  };
-
   const renderContent = () => {
     switch (activeNav) {
       case "overview":
@@ -26,10 +20,8 @@ const DashboardLayout = () => {
         );
       case "patientreport":
         return <PatientReport setActiveNav={setActiveNav} />;
-
       case "testresult":
         return <TestResult onClose={() => setShowResultTemplate(false)} />;
-
       case "resultform":
         return <ResultForm setActiveNav={setActiveNav} />;
       default:
@@ -38,16 +30,20 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex justify-between items-start bg-white  overflow-x-auto overflow-y-auto">
-      {/* <div className="flex-1 "> */}
+    <div className="flex bg-white overflow-hidden">
+      {/* Sidebar*/}
+      <div className="w-[20rem] border-gray-200">
+        <Sidebar
+          activeNav={activeNav}
+          setActiveNav={setActiveNav}
+          disableNav={activeNav === "resultform"}
+        />
+      </div>
 
-      <Sidebar
-        activeNav={activeNav}
-        setActiveNav={setActiveNav}
-        disableNav={activeNav === "resultform"}
-      />
-
-      <div className="flex-1 px-4 py-6 relative">{renderContent()}</div>
+      {/* Main content */}
+      <div className="flex-1 h-screen overflow-y-auto px-4 py-6 relative">
+        {renderContent()}
+      </div>
 
       {/* Result modal */}
       {showResultTemplate && (

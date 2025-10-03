@@ -5,10 +5,9 @@ const HeaderStats = () => {
   const data = [
     {
       label: "Outstanding reports",
-      value: "3",
+      value: "03",
       tooltip: "Total number of reports you haven't attended to",
     },
-
     {
       label: "Tests uploaded",
       value: "20",
@@ -19,31 +18,30 @@ const HeaderStats = () => {
   const [visibleTooltip, setVisibleTooltip] = useState(null);
 
   return (
-    <div className="flex items-center justify-between bg-[#FAFAFA] border border-[#E5E7EA] rounded-[16px] px-4 py-6 shadow mb-6">
+    <div className="flex flex-col md:flex-row flex-wrap gap-4 mb-6">
       {data.map((item, index) => (
         <div
           key={index}
-          className="flex items-center justify-around w-full relative"
+          className="flex-1 flex items-center justify-between bg-[#FAFAFA] border border-[#E5E7EA] rounded-[16px] px-4 py-6 shadow relative"
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full">
             <div className="flex items-center justify-between gap-4">
               <div className="text-2xl font-bold">{item.value}</div>
 
-              {item.label !== "Outstanding reports" && (
-                <select
-                  className="px-[8px] py-[8px] text-[14px] font-normal leading-[20px] text-[#596066] bg-white border border-[#E5E7EA] rounded-[8px] shadow-sm focus:outline-none"
-                  onChange={() => {}}
-                >
-                  {filters.map((f) => (
-                    <option
-                      key={f}
-                      className="bg-white hover:bg-[#F8FCE9] text-[#596066] px-2 py-1"
-                    >
-                      {f}
-                    </option>
-                  ))}
-                </select>
-              )}
+              {/* Date filter now visible for all cards */}
+              <select
+                className="px-[8px] py-[8px] text-[14px] font-normal leading-[20px] text-[#596066] bg-white border border-[#E5E7EA] rounded-[8px] shadow-sm focus:outline-none"
+                onChange={() => {}}
+              >
+                {filters.map((f) => (
+                  <option
+                    key={f}
+                    className="bg-white hover:bg-[#F8FCE9] text-[#596066] px-2 py-1"
+                  >
+                    {f}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex items-center gap-1 text-sm text-[#596066]">
@@ -84,25 +82,6 @@ const HeaderStats = () => {
               </div>
             )}
           </div>
-
-          {index < data.length - 1 && (
-            <div className="mx-[20px] h-full flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2"
-                height="70"
-                viewBox="0 0 2 70"
-                fill="none"
-              >
-                <path
-                  d="M1 1V69"
-                  stroke="#E5E7EA"
-                  strokeLinecap="round"
-                  strokeWidth="1"
-                />
-              </svg>
-            </div>
-          )}
         </div>
       ))}
     </div>

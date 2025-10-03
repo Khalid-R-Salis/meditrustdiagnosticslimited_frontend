@@ -73,11 +73,13 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
   return (
     <div
       className={`flex w-full ${
-        showReceipt || showResult ? "overflow-hidden h-screen" : ""
+        showReceipt || showResult
+          ? "overflow-hidden min-h-screen scrollbar-thin-green "
+          : ""
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
+      <div className=" flex-1 relative bg-white py-8 overflow-x-hidden  pt-0 pb-8 px-6 scrollbar-thin-green">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Patient reports"}
@@ -148,11 +150,11 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
           </div>
         </div>
 
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-340px)] scrollbar-thin-green">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-280px)] scrollbar-thin-green">
           <section className="bg-white">
             <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
               <thead>
-                <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                <tr className="text-[#676E76] border-b text-[14px] font-medium leading-[18px] font-inter">
                   <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
                     Receipt number
                   </th>
@@ -171,27 +173,27 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
                     key={patient.id}
                     className="border-b hover:bg-gray-50 relative"
                   >
-                    <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
+                    <td className="text-[#000] text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.receipt}
                     </td>
-                    <td className="px-5 py-4 max-w-[140px] truncate">
+                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.name}
                     </td>
-                    <td className="px-5 py-4 max-w-[60px] truncate">
+                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.sex}
                     </td>
-                    <td className="px-5 py-4 max-w-[140px] truncate">
+                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[320px] truncate">
                       {patient.test}
                     </td>
-                    <td className="px-5 py-4 max-w-[160px] truncate">
+                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.date}
                     </td>
-                    <td className="px-5 py-4 max-w-[120px] truncate">
+                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.amount}
                     </td>
 
                     <td className="px-5 py-4">
-                      <div className="flex items-center justify-between relative">
+                      <div className="flex items-center justify-between relative text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                         <span
                           className={
                             patient.status === "Completed"

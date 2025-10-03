@@ -49,7 +49,7 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
       }`}
     >
       {/* Main content */}
-      <div className="flex-1 bg-[#ffffff] py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
+      <div className=" flex-1 relative bg-white py-8 overflow-x-hidden  pt-0 pb-8 px-6 scrollbar-thin-green">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
             {pageType === "overview" ? "Overview" : "Recent Patient Report"}
@@ -59,7 +59,7 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
         {pageType === "overview" && <HeaderStats />}
 
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-[16px] font-normal leading-6 text-primary-black font-inter">
+          <h2 className="text-[18px] font-normal leading-6 text-primary-black font-inter">
             Recent patient reports
           </h2>
 
@@ -81,11 +81,11 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
           )}
         </div>
 
-        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-400px)] scrollbar-thin-green">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-350px)] w-full scrollbar-thin-green">
           <section className="bg-white">
-            <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
+            <table className="min-w-full text-left text-[16px] text-[#676E76] rounded-sm">
               <thead>
-                <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+                <tr className="text-[#676E76] border-b text-[14px] font-medium leading-[18px] font-inter">
                   <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
                     Receipt number
                   </th>
@@ -104,24 +104,21 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
                     key={patient.id}
                     className="border-b hover:bg-gray-50 relative"
                   >
-                    <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
+                    <td className="text-[#000] text-[16px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                       {patient.receipt}
                     </td>
-                    <td className="px-5 py-4 max-w-[140px] truncate">
-                      {patient.name}
-                    </td>
-                    <td className="px-5 py-4 max-w-[60px] truncate">
-                      {patient.sex}
-                    </td>
-                    <td className="px-5 py-4 max-w-[140px] truncate">
+                    <td className="px-5 py-4 max-w-full">{patient.name}</td>
+                    <td className="px-5 py-4 max-w-full">{patient.sex}</td>
+                    <td
+                      className="px-5 py-4 max-w-[320px] truncate"
+                      title={patient.test}
+                    >
                       {patient.test}
                     </td>
-                    <td className="px-5 py-4 max-w-[160px] truncate">
+                    <td className="px-5 py-4 max-w-full truncate">
                       {patient.date}
                     </td>
-                    <td className="px-5 py-4 max-w-[120px] truncate">
-                      {patient.amount}
-                    </td>
+                    <td className="px-5 py-4 max-w-full">{patient.amount}</td>
 
                     <td className="px-5 py-4">
                       <div className="flex items-center justify-between relative">
