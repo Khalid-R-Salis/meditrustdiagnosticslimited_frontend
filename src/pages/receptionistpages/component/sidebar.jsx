@@ -102,7 +102,7 @@ const Sidebar = ({ activeNav, setActiveNav, sidebarDisabled, onClose }) => {
         </nav>
       </div>
 
-      <div className="md:mb-[30px]">
+      <div className="">
         <Settings />
       </div>
     </div>

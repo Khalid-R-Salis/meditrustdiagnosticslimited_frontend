@@ -356,7 +356,10 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           <button
             type="button"
             onClick={() => setShowCancelConfirm(true)}
-            className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] px-3 py-[6px] text-black text-sm font-medium leading-5 text-center hover:bg-gray-100 font-inter"
+            className="rounded-lg border border-[#E5E7EA] bg-[#FAFAFA] 
+               px-3 py-[6px] text-sm leading-5 font-medium text-black text-center 
+               hover:bg-gray-100 font-inter
+               sm:px-4 sm:py-2 sm:text-base sm:leading-6"
           >
             Cancel
           </button>
@@ -364,7 +367,10 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           <button
             type="button"
             onClick={handleExternalSubmit}
-            className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
+            className="rounded-lg bg-[#829C15] 
+               px-3 py-[6px] text-sm leading-5 font-medium text-white text-center 
+               font-inter hover:bg-[#6f8911]
+               sm:px-4 sm:py-2 sm:text-base sm:leading-6"
           >
             Confirm Consultation
           </button>
