@@ -84,7 +84,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
   return (
     <div className="flex-1 relative max-h-screen overflow-y-auto bg-[#ffffff] py-2 lg:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
       {/* Top bar */}
-      <div className="flex justify-between items-center mb-5 sticky top-0 bg-white z-20 py-3">
+      <div className="flex justify-between items-center mb-4 sticky top-0 bg-white z-20 py-3">
         <div className="flex items-center gap-3">
           {(deviceType === "mobile" || deviceType === "tablet") && (
             <button
@@ -111,14 +111,13 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
       {/* Search & Filter */}
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 max-w-md w-full py-1.5">
-          <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
+          {/* Search box */}
+          <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              className="shrink-0 w-[18px] h-[18px] md:w-[20px] md:h-[20px]"
               viewBox="0 0 18 18"
               fill="none"
-              className="shrink-0"
             >
               <path
                 d="M15.75 15.75L11.8525 11.8525M11.8525 11.8525C12.8704 10.8346 13.5 9.4283 13.5 7.875C13.5 4.7684 10.9816 2.25 7.875 2.25C4.7684 2.25 2.25 4.7684 2.25 7.875C2.25 10.9816 4.7684 13.5 7.875 13.5C9.4283 13.5 10.8346 12.8704 11.8525 11.8525Z"
@@ -132,7 +131,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
             <input
               type="text"
               placeholder="Search by name or receipt number"
-              className="w-full text-sm placeholder:text-[#9EA5AD] outline-none"
+              className="w-full text-sm md:text-base placeholder:text-[#9EA5AD] outline-none"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -141,14 +140,13 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
             />
           </div>
 
-          <div className="flex items-center px-3 py-[4.5px] rounded-lg border border-[#E5E7EA] bg-white]">
+          {/* Filter dropdown */}
+          <div className="flex items-center px-3 py-[4.5px] md:px-4 md:py-2 rounded-lg border border-[#E5E7EA] bg-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              className="mr-2 shrink-0 w-[18px] h-[18px] md:w-[20px] md:h-[20px]"
               viewBox="0 0 18 18"
               fill="none"
-              className="mr-2 shrink-0"
             >
               <path
                 d="M5.0625 2.25V3.9375M12.9375 2.25V3.9375M2.25 14.0625V5.625C2.25 4.69302 3.00552 3.9375 3.9375 3.9375H14.0625C14.9945 3.9375 15.75 4.69302 15.75 5.625V14.0625M2.25 14.0625C2.25 14.9945 3.00552 15.75 3.9375 15.75H14.0625C14.9945 15.75 15.75 14.9945 15.75 14.0625M2.25 14.0625V8.4375C2.25 7.50552 3.00552 6.75 3.9375 6.75H14.0625C14.9945 6.75 15.75 7.50552 15.75 8.4375"
@@ -160,7 +158,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
             </svg>
 
             <select
-              className="bg-transparent outline-none text-sm"
+              className="bg-transparent outline-none text-sm md:text-base"
               value={filterRange}
               onChange={(e) => setFilterRange(e.target.value)}
             >
@@ -176,9 +174,9 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
       {/* Table & Pagination */}
       <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-320px)] scrollbar-thin-green">
         <section className="bg-white">
-          <table className="min-w-full text-left text-[10px] text-[#676E76] rounded-sm">
+          <table className="min-w-full text-left text-[18px] text-[#676E76] rounded-sm">
             <thead>
-              <tr className="text-[#676E76] border-b text-[12px] font-medium leading-[18px] font-inter">
+              <tr className="text-[#676E76] border-b text-[18px] font-medium leading-[18px] font-inter">
                 <th className="bg-[#FAFAFA] p-5 rounded-tl-lg">
                   Receipt number
                 </th>
@@ -194,22 +192,23 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
             <tbody>
               {paginatedData.map((item) => (
                 <tr key={item.id} className="border-b hover:bg-gray-50">
-                  <td className="text-[#000] text-[12px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[100px] truncate">
+                  <td className="text-[#000] text-[18px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
                     {item.receiptNumber}
                   </td>
-                  <td className="flex-col items-start justify-center py-4 max-w-[140px] truncate">
+                  <td className="flex-col items-start justify-center py-4 max-w-full truncate">
                     {item.name} – {item.phone}
                   </td>
-                  <td className="px-5 py-4 max-w-[60px] truncate">
-                    {item.sex}
-                  </td>
-                  <td className="px-5 py-4 max-w-[140px] truncate">
+                  <td className="px-5 py-4 max-w-full truncate">{item.sex}</td>
+                  <td
+                    className="px-5 py-4 max-w-[320px] truncate"
+                    title={item.testType}
+                  >
                     {item.testType}
                   </td>
-                  <td className="px-5 py-4 max-w-[160px] truncate">
+                  <td className="px-5 py-4 max-w-full truncate">
                     {item.dateTime}
                   </td>
-                  <td className="px-5 py-4 max-w-[120px] truncate">
+                  <td className="px-5 py-4 max-w-full truncate">
                     {item.amount}
                   </td>
                   <td className="px-5 py-4">
@@ -228,7 +227,7 @@ const ConsultationPage = ({ setSidebarOpen, deviceType }) => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-sm font-semibold leading-[20px] font-inter">
+      <div className="flex justify-between items-center gap-4 mt-6 text-[#454C52] text-[17px] font-semibold leading-[20px] font-inter">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
