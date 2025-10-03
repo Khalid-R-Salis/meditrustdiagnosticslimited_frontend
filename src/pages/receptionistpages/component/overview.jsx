@@ -58,8 +58,8 @@ const OverviewPage = ({ setActiveNav, setSidebarOpen, deviceType }) => {
 
           <button
             className="text-white text-center font-medium 
-  text-[10px] md:text-[1px] lg:text-[18px]  
-  leading-[16px] md:leading-[20px] lg:leading-[24px] 
+  text-[10px] md:text-[18px] lg:text-[18px]  
+  leading-[16px] md:leading-[24px] lg:leading-[24px] 
   font-inter
   flex items-center justify-center gap-2
   px-3 py-[6px] md:px-4 md:py-[10px]          
