@@ -57,9 +57,13 @@ const OverviewPage = ({ setActiveNav, setSidebarOpen, deviceType }) => {
           </div>
 
           <button
-            className="text-white text-center font-medium text-[10px] sm:text-[14px] leading-[16px] sm:leading-[20px] font-inter
-    flex items-center justify-center gap-2
-    px-3 py-[6px] rounded-[8px]
+            className="text-white text-center font-medium 
+  text-[10px] md:text-[1px] lg:text-[18px]  
+  leading-[16px] md:leading-[20px] lg:leading-[24px] 
+  font-inter
+  flex items-center justify-center gap-2
+  px-3 py-[6px] md:px-4 md:py-[10px]          
+  rounded-[8px]
     bg-[#829C15] shadow-[inset_1px_1px_2px_1px_rgba(255,255,255,0.18),inset_-1px_-1px_2px_1px_rgba(255,255,255,0.18)]
     hover:bg-[#6f8612]"
             onClick={() => setActiveNav("new-consultation")}

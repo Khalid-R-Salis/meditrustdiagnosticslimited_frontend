@@ -75,11 +75,11 @@ const HeaderStats = () => {
 
             {/* Tooltip */}
             {visibleTooltip === index && (
-              <div className="absolute top-full left-0 z-10 bg-white text-black shadow-[0_5px_15px_rgba(0,0,0,0.12),0_15px_35px_rgba(103,110,118,0.08)] text-[12px] font-medium leading-[18px] px-3 py-2 rounded-md w-max mt-1 flex items-start gap-2">
+              <div className="absolute top-full left-0 z-10 bg-white text-black shadow-[0_5px_15px_rgba(0,0,0,0.12),0_15px_35px_rgba(103,110,118,0.08)] text-[12px] md:text-[14px] font-medium leading-[18px] px-3 py-2 rounded-md w-max mt-1 flex items-start gap-2 ">
                 <span>{item.tooltip}</span>
                 <button
                   onClick={() => setVisibleTooltip(null)}
-                  className="text-gray-500 hover:text-black text-xs ml-2"
+                  className="text-gray-500 hover:text-black text-[16px] ml-2"
                 >
                   ✕
                 </button>
