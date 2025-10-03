@@ -409,12 +409,12 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
       >
         <div className="space-y-4 flex flex-col gap-3">
           {/* Patient Details */}
-          <h3 className="text-[15px] font-medium leading-[28px] text-black font-inter">
+          <h3 className="text-[20px] font-medium leading-[28px] text-black font-inter">
             Enter patient details
           </h3>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
+            <label className="block mb-1 text-[#676E76] font-inter text-[18px]">
               Name
             </label>
             <input
@@ -422,7 +422,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               value={form.name}
               onChange={handleChange}
               placeholder="John Doe"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -430,12 +430,12 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] text-sm">Sex</label>
+            <label className="block mb-1 text-[#676E76] text-[18px]">Sex</label>
             <select
               name="sex"
               value={form.sex}
               onChange={handleChange}
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             >
               <option>Male</option>
               <option>Female</option>
@@ -443,7 +443,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
+            <label className="block mb-1 text-[#676E76] font-inter text-[18px]">
               Phone number
             </label>
             <input
@@ -452,7 +452,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               value={form.phone}
               onChange={handleChange}
               placeholder="09099999999"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
@@ -460,7 +460,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
+            <label className="block mb-1 text-[#676E76] font-inter text-[18px]">
               Sample received
             </label>
             <input
@@ -468,7 +468,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               value={form.sample}
               onChange={handleChange}
               placeholder="Blood"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             />
             {errors.sample && (
               <p className="text-red-500 text-sm mt-1">{errors.sample}</p>
@@ -476,7 +476,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] font-inter text-sm">
+            <label className="block mb-1 text-[#676E76] font-inter text-[18px]">
               Referring hospital
             </label>
             <input
@@ -484,7 +484,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               value={form.hospital}
               onChange={handleChange}
               placeholder="St. Bernard’s hospital"
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             />
             {errors.hospital && (
               <p className="text-red-500 text-sm mt-1">{errors.hospital}</p>
@@ -492,14 +492,14 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           <div>
-            <label className="block mb-1 text-[#676E76] text-sm">
+            <label className="block mb-1 text-[#676E76] text-sm text-[18px]">
               Operator
             </label>
             <select
               name="operator"
               value={form.operator}
               onChange={handleChange}
-              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15]"
+              className="w-full rounded-lg border border-[#E5E7EA] bg-white px-[14px] py-[10px] focus:outline-none focus:border-[#829C15] text-[18px]"
             >
               <option value="">Select</option>
               <option>Radiologist</option>
@@ -511,11 +511,11 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
           </div>
 
           {/* Test details */}
-          <h3 className="text-[15px] font-medium leading-[28px] text-black font-inter">
+          <h3 className="text-[20px] font-medium leading-[28px] text-black font-inter ">
             Test details
           </h3>
           <div className="relative" ref={dropdownRef}>
-            <label className="block mb-1 text-[#676E76] text-sm">
+            <label className="block mb-1 text-[#676E76] text-sm text-[18px]">
               Select test
             </label>
 
@@ -533,7 +533,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               }}
               onFocus={() => setDropdownOpen(true)}
               disabled={form.tests.length >= MAX_TESTS}
-              className={`w-full rounded-lg border px-[14px] py-[10px] ${
+              className={`w-full rounded-lg border px-[14px] py-[10px] text-[18px] ${
                 form.tests.length >= MAX_TESTS
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-white border-[#E5E7EA]"
@@ -543,7 +543,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
 
             {dropdownOpen && filteredTests.length > 0 && (
               <ul
-                className="absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded border border-[#E5E7EA] bg-white shadow-lg scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+                className="absolute z-10 mt-1 max-h-48 w-full overflow-auto rounded border border-[#E5E7EA] bg-white shadow-lg scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 text-[18px]"
                 style={{
                   scrollbarWidth: "thin",
                   scrollbarColor: "#9ca3af #f3f4f6",
@@ -553,7 +553,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
                   <li
                     key={test.label}
                     onClick={() => addTest(test.label)}
-                    className="cursor-pointer px-4 py-2 hover:bg-gray-300"
+                    className="cursor-pointer px-4 py-2 hover:bg-gray-300 text-[18px]"
                   >
                     {test.label} [₦{test.price.toLocaleString()}]
                   </li>
@@ -561,7 +561,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
               </ul>
             )}
             {dropdownOpen && filteredTests.length === 0 && (
-              <div className="absolute z-10 mt-1 w-full rounded border border-[#E5E7EA] bg-white px-4 py-2 text-gray-500">
+              <div className="absolute z-10 mt-1 w-full rounded border border-[#E5E7EA] bg-white px-4 py-2 text-gray-500 text-[18px]">
                 No tests found.
               </div>
             )}
@@ -571,7 +571,7 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
             {form.tests.map((test, index) => (
               <div
                 key={index}
-                className="bg-gray-100 rounded-full px-3 py-1 flex items-center text-sm max-w-full"
+                className="bg-gray-100 rounded-full px-3 py-1 flex items-center text-sm max-w-full text-[18px]"
               >
                 <span className="mr-2">
                   {test} (₦{getTestPrice(test).toLocaleString()})
@@ -592,10 +592,10 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
 
           {/* Payment type */}
           <div>
-            <label className="block mb-1 text-[#676E76] text-sm">
+            <label className="block mb-1 text-[#676E76] text-[18px]">
               Payment type
             </label>
-            <div className="space-x-4 mt-1">
+            <div className="space-x-4 mt-1 text-[18px]">
               <label>
                 <input
                   type="radio"
@@ -621,11 +621,13 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
 
           {/* Total */}
           <div>
-            <label className="block mb-1 text-[#676E76] text-sm">Total</label>
+            <label className="block mb-1 text-[#676E76] text-[18px]">
+              Total
+            </label>
             <input
               value={`₦${total.toLocaleString()}`}
               readOnly
-              className="w-full rounded-lg border-none bg-white px-[14px] py-[10px]"
+              className="w-full rounded-lg border-none bg-white px-[14px] py-[10px] text-[18px]"
             />
           </div>
         </div>
