@@ -60,7 +60,7 @@ const Chart = () => {
         {data.map((item, i) => (
           <div
             key={i}
-            className="flex items-center gap-2 rounded-[4px] bg-[#FAFAFA] px-2 py-[1px] w-full"
+            className="flex items-center gap-2 rounded-[4px] bg-[#FAFAFA] px-2 py-[1px] mb-1 w-full"
           >
             {/* Color dot */}
             <span
