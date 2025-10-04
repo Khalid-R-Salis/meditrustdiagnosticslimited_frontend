@@ -410,8 +410,10 @@ const ConsultationForm = ({ onClose, onConfirm, setSidebarDisabled }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll 
-  max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+        className="
+  flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll
+  w-full sm:w-full md:max-w-xl lg:max-w-2xl
+"
       >
         <div className="space-y-4 flex flex-col gap-3">
           {/* Patient Details */}
