@@ -50,8 +50,8 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
     >
       {/* Main content */}
       <div className=" flex-1 relative bg-white py-8 overflow-x-hidden  pt-0 pb-8 px-6 scrollbar-thin-green">
-        <div className="flex justify-between items-center mb-10">
-          <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+        <div className="flex justify-between items-center mb-10 ">
+          <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter md: ml-10">
             {pageType === "overview" ? "Overview" : "Recent Patient Report"}
           </h1>
         </div>
@@ -200,7 +200,7 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
           <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
             <button
-              className="absolute top-2 right-2 text-gray-600 text-sm"
+              className="absolute top-5 right-3 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}
             >
               ✕

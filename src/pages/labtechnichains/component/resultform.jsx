@@ -609,13 +609,13 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
       : "Name";
 
   return (
-    <div className="bg-white w-full flex flex-col py-4 px-[72px] h-full relative">
+    <div className="bg-white w-full flex flex-col py-4 px-[5px] lg:px-[72px] h-full relative">
       {/* Header */}
       <div className="flex justify-between items-center border-b pb-[24px] mb-[25px]">
         <h2 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
           New Report
         </h2>
-        <div className="flex justify-between mb-6 gap-3">
+        <div className="flex justify-between gap-3">
           <button
             type="button"
             onClick={handleCancel}
@@ -638,7 +638,7 @@ const ResultForm = ({ setActiveNav, onClose, onConfirm }) => {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll max-w-[60rem] scrollbar-thin-green"
+        className="flex-1 max-h-[72vh] overflow-y-auto pr-2 space-y-4 custom-scroll w-full lg:max-w-[60rem] scrollbar-thin-green"
       >
         {/* Test Result */}
         <RichTextEditor

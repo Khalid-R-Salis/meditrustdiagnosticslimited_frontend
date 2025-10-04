@@ -3,6 +3,20 @@ import React from "react";
 import logo2 from "../../../assets/logo2.png";
 import Settings from "../../../components/settings";
 
+const CancelIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 640 640"
+    width="20"
+    height="20"
+  >
+    <path
+      d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
+      fill="#596066"
+    />
+  </svg>
+);
+
 const OverviewIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -44,30 +58,37 @@ const ReportIcon = () => (
   </svg>
 );
 
-const Sidebar = ({ activeNav, setActiveNav, disableNav = false }) => {
+const Sidebar = ({ activeNav, setActiveNav, disableNav = false, onClose }) => {
   const navigate = useNavigate();
 
   return (
     <div className="p-4 h-screen">
       <div
         className="
-      flex flex-col justify-between 
-      bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] 
-      w-[90%] md:w-[100%] 
-      h-full
-      overflow-y-auto 
-      px-[12px] pt-[32px]
-    "
+        flex flex-col justify-between 
+        bg-[#FAFAFA] rounded-[16px] border border-[#E5E7EA] 
+        w-[90%] md:w-[100%] 
+        h-full
+        overflow-y-auto 
+        px-[12px] pt-[32px]
+      "
       >
         <div>
-          <div className="ml-6 mb-5">
+          {/* Logo row with Cancel button */}
+          <div className="flex items-center justify-between ml-6 mb-2">
             <img src={logo2} alt="logo" className="w-36" />
-
-            <h3 className="mt-3 text-lg font-semibold text-[#383F45]">
-              Technician Dashboard
-            </h3>
+            {onClose && (
+              <button onClick={onClose} className="p-2">
+                <CancelIcon />
+              </button>
+            )}
           </div>
 
+          <h3 className="mt-2 ml-6 mb-4 text-lg font-semibold text-[#383F45]">
+            Technician Dashboard
+          </h3>
+
+          {/* Nav Section */}
           <nav className="flex flex-col justify-center items-start gap-2">
             <button
               className={`self-stretch w-full flex items-center gap-2 font-inter text-[16px] font-[400] rounded-[8px] px-[10px] py-[12px] transition-all duration-200
@@ -98,8 +119,9 @@ const Sidebar = ({ activeNav, setActiveNav, disableNav = false }) => {
             </button>
           </nav>
         </div>
+
         {/* Settings */}
-        <div className="relative">
+        <div className="relative mt-6">
           <Settings />
           {disableNav && (
             <div className="absolute inset-0 z-10 bg-transparent cursor-not-allowed"></div>
