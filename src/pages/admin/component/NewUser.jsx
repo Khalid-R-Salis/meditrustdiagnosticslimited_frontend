@@ -19,6 +19,7 @@ const NewUser = ({
     phoneNumber: "",
     emailAddress: "",
     role: "",
+    technicianType: "Lab Technician",
   });
 
   const [errors, setErrors] = useState({});
@@ -224,11 +225,40 @@ const NewUser = ({
                 Select role
               </option>
               <option value="Receptionist">Receptionist</option>
-              <option value="Lab Technician">Lab Technician</option>
-              <option value="Receptionist">Radiologiest</option>
+              <option value="Technician">Technician</option>
             </select>
             {errors.role && (
               <p className="text-red-500 text-sm mt-1">{errors.role}</p>
+            )}
+
+            {/* Show radio buttons only if Technician is selected */}
+            {form.role === "Technician" && (
+              <div className="flex items-center gap-4 mt-2">
+                <label className="flex items-center gap-2 font-inter text-sm">
+                  <input
+                    type="radio"
+                    name="technicianType"
+                    value="Lab Technician"
+                    checked={form.technicianType === "Lab Technician"}
+                    onChange={(e) =>
+                      setForm({ ...form, technicianType: e.target.value })
+                    }
+                  />
+                  Lab Technician
+                </label>
+                <label className="flex items-center gap-2 font-inter text-sm">
+                  <input
+                    type="radio"
+                    name="technicianType"
+                    value="Radiologist"
+                    checked={form.technicianType === "Radiologist"}
+                    onChange={(e) =>
+                      setForm({ ...form, technicianType: e.target.value })
+                    }
+                  />
+                  Radiologist
+                </label>
+              </div>
             )}
           </div>
         </div>
