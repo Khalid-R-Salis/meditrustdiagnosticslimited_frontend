@@ -216,7 +216,7 @@ const UserManagement = ({
       )}
 
       <div className="flex-1 relative max-h-screen overflow-y-auto overflow-x-hidden  bg-white py-0 md:py-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-[15px] mb-8 gap-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-[22px] mb-8 gap-2">
           <h1 className="mt-4 sm:mt-0 sm:ml-[4px] text-[15px] leading-[16px] sm:text-[24px] sm:leading-[32px] font-semibold text-black font-inter">
             User Management
           </h1>

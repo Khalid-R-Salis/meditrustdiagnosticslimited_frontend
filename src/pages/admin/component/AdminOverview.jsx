@@ -9,11 +9,13 @@ const AdminOverview = ({ setActiveNav }) => {
       {/* Main content container */}
       <div className="overflow-y-auto max-h-screen pt-[64px] md:pt-0 scrollbar-thin-green">
         <div className="bg-white pt-0 pb-4 px-4 sm:pt-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative">
-          {/* Desktop header */}
-          <div className=" md:flex justify-between items-center mb-4 mt-2">
-            <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
-              Overview
-            </h1>
+          {/* Desktop fixed header hidden on tablet/mobile*/}
+          <div className="hidden md:block mb-[4rem]">
+            <div className="fixed top-0 right-0 z-40 bg-white h-[64px] px-10 lg:px-16 xl:px-20 2xl:px-24 flex items-center w-[calc(100%-350px)]">
+              <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+                Overview
+              </h1>
+            </div>
           </div>
 
           {/* Stats cards */}

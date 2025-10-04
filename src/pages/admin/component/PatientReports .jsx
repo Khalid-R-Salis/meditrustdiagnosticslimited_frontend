@@ -83,14 +83,17 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       {/* Main content */}
       {/* <div className="flex-1 bg-white pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 relative overflow-x-hidden"> */}
       <div className="flex-1 relative max-h-screen overflow-y-auto pt-0 md:pt-8 pb-8 px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 scrollbar-thin-green">
-        <div className="flex justify-between items-center mb-6 md:mb-10">
-          <h1 className="ml-8 mt-4 sm:ml-0 sm:mt-0 text-[24px] font-semibold leading-[32px] text-black font-inter">
-            {pageType === "overview" ? "Overview" : "Patient reports"}
-          </h1>
+        {/* Desktop fixed header hidden on tablet/mobile*/}
+        <div className="hidden md:block mb-[4rem]">
+          <div className="fixed top-0 right-0 z-40 bg-white h-[64px] px-10 lg:px-16 xl:px-20 2xl:px-24 flex items-center w-[calc(100%-350px)]">
+            <h1 className="text-[24px] font-semibold leading-[32px] text-black font-inter">
+              {pageType === "overview" ? "Overview" : "Patient reports"}
+            </h1>
+          </div>
         </div>
 
         {/* Filters */}
-        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-[5px] sm:mt-0">
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-20 sm:mt-0">
           {/* Search */}
           <div className="flex items-center gap-2 max-w-md w-full px-3 py-1.5 border border-gray-300 rounded-md">
             <svg

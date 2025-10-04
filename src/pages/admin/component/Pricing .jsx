@@ -325,7 +325,7 @@ const Pricing = ({ setActiveNav }) => {
           <button
             type="button"
             onClick={() => setActiveNav("AddTest")}
-            className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911]"
+            className="rounded-lg bg-[#829C15] px-3 py-[6px] text-white text-center text-sm font-medium leading-5 font-inter hover:bg-[#6f8911] z-30"
           >
             + New Test
           </button>
