@@ -185,7 +185,7 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
                     <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-[320px] truncate">
                       {patient.test}
                     </td>
-                    <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
+                    <td className="text-[14px] px-5 py-4 max-w-full truncate">
                       {patient.date}
                     </td>
                     <td className="text-[14px] font-medium leading-[18px] font-inter px-5 py-4 max-w-full">
