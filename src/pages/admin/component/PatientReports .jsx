@@ -290,7 +290,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
           <div className="mt-16 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
             <button
-              className="absolute top-2 right-2 text-gray-600 text-sm"
+              className="absolute top-5 right-3 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}
             >
               ✕
@@ -307,7 +307,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
             {/* <div className="bg-white p-8 sm:p-10 rounded-[6px] shadow-lg w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto relative"> */}
 
             <button
-              className="absolute top-2 right-2 text-gray-600 text-sm"
+              className="absolute top-5 right-5 text-gray-600 text-sm"
               onClick={() => setShowResult(false)}
             >
               ✕
