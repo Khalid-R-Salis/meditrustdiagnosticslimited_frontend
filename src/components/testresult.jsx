@@ -49,16 +49,28 @@ const TestResult = ({ onClose, from }) => {
     link.click();
   };
 
+  // const handlePrint = () => {
+  //   const iframe = document.createElement("iframe");
+  //   iframe.style.display = "none";
+  //   iframe.src = fileUrl;
+  //   document.body.appendChild(iframe);
+  //   iframe.onload = () => {
+  //     iframe.contentWindow.focus();
+  //     iframe.contentWindow.print();
+  //     setTimeout(() => iframe.remove(), 1000);
+  //   };
+  // };
+
   const handlePrint = () => {
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = fileUrl;
-    document.body.appendChild(iframe);
-    iframe.onload = () => {
-      iframe.contentWindow.focus();
-      iframe.contentWindow.print();
-      setTimeout(() => iframe.remove(), 1000);
-    };
+    const printWindow = window.open(fileUrl, "_blank");
+    if (printWindow) {
+      printWindow.addEventListener("load", () => {
+        printWindow.focus();
+        printWindow.print();
+      });
+    } else {
+      alert("Please allow pop-ups for this site to enable printing.");
+    }
   };
 
   return (
