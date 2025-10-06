@@ -6,7 +6,9 @@ import { useEffect, useRef, useState } from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const TestResult = ({ onClose, from }) => {
-  const [fileUrl] = useState(`${import.meta.env.BASE_URL}sample.pdf`);
+  // const [fileUrl] = useState(`${import.meta.env.BASE_URL}sample.pdf`);
+  const [fileUrl] = useState("/sample.pdf");
+
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
   const [numPages, setNumPages] = useState(null);
   const containerRef = useRef(null);
