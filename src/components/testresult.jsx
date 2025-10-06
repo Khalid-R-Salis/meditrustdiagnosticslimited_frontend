@@ -79,7 +79,9 @@ const TestResult = ({ onClose, from }) => {
       <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-white z-20">
         <h2 className="text-lg font-semibold">Test Result</h2>
         <div className="flex gap-2">
-          <button
+          {/* PRINT BTN */}
+
+          {/* <button
             onClick={!isMobileOrTablet ? handlePrint : undefined}
             disabled={isMobileOrTablet}
             className={`px-3 py-1 rounded text-white transition-colors ${
@@ -94,15 +96,55 @@ const TestResult = ({ onClose, from }) => {
             }
           >
             Print
+          </button> */}
+
+          {/* Print button */}
+          <button
+            onClick={
+              !isMobileOrTablet && from !== "admin" ? handlePrint : undefined
+            }
+            disabled={isMobileOrTablet || from === "admin"}
+            className={`px-3 py-1 rounded text-white transition-colors ${
+              isMobileOrTablet || from === "admin"
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#829C15] hover:bg-[#718813]"
+            }`}
+            title={
+              from === "admin"
+                ? "Disabled in admin dashboard"
+                : isMobileOrTablet
+                ? "Print not supported on mobile/tablet"
+                : "Print PDF"
+            }
+          >
+            Print
           </button>
 
-          <button
+          {/* DOWNLAOD BTN */}
+          {/* <button
             onClick={handleDownload}
             className="border px-3 py-1 rounded hover:bg-gray-100"
           >
             Download
+          </button> */}
+
+          {/* Download button */}
+          <button
+            onClick={from !== "admin" ? handleDownload : undefined}
+            disabled={from === "admin"}
+            className={`border px-3 py-1 rounded transition-colors ${
+              from === "admin"
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "hover:bg-gray-100"
+            }`}
+            title={
+              from === "admin" ? "Disabled in admin dashboard" : "Download PDF"
+            }
+          >
+            Download
           </button>
 
+          {/* CANCEL BTN */}
           <button
             onClick={() => setShowCancelConfirm(true)}
             className="border px-3 py-1 rounded hover:bg-red-50 hover:text-red-600"
@@ -152,7 +194,7 @@ const TestResult = ({ onClose, from }) => {
             <p className="text-gray-600 text-base mb-6">
               Are you sure you want to close this page? <br />
               <b className="uppercase text-red-600 block mt-1">
-                Changes are Unsaved!
+                PATIENT TEST RESULT PAGE!
               </b>
             </p>
             <div className="flex justify-center gap-4 flex-wrap">

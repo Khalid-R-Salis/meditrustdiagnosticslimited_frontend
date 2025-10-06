@@ -239,6 +239,7 @@ const AdminDashboard = () => {
               {activeNav === "TestResult" && (
                 <ResultTemplate
                   onClose={() => setActiveNav("PatientReports")}
+                  from="admin"
                 />
               )}
             </>
