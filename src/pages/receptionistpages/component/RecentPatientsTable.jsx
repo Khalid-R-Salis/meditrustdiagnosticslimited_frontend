@@ -127,7 +127,7 @@ const RecentPatientsTable = ({ setActiveNav }) => {
       {/* Receipt Modal */}
       {showReceipt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
+          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8] max-h-[90vh] overflow-y-auto scrollbar-thin-green">
             <button
               className="absolute top-5 right-3 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}

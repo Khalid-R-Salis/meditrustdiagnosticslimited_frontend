@@ -284,22 +284,15 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
       </div>
       {/* Receipt Modal */}
       {showReceipt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 overflow-auto">
-          <div className="relative bg-white shadow-lg rounded-lg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
+          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8] max-h-[90vh] overflow-y-auto scrollbar-thin-green">
             <button
-              className="absolute top-3 right-3 text-gray-600 text-sm z-10"
+              className="absolute top-5 right-3 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}
             >
               ✕
             </button>
-            <div
-              id="receipt"
-              className="w-full max-w-[600px] font-inter text-black text-[20px] 
-                   p-6 border rounded-md bg-[#F8F9F4] shadow-md
-                   print:max-w-[230px] print:text-[7px] print:p-0 print:shadow-none print:rounded-none"
-            >
-              <ReceiptTemplate />
-            </div>
+            <ReceiptTemplate />
           </div>
         </div>
       )}
