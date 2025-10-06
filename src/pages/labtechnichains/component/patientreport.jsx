@@ -234,10 +234,32 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
                               View report
                             </button>
 
-                            {patient.status === "Completed" ? (
+                            {/* {patient.status === "Completed" ? (
                               <button
                                 onClick={() => {
                                   setShowResult(true);
+                                  setMenuOpen(null);
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                              >
+                                View test result
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  setActiveNav("resultform");
+                                  setMenuOpen(null);
+                                }}
+                                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                              >
+                                Upload test result
+                              </button>
+                            )} */}
+
+                            {patient.status === "Completed" ? (
+                              <button
+                                onClick={() => {
+                                  setActiveNav("testresult");
                                   setMenuOpen(null);
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -304,17 +326,21 @@ const PatientReport = ({ setActiveNav, pageType = "patientreport" }) => {
         </div>
       )}
 
-      {/* Result Modal */}
-      {showResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
+      {/* Receipt Modal */}
+      {showReceipt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div
+            className="relative mt-10 bg-white p-6 rounded-lg shadow-lg 
+                    w-[40%] sm:w-[40%] md:w-[40%] lg:w-[20%]
+                    max-h-[100vh] overflow-y-auto"
+          >
             <button
-              className="absolute top-2 right-2 text-gray-600 text-sm"
-              onClick={() => setShowResult(false)}
+              className="absolute top-5 right-3 text-gray-600 text-sm"
+              onClick={() => setShowReceipt(false)}
             >
               ✕
             </button>
-            <ResultTemplate />
+            <ReceiptTemplate />
           </div>
         </div>
       )}

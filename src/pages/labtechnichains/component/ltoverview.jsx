@@ -165,7 +165,7 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
                             {patient.status === "Completed" ? (
                               <button
                                 onClick={() => {
-                                  setShowResult(true);
+                                  setActiveNav("testresult");
                                   setMenuOpen(null);
                                 }}
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -194,11 +194,14 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
           </section>
         </div>
       </div>
-
-      {/* Receipt Modal */}
+      {/* Receipt Component */}
       {showReceipt && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div
+            className="relative mt-10 bg-white p-6 rounded-lg shadow-lg 
+                    w-[40%] sm:w-[40%] md:w-[40%] lg:w-[20%]
+                    max-h-[100vh] overflow-y-auto"
+          >
             <button
               className="absolute top-5 right-3 text-gray-600 text-sm"
               onClick={() => setShowReceipt(false)}
@@ -209,19 +212,10 @@ const OverviewPage = ({ setActiveNav, pageType = "overview" }) => {
           </div>
         </div>
       )}
-
-      {/* Result Modal */}
+      {/* Result Component */}
       {showResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden">
-          <div className="mt-10 bg-white p-6 rounded-lg shadow-lg relative scale-[1.5] sm:scale-[1.8]">
-            <button
-              className="absolute top-2 right-2 text-gray-600 text-sm"
-              onClick={() => setShowResult(false)}
-            >
-              ✕
-            </button>
-            <ResultTemplate />
-          </div>
+          <ResultTemplate />
         </div>
       )}
     </div>

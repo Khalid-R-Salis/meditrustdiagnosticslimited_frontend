@@ -1,183 +1,176 @@
-import React, { useRef } from "react";
-import meditrustbg from "../../src/assets/meditrustbg.jpg";
+import { useNavigate } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
+import { useEffect, useRef, useState } from "react";
 
-const TestResult = ({ disableUpload = false }) => {
-  const cardRef = useRef();
+// PDF.js worker for Vite
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-  // ✅ Download as high-quality PDF
-  const handleDownload = async () => {
-    const element = cardRef.current;
-    if (!element) return;
+const TestResult = ({ onClose, from }) => {
+  const [fileUrl] = useState(`${import.meta.env.BASE_URL}sample.pdf`);
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+  const containerRef = useRef(null);
+  const [pageWidth, setPageWidth] = useState(800);
+  const navigate = useNavigate();
 
-    const html2canvas = (await import("html2canvas")).default;
-    const { jsPDF } = await import("jspdf");
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
-    const canvas = await html2canvas(element, {
-      scale: 3, // higher = sharper
-      useCORS: true, // keeps background
-      backgroundColor: null, // keeps transparency if any
-    });
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      setIsMobileOrTablet(width < 1024);
+    };
+    checkDevice();
+    window.addEventListener("resize", checkDevice);
+    return () => window.removeEventListener("resize", checkDevice);
+  }, []);
 
-    const imgData = canvas.toDataURL("image/png", 1.0); // max quality
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
+  useEffect(() => {
+    const updateWidth = () => {
+      const containerW = containerRef.current?.clientWidth ?? window.innerWidth;
+      const computed = Math.min(containerW * 0.95, 1200);
+      setPageWidth(Math.max(300, computed));
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight, "", "FAST");
-    pdf.save("test-result.pdf");
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
   };
 
-  // ✅ Print with background in high quality
-  const handlePrint = async () => {
-    const element = cardRef.current;
-    if (!element) return;
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = "test-result.pdf";
+    link.click();
+  };
 
-    const html2canvas = (await import("html2canvas")).default;
-    const canvas = await html2canvas(element, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: null,
-    });
-
-    const imgData = canvas.toDataURL("image/png", 1.0);
-    const WinPrint = window.open("", "_blank", "width=800,height=600");
-    WinPrint.document.write(`
-      <html>
-        <head>
-          <title>Print Test Result</title>
-          <style>
-            body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-            img { max-width: 100%; height: auto; }
-          </style>
-        </head>
-        <body>
-          <img src="${imgData}" />
-        </body>
-      </html>
-    `);
-    WinPrint.document.close();
-    WinPrint.focus();
-    setTimeout(() => {
-      WinPrint.print();
-      WinPrint.close();
-    }, 500);
+  const handlePrint = () => {
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = fileUrl;
+    document.body.appendChild(iframe);
+    iframe.onload = () => {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+      setTimeout(() => iframe.remove(), 1000);
+    };
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <form className="flex flex-col items-center justify-center">
-        {/* CARD */}
-        <div
-          ref={cardRef}
-          className="relative overflow-hidden shadow-sm rounded-lg flex flex-col"
-          style={{
-            width: "min(80vw, 210px)",
-            height: "calc(min(80vw, 210px) * 1.41)",
-            backgroundImage: `url(${meditrustbg})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center top",
-          }}
-        >
-          {/* Card Content */}
-          <div className="relative z-10 text-gray-900 px-4 pt-16 text-[7px] flex flex-col h-full">
-            {/* Patient details */}
-            <div className="mb-2">
-              <div className="flex justify-between">
-                <span className="font-medium">Name of patient</span>
-                <span>John Smith Doe</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Sex/Age</span>
-                <span>Male/20</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Test Conducted</span>
-                <span>X Ray</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Phone number</span>
-                <span>09000000000</span>
-              </div>
-            </div>
-
-            {/* Report */}
-            <div className="flex-1 overflow-hidden flex items-start">
-              <p className="text-[7px] leading-[12px] flex-shrink">
-                A row consists of people, things, or information placed in a
-                straight line, side by side. A column consists of elements
-                arranged one on top of the other...
-              </p>
-            </div>
-
-            {/* Footer */}
-            <div className="flex justify-between items-center text-[5px] border-t pt-1 mt-2 mb-8">
-              <div>
-                <p>
-                  <span className="font-medium">Date/Time:</span>{" "}
-                  {new Date().toLocaleString()}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <span className="font-medium">Radiologist:</span> Dr. John Doe
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* BUTTONS */}
-        <div className="flex justify-between mt-2 w-[220px] gap-8">
-          {/* ✅ Download PDF */}
+    <div className="w-full h-screen flex flex-col bg-white font-inter relative">
+      {/* Header */}
+      <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-white z-20">
+        <h2 className="text-lg font-semibold">Test Result</h2>
+        <div className="flex gap-2">
           <button
-            type="button"
+            onClick={!isMobileOrTablet ? handlePrint : undefined}
+            disabled={isMobileOrTablet}
+            className={`px-3 py-1 rounded text-white transition-colors ${
+              isMobileOrTablet
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#829C15] hover:bg-[#718813]"
+            }`}
+            title={
+              isMobileOrTablet
+                ? "Print not supported on mobile/tablet"
+                : "Print PDF"
+            }
+          >
+            Print
+          </button>
+
+          <button
             onClick={handleDownload}
-            className="text-[7px] font-medium"
-            style={{
-              display: "flex",
-              padding: "4px 6px",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "2px",
-              flex: "1 0 0",
-              borderRadius: "6px",
-              border: "1px solid #E5E7EA",
-              background: "#FAFAFA",
-            }}
+            className="border px-3 py-1 rounded hover:bg-gray-100"
           >
             Download
           </button>
 
-          {/* ✅ Print */}
           <button
-            type="button"
-            disabled={disableUpload}
-            onClick={handlePrint}
-            className={`text-[7px] font-medium text-white ${
-              disableUpload ? "bg-gray-300 cursor-not-allowed" : "bg-[#829C15]"
-            }`}
-            style={{
-              display: "flex",
-              padding: "4px 6px",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "2px",
-              flex: "1 0 0",
-              borderRadius: "6px",
-              boxShadow:
-                "1px 1px 2px 1px rgba(255, 255, 255, 0.18) inset, -1px -1px 2px 1px rgba(255, 255, 255, 0.18) inset",
-            }}
+            onClick={() => setShowCancelConfirm(true)}
+            className="border px-3 py-1 rounded hover:bg-red-50 hover:text-red-600"
           >
-            Print
+            Cancel
           </button>
         </div>
-      </form>
+      </div>
+
+      {/* PDF Viewer */}
+      <div
+        ref={containerRef}
+        className="flex-1 overflow-auto flex justify-center items-start bg-gray-50 py-4 scrollbar-thin-green"
+      >
+        <Document
+          file={fileUrl}
+          onLoadSuccess={onDocumentLoadSuccess}
+          onLoadError={(error) => console.error("PDF failed to load:", error)}
+          loading={<p className="text-center py-8">Loading PDF...</p>}
+          error={
+            <p className="text-red-500 text-center py-8">
+              Failed to load PDF file.
+            </p>
+          }
+        >
+          {numPages &&
+            Array.from({ length: numPages }, (_, i) => (
+              <Page
+                key={`page_${i + 1}`}
+                pageNumber={i + 1}
+                width={pageWidth}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+                className="shadow-md border bg-white my-2 mx-auto"
+              />
+            ))}
+        </Document>
+      </div>
+
+      {/* Confirmation Modal */}
+      {showCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-sm mx-4 text-center border-t-4 border-red-500">
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">
+              Confirm Close
+            </h3>
+            <p className="text-gray-600 text-base mb-6">
+              Are you sure you want to close this page? <br />
+              <b className="uppercase text-red-600 block mt-1">
+                Changes are Unsaved!
+              </b>
+            </p>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <button
+                type="button"
+                onClick={() => setShowCancelConfirm(false)}
+                className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-2 text-black text-base font-semibold hover:bg-gray-100 transition-colors"
+              >
+                NO, Stay
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCancelConfirm(false);
+                  if (from === "admin") {
+                    navigate("/admin", { replace: true });
+                    navigate(0); // force refresh
+                  } else if (from === "technician") {
+                    navigate("/technician", { replace: true });
+                    navigate(0); // force refresh
+                  } else {
+                    if (typeof onClose === "function") onClose();
+                  }
+                }}
+                className="flex-1 rounded-xl bg-[#829C15] px-4 py-2 text-white text-base font-semibold hover:bg-[#718813] transition-colors shadow-md"
+              >
+                YES, Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

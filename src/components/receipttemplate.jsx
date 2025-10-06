@@ -338,11 +338,34 @@ const ReceiptTemplate = ({ disablePrint = false }) => {
 
   return (
     <div className="flex flex-col items-center py-4">
-      <div
+      {/* <div
         id="receipt"
         className="w-full max-w-[230px] font-inter text-black text-[7px] print:bg-[#F8F9F4] print:shadow-none print:text-black print:p-0 p-4 border"
         style={{ backgroundColor: "#F8F9F4" }}
+      > */}
+
+      {/* ///////////////////////////////////////////////////////////////////////////// */}
+      {/* HERE, I AM TRYING TO MAKE THE RECIPT MORE VISIBLE ON SCREEN AND NORMAL ON PRINT OUT */}
+      <div
+        id="receipt"
+        className="
+    w-full 
+    max-w-[2000px]          /* Bigger on screen */
+    font-inter text-black 
+    text-[20px]            /* Larger font on screen */
+    p-6 border rounded-md  /* More spacing for readability */
+    bg-[#F8F9F4] shadow-md 
+
+    /* Print-specific overrides */
+    print:max-w-[230px] 
+    print:text-[7px] 
+    print:p-0 
+    print:shadow-none
+    print:rounded-none
+  "
       >
+        {/* THE VISBILITY FOR SCREEN ENDS HERE */}
+
         {/* Header */}
         <div className="text-center border-b pb-2 mb-2">
           <img src={logo2} alt="Logo" className="w-16 mx-auto mb-1" />
