@@ -233,31 +233,36 @@ const NewUser = ({
 
             {/* Show radio buttons only if Technician is selected */}
             {form.role === "Technician" && (
-              <div className="flex items-center gap-4 mt-2">
-                <label className="flex items-center gap-2 font-inter text-sm">
-                  <input
-                    type="radio"
-                    name="technicianType"
-                    value="Lab Technician"
-                    checked={form.technicianType === "Lab Technician"}
-                    onChange={(e) =>
-                      setForm({ ...form, technicianType: e.target.value })
-                    }
-                  />
-                  Lab Technician
-                </label>
-                <label className="flex items-center gap-2 font-inter text-sm">
-                  <input
-                    type="radio"
-                    name="technicianType"
-                    value="Radiologist"
-                    checked={form.technicianType === "Radiologist"}
-                    onChange={(e) =>
-                      setForm({ ...form, technicianType: e.target.value })
-                    }
-                  />
-                  Radiologist
-                </label>
+              <div className="">
+                <h3 className="mt-2 text-red-900 text-[15px]">
+                  Choose the type of technician you want to create
+                </h3>
+                <div className="flex items-center gap-4 ">
+                  <label className="flex items-center gap-2 font-inter text-sm">
+                    <input
+                      type="radio"
+                      name="technicianType"
+                      value="Lab Technician"
+                      checked={form.technicianType === "Lab Technician"}
+                      onChange={(e) =>
+                        setForm({ ...form, technicianType: e.target.value })
+                      }
+                    />
+                    Lab Technician
+                  </label>
+                  <label className="flex items-center gap-2 font-inter text-sm">
+                    <input
+                      type="radio"
+                      name="technicianType"
+                      value="Radiologist"
+                      checked={form.technicianType === "Radiologist"}
+                      onChange={(e) =>
+                        setForm({ ...form, technicianType: e.target.value })
+                      }
+                    />
+                    Radiologist
+                  </label>
+                </div>
               </div>
             )}
           </div>
