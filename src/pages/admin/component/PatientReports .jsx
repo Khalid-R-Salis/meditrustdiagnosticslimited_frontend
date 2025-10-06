@@ -292,7 +292,7 @@ const PatientReports = ({ setActiveNav, pageType = "patientreport" }) => {
             >
               ✕
             </button>
-            <ReceiptTemplate />
+            <ReceiptTemplate disablePrint={true} />
           </div>
         </div>
       )}
